@@ -2,11 +2,19 @@ var path = require("path")
 var webpack = require("webpack")
 
 module.exports = {
-    entry: "./src/main.js",
+    entry: {
+        app: "./src/main.js",
+        vendor: [
+            "vue",
+            "vue-router",
+            "bluebird",
+            "moment"
+        ]
+    },
     output: {
         path: path.resolve(__dirname, "./dist"),
         publicPath: "/dist/",
-        filename: "build.js"
+        filename: "app.bundle.js"
     },
     module: {
         rules: [{
@@ -48,7 +56,10 @@ module.exports = {
         noInfo: true
     },
     devtool: "#eval-source-map",
-    watch: true
+    watch: true,
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' })
+    ]
 }
 
 if (process.env.NODE_ENV === "production") {

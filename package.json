@@ -6,9 +6,13 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "start": "npm run dev"
   },
   "dependencies": {
+    "bluebird": "^3.4.6",
+    "lodash": "^4.17.2",
+    "moment": "^2.17.1",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1"
   },
