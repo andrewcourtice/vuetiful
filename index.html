@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Test Webpack App</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <menu-list>
+                <div class="menu-item" v-for="menu in menuItems">
+                    <router-link :to="menu.route" class="andrew">{{ menu.name }}</router-link>
+                </div>
+            </menu-list>
+        </div>
+        <transition name="fade">
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </transition>
+    </div>
+    <script src="/dist/build.js"></script>
+</body>
+
+</html>
