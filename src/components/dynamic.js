@@ -2,39 +2,39 @@ export default {
     functional: true,
 
     props: {
-        definition: {
+        component: {
             type: Object,
             required: true
         }
     },
 
     render: (createElement, context) => {
-        let definition = context.props.definition;
+        let component = context.props.component;
 
-        if (!definition.node) {
+        if (!component.node) {
             console.warn("Dynamic element not rendered. No node name specified.");
             return;
         }
 
-        let component = {
-            attrs: {
-                id: "1234"
-            },
-            props: definition.props || {}
+        let definition = {
+            attrs: component.attrs,
+            props: component.props,
+            domProps: component.domProps,
+            on: component.on
         };
 
-        if (!definition.children) {
-            return createElement(definition.node, component);
+        if (!component.children) {
+            return createElement(component.node, definition);
         }
 
-        let children = definition.children.map(child => {
+        let children = component.children.map(child => {
             return createElement("dynamic", {
                 props: {
-                    definition: child
+                    component: child
                 }
             });
         });
 
-        return createElement(definition.node, component, children);
+        return createElement(component.node, definition, children);
     }
 }
