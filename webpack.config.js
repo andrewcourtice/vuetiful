@@ -1,5 +1,6 @@
-var path = require("path")
-var webpack = require("webpack")
+var path = require("path");
+var webpack = require("webpack");
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -58,7 +59,15 @@ module.exports = {
     devtool: "#eval-source-map",
     watch: true,
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' })
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            filename: "vendor.bundle.js"
+        }),
+        new BundleAnalyzerPlugin({
+            analyzerMode: "static",
+            reportFileName: "bundle.report.html",
+            openAnalyzer: false
+        })
     ]
 }
 
