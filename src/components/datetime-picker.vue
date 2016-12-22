@@ -68,7 +68,6 @@
 
         computed: {
             formattedValue() {
-
                 return this.value && isValid(this.value) ? format(this.value, this.format) : null;
             }
         },

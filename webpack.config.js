@@ -59,11 +59,12 @@ module.exports = {
             openAnalyzer: false
         })
     ]
-}
+};
 
 if (process.env.NODE_ENV === "production") {
-    module.exports.devtool = "#source-map"
+    module.exports.devtool = "#source-map";
         // http://vue-loader.vuejs.org/en/workflow/production.html
+    module.exports.watch = false;
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
             "process.env": {
@@ -79,5 +80,5 @@ if (process.env.NODE_ENV === "production") {
         new webpack.LoaderOptionsPlugin({
             minimize: true
         })
-    ])
+    ]);
 }
