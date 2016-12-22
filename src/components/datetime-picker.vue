@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import moment from "moment";
+    import { isValid, format } from "date-fns";
 
     const EPOCH_MIN = new Date(-8640000000000000);
     const EPOCH_MAX = new Date(8640000000000000);
@@ -68,9 +68,8 @@
 
         computed: {
             formattedValue() {
-                let date = moment(this.value);
 
-                return date.isValid() ? date.format(this.format) : null;
+                return this.value && isValid(this.value) ? format(this.value, this.format) : null;
             }
         },
 

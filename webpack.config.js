@@ -4,13 +4,7 @@ var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlug
 
 module.exports = {
     entry: {
-        app: "./src/main.js",
-        vendor: [
-            "vue",
-            "vue-router",
-            "bluebird",
-            "moment"
-        ]
+        app: "./src/main.js"
     },
     output: {
         path: path.resolve(__dirname, "./dist"),
@@ -59,10 +53,6 @@ module.exports = {
     devtool: "#eval-source-map",
     watch: true,
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "vendor",
-            filename: "vendor.bundle.js"
-        }),
         new BundleAnalyzerPlugin({
             analyzerMode: "static",
             reportFileName: "bundle.report.html",
