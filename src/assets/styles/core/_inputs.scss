@@ -1,0 +1,14 @@
+
+input {
+
+    &:not([type="submit"]),
+    &:not([type="file"]) {
+        display: inline-block;
+        font-family: inherit;
+        width: 250px;
+        height: 40px;
+        padding: 0 0.5em;
+        border: 1px solid #DDDDDD;
+        border-radius: 2px;
+    }
+}

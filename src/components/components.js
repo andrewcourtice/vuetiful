@@ -1,15 +1,20 @@
 import MenuList from "./menu-list.vue";
 import Dynamic from "./dynamic";
-import RawContent from "./raw-content.vue";
+import DateTimePicker from "./datetime-picker.vue";
+import Float from "./float.vue";
 
 export default {
     dynamic: {
         tag: "dynamic",
         definition: Dynamic
     },
-    rawContent: {
-        tag: "raw-content",
-        definition: RawContent
+    dateTimePicker: {
+        tag: "datetime-picker",
+        definition: DateTimePicker
+    },
+    float: {
+        tag: "float",
+        definition: Float
     },
     menuList: {
         tag: "menu-list",
