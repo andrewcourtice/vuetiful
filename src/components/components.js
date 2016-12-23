@@ -1,6 +1,6 @@
 import MenuList from "./menu-list.vue";
 import Dynamic from "./dynamic";
-import DataGrid from "./datagrid.vue";
+import DataTable from "./datatable.vue";
 import DateTimePicker from "./datetime-picker.vue";
 import Float from "./float.vue";
 
@@ -9,9 +9,9 @@ export default {
         tag: "dynamic",
         definition: Dynamic
     },
-    datagrid: {
-        tag: "datagrid",
-        definition: DataGrid
+    datatable: {
+        tag: "datatable",
+        definition: DataTable
     },
     dateTimePicker: {
         tag: "datetime-picker",

@@ -1,11 +1,14 @@
 <template>
     <div id="index" class="container">
-        <datagrid :columns="customers.columns" :rows="customers.rows">
-        </datagrid>
+        <datatable 
+            :columns="customers.columns" 
+            :rows="customers.rows">
+        </datatable>
     </div>
 </template>
 
 <script>
+    import { format } from "date-fns";
 
     let customers = {
         columns: [
@@ -24,7 +27,11 @@
             },
             {
                 key: "dateOfBirth",
-                label: "Date of Birth"
+                label: "Date of Birth",
+                filter: value => { 
+                    console.log(value);
+                    return format(value, "DD MMM YYYY"); 
+                }
             }
         ],
         rows: []
@@ -34,7 +41,7 @@
         name: 'index',
         data() {
 
-            for (let i = 0; i < 1000; i++) {
+            for (let i = 0; i < 250; i++) {
                 customers.rows.push({
                     givenName: "John " + i,
                     surname: "Smith " + i,
