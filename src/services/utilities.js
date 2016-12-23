@@ -4,9 +4,9 @@
  * 
  * 
  * @export
- * @param {any} array The array to be sorted
- * @param {any} key The key of the object to sort on
- * @param {any} direction The direction of the sort
+ * @param {Array} array The array to be sorted
+ * @param {String} key The key of the object to sort on
+ * @param {Number} direction The direction of the sort
  */
 export function sortBy(array, key, direction) {
 
@@ -25,6 +25,14 @@ export function sortBy(array, key, direction) {
 
 }
 
+/**
+ * 
+ * 
+ * @export
+ * @param {Array} array The array to group
+ * @param {String} key The key to group the array by
+ * @returns Object
+ */
 export function groupBy(array, key) {
     let groups = {
         data: array
