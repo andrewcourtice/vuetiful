@@ -1,96 +1,54 @@
 <template>
     <div id="index" class="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Test Header</th>
-                    <th>Test Header</th>
-                    <th>Test Header</th>
-                    <th>Test Header</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="table-group-header">
-                    <td colspan="4">Test Group Header 1</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-            </tbody>
-            <tbody>
-                <tr class="table-group-header">
-                    <td colspan="4">Test Group Header 2</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-                <tr>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                    <td>Test Data</td>
-                </tr>
-            </tbody>
-        </table>
-        <datagrid>
+        <datagrid :columns="customers.columns" :rows="customers.rows">
         </datagrid>
     </div>
 </template>
 
 <script>
+
+    let customers = {
+        columns: [
+            {
+                key: "givenName",
+                label: "Given Name"
+            },
+            {
+                key: "surname",
+                label: "Surname"
+            },
+            {
+                key: "email",
+                label: "Email",
+                width: 33
+            },
+            {
+                key: "dateOfBirth",
+                label: "Date of Birth"
+            }
+        ],
+        rows: [
+            {
+                givenName: "Andrew",
+                surname: "Courtice",
+                email: "something@random.com",
+                dateOfBirth: "23-12-2016"
+            },
+            {
+                givenName: "Liana",
+                surname: "Courtice",
+                email: "somethingelse@random.com",
+                dateOfBirth: "22-12-2016"
+            }
+        ]
+    };
+
     export default {
         name: 'index',
         data() {
             return {
-                name: ''
+                name: '',
+                customers: customers
             }
         }
     }
