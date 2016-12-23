@@ -1,5 +1,5 @@
 <template>
-    <div class="table-wrapper">
+    <div class="table-wrapper" :id="id">
         <table class="datatable" :class="{ 'table-striped': striped }">
             <thead>
                 <tr>
@@ -24,6 +24,7 @@
 
 <script>
     import Vue from "vue";
+    import registerable from "../mixins/registerable.js";
     import { sortBy, groupBy } from "../services/utilities.js";
 
     export default {
@@ -43,6 +44,11 @@
             rows: {
                 type: Array,
                 default: () => []
+            },
+
+            editable: {
+                type: Boolean,
+                default: false
             }
 
         },
@@ -116,7 +122,9 @@
                 return method.apply(this, args);
             }
         
-        }
+        },
+
+        mixins: [ registerable ]
 
     }
 </script>

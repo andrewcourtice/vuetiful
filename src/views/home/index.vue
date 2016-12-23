@@ -1,6 +1,6 @@
 <template>
     <div id="index" class="container">
-        <datatable 
+        <datatable id="data-table-1"
             :columns="customers.columns" 
             :rows="customers.rows">
         </datatable>
