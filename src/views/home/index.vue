@@ -28,17 +28,13 @@
             {
                 key: "dateOfBirth",
                 label: "Date of Birth",
-                filter: value => { 
-                    console.log(value);
-                    return format(value, "DD MMM YYYY"); 
-                }
+                filter: value => format(value, "DD MMMM YYYY")
             }
         ],
         rows: []
     };
 
     export default {
-        name: 'index',
         data() {
 
             for (let i = 0; i < 250; i++) {
@@ -51,7 +47,6 @@
             }
 
             return {
-                name: '',
                 customers: customers
             }
         }

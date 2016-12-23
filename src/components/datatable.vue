@@ -100,11 +100,11 @@
             },
 
             formatData(column, value) {
-                if (!column.filter) {
+                let filter = column.filter;
+
+                if (!filter) {
                     return value;
                 }
-
-                let filter = column.filter;
 
                 if (typeof filter === "function") {
                     return filter(value);
