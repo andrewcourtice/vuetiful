@@ -80,6 +80,8 @@
                 </tr>
             </tbody>
         </table>
+        <datagrid>
+        </datagrid>
     </div>
 </template>
 

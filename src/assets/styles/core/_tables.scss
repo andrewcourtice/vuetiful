@@ -1,5 +1,5 @@
 
-@import "./../abstract/_variables.scss";
+@import "../abstract/_variables.scss";
 
 table {
     table-layout: fixed;
@@ -7,6 +7,22 @@ table {
     background-color: $background-colour;
     border-collapse: collapse;
     border: 1px solid $border-colour;
+
+    &.table-striped {
+
+        & tbody {
+
+            & tr {
+
+                &:nth-child(odd) {
+
+                    & td {
+                        background-color: #FDFDFD;
+                    }
+                }
+            }
+        }
+    }
 }
 
 tr {
@@ -58,5 +74,14 @@ tbody {
     }
 }
 
+.table-wrapper {
+    display: block;
+    width: 100%;
+    border: 1px solid $border-colour;
+    border-radius: 2px;
 
+    & table {
+        border: none;
+    }
+}
 
