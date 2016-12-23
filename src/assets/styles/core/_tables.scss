@@ -1,0 +1,62 @@
+
+@import "./../abstract/_variables.scss";
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    background-color: $background-colour;
+    border-collapse: collapse;
+    border: 1px solid $border-colour;
+}
+
+tr {
+
+    &.table-group-header {
+
+        & td {
+            font-weight: 600;
+            background-color: #FBFCFD;
+        }
+    }
+}
+
+th,
+td {
+    text-align: left;
+    border-right: 1px solid $border-colour;
+
+    &:last-of-type {
+        border-right: none;
+    }
+}
+
+th {
+    padding: $clearing-medium $clearing-default;
+    font-weight: 600;
+    background-color: #FAFAFC;
+    border-bottom: 1px solid $border-colour;
+}
+
+td {
+    padding: $clearing-small $clearing-default;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+tbody {
+
+    &:last-of-type {
+
+        & tr {
+
+            &:last-of-type {
+
+                & td {
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}
+
+
+

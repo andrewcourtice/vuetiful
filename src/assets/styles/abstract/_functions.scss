@@ -1,0 +1,10 @@
+
+@function pow($base, $exponent: 2) {
+    $value: $base;
+
+    @for $i from 1 through ($exponent - 1) {
+        $value: ($value * $base);
+    }
+
+    @return $value;
+}

@@ -2,7 +2,7 @@ var path = require("path");
 var webpack = require("webpack");
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-module.exports = {
+var config = {
     entry: {
         app: "./src/main.js"
     },
@@ -48,7 +48,8 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
-        noInfo: true
+        noInfo: true,
+        compress: true
     },
     devtool: "#eval-source-map",
     watch: true,
@@ -62,10 +63,12 @@ module.exports = {
 };
 
 if (process.env.NODE_ENV === "production") {
-    module.exports.devtool = "#source-map";
-        // http://vue-loader.vuejs.org/en/workflow/production.html
-    module.exports.watch = false;
-    module.exports.plugins = (module.exports.plugins || []).concat([
+    config.devtool = "#source-map";
+    
+    // http://vue-loader.vuejs.org/en/workflow/production.html
+    config.watch = false;
+
+    config.plugins = (config.plugins || []).concat([
         new webpack.DefinePlugin({
             "process.env": {
                 NODE_ENV: '"production"'
@@ -78,7 +81,10 @@ if (process.env.NODE_ENV === "production") {
             }
         }),
         new webpack.LoaderOptionsPlugin({
+            debug: false,
             minimize: true
         })
     ]);
 }
+
+module.exports = config;

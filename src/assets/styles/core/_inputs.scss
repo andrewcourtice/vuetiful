@@ -1,4 +1,6 @@
 
+@import "./../abstract/_variables.scss";
+
 input {
 
     &:not([type="submit"]),
@@ -8,7 +10,8 @@ input {
         width: 250px;
         height: 40px;
         padding: 0 0.5em;
-        border: 1px solid #DDDDDD;
+        background-color: $background-colour;
+        border: 1px solid $border-colour;
         border-radius: 2px;
     }
 }
