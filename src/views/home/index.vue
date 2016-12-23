@@ -27,25 +27,22 @@
                 label: "Date of Birth"
             }
         ],
-        rows: [
-            {
-                givenName: "Andrew",
-                surname: "Courtice",
-                email: "something@random.com",
-                dateOfBirth: "23-12-2016"
-            },
-            {
-                givenName: "Liana",
-                surname: "Courtice",
-                email: "somethingelse@random.com",
-                dateOfBirth: "22-12-2016"
-            }
-        ]
+        rows: []
     };
 
     export default {
         name: 'index',
         data() {
+
+            for (let i = 0; i < 1000; i++) {
+                customers.rows.push({
+                    givenName: "John " + i,
+                    surname: "Smith " + i,
+                    email: `john${i}.smith${i}@random.com`,
+                    dateOfBirth: new Date() 
+                });
+            }
+
             return {
                 name: '',
                 customers: customers

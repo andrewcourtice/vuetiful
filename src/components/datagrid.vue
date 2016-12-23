@@ -1,10 +1,10 @@
 <template>
     <div class="table-wrapper">
-        <table>
+        <table class="datagrid" :class="{ 'table-striped': striped }">
             <thead>
                 <tr>
                     <th v-for="column in columns" :style="{ width: getCellWidth(column) }">
-                        <span @click="sortBy(column.key)">{{ column.label || column.key }}</span>
+                        <span class="datagrid-column" @click="sortBy(column.key)">{{ column.label || column.key }}</span>
                     </th>
                 </tr>
             </thead>
@@ -106,5 +106,15 @@
 <style>
     @import "../assets/styles/abstract/_variables.scss";
 
+    th {
+        padding: 0;
+    }
+
+    .datagrid-column {
+        display: block;
+        padding: $clearing-medium $clearing-default;
+        cursor: pointer;
+        user-select: none;
+    }
 
 </style>
