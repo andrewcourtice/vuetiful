@@ -1,8 +1,8 @@
 <template>
-    <float class="date-picker" :visible="visible">
+    <floating-panel class="date-picker" :visible="visible">
         <input type="text" slot="host" v-model="formattedValue" @focus="show()" readonly>
         <p slot="content" @click="updateValue(new Date())">Hello</p>
-    </float>
+    </floating-panel>
 </template>
 
 <script>

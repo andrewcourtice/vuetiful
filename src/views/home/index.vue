@@ -1,8 +1,17 @@
 <template>
     <div id="index" class="container">
+        <input type="checkbox" v-model="customers.editable">
         <datatable id="data-table-1"
             :columns="customers.columns" 
-            :rows="customers.rows">
+            :rows="customers.rows"
+            :editable="customers.editable">
+            <template slot="surname" scope="cell">
+                <div class="surname">{{ cell.value }}</div>
+            </template>
+            <template slot="dateOfBirth" scope="cell">
+                <datetime-picker v-model="cell.value" v-if="cell.editable"></datetime-picker>
+                <span class="date-of-birth" v-else>{{ cell.formatter(cell.value) }}</span>
+            </template>
         </datatable>
     </div>
 </template>
@@ -11,6 +20,7 @@
     import { format } from "date-fns";
 
     let customers = {
+        editable: false,
         columns: [
             {
                 key: "givenName",
@@ -28,7 +38,7 @@
             {
                 key: "dateOfBirth",
                 label: "Date of Birth",
-                filter: value => format(value, "DD MMMM YYYY")
+                formatter: value => format(value, "DD MMMM YYYY")
             }
         ],
         rows: []

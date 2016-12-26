@@ -14,7 +14,10 @@
                 </tr>
                 <tr v-for="row in rows">
                     <td v-for="column in columns">
-                        <span>{{ formatData(column, row[column.key]) }}</span>
+                        <slot :name="column.key" :value="row[column.key]" :formatter="column.formatter" :editable="editable">
+                            <input type="text" v-if="editable" v-model="row[column.key]">
+                            <span v-else>{{ formatData(column, row[column.key]) }}</span>
+                        </slot>
                     </td>
                 </tr>
             </tbody>
@@ -106,20 +109,20 @@
             },
 
             formatData(column, value) {
-                let filter = column.filter;
+                let formatter = column.formatter;
 
-                if (!filter) {
+                if (!formatter) {
                     return value;
                 }
 
-                if (typeof filter === "function") {
-                    return filter(value);
+                if (typeof formatter === "function") {
+                    return formatter(value);
                 }
 
-                let method = Vue.filter(filter.name);
+                formatter = Vue.filter(filter.name);
                 let args = [value, ...filter.args];
 
-                return method.apply(this, args);
+                return formatter.apply(this, args);
             }
         
         },

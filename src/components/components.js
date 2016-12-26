@@ -2,7 +2,7 @@ import MenuList from "./menu-list.vue";
 import Dynamic from "./dynamic";
 import DataTable from "./datatable.vue";
 import DateTimePicker from "./datetime-picker.vue";
-import Float from "./float.vue";
+import FloatingPanel from "./floating-panel.vue";
 
 export default {
     dynamic: {
@@ -17,9 +17,9 @@ export default {
         tag: "datetime-picker",
         definition: DateTimePicker
     },
-    float: {
-        tag: "float",
-        definition: Float
+    floatingPanel: {
+        tag: "floating-panel",
+        definition: FloatingPanel
     },
     menuList: {
         tag: "menu-list",
