@@ -119,10 +119,10 @@
                     return formatter(value);
                 }
 
-                formatter = Vue.filter(filter.name);
-                let args = [value, ...filter.args];
+                let filter = Vue.filter(formatter.name);
+                let args = [value, ...formatter.args];
 
-                return formatter.apply(this, args);
+                return filter.apply(this, args);
             }
         
         },
