@@ -7,6 +7,7 @@ import components from "./components/components";
 import views from "./views/views";
 
 // Import the core styles
+import "flex-layout-attribute";
 import "./assets/styles/site.scss";
 
 function registerPlugins() {
