@@ -9,8 +9,8 @@
                 <div class="surname">{{ cell.value }}</div>
             </template>
             <template slot="dateOfBirth" scope="cell">
-                <datetime-picker v-model="cell.value" v-if="cell.editable"></datetime-picker>
-                <span class="date-of-birth" v-else>{{ cell.formatter(cell.value) }}</span>
+                <datetime-picker v-model="cell.value" v-if="customers.editable"></datetime-picker>
+                <span class="date-of-birth" v-else>{{ cell.column.formatter(cell.value) }}</span>
             </template>
         </datatable>
     </div>

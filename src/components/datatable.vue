@@ -14,7 +14,7 @@
                 </tr>
                 <tr v-for="row in rows">
                     <td v-for="column in columns">
-                        <slot :name="column.key" :value="row[column.key]" :formatter="column.formatter" :editable="editable">
+                        <slot :name="column.key" :row="row" :column="column" :value="row[column.key]">
                             <input type="text" v-if="editable" v-model="row[column.key]">
                             <span v-else>{{ formatData(column, row[column.key]) }}</span>
                         </slot>
