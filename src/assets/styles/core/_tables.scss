@@ -1,7 +1,4 @@
 
-@import "../abstract/_variables.scss";
-@import "../abstract/_mixins.scss";
-
 table {
     table-layout: fixed;
     width: 100%;
@@ -48,14 +45,14 @@ td {
 }
 
 th {
-    padding: $clearing-medium $clearing-default;
+    padding: rem-size(1.5) rem-size(2);
     font-weight: 600;
     background-color: #FAFAFC;
     border-bottom: 1px solid $colour-border;
 }
 
 td {
-    padding: $clearing-small $clearing-default;
+    padding: rem-size() rem-size(2);
     border-bottom: 1px solid #EEEEEE;
     @include truncate-text;
 }

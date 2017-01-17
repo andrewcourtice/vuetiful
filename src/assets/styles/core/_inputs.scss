@@ -1,6 +1,4 @@
 
-@import "../abstract/_variables.scss";
-
 input {
 
     &:not([type="checkbox"]),
@@ -12,10 +10,11 @@ input {
         display: inline-block;
         font-family: inherit;
         width: 250px;
-        height: 40px;
+        height: rem-size(6);
         padding: 0 0.5em;
         background-color: $colour-background;
         border: 1px solid $colour-border;
         border-radius: 2px;
+        outline: none;
     }
 }

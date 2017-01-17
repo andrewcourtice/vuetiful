@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th v-for="column in columns" :style="{ width: getCellWidth(column) }">
-                        <span class="datatable-column" @click="groupBy(column)">{{ column.label || column.key }}</span>
+                        <span class="datatable-column" @click="sortBy(column)">{{ column.label || column.key }}</span>
                     </th>
                 </tr>
             </thead>
@@ -13,9 +13,9 @@
                     <td :colspan="columnSpan">{{ formatData(groupingColumn, group) }}</td>
                 </tr>
                 <tr v-for="row in rows">
-                    <td v-for="column in columns">
+                    <td v-for="column in columns" :class="cellClass">
                         <slot :name="column.key" :row="row" :column="column" :value="row[column.key]">
-                            <input type="text" v-if="editable" v-model="row[column.key]">
+                            <input type="text" v-model="row[column.key]" v-if="editable">
                             <span v-else>{{ formatData(column, row[column.key]) }}</span>
                         </slot>
                     </td>
@@ -66,14 +66,20 @@
 
         computed: {
 
+            cellClass() {
+                return "datatable-cell-" + (this.editable ? "edit" : "view");
+            },
+
             groups() {
 
+                let rows = this.rows;
+
                 if (this.sortKey) {
-                    sortBy(this.rows, this.sortKey, this.sortDirection);
+                    rows = sortBy(rows, this.sortKey, this.sortDirection);
                 }
 
                 let groupingKey = this.groupingColumn ? this.groupingColumn.key : null;
-                let groups = groupBy(this.rows, groupingKey);
+                let groups = groupBy(rows, groupingKey);
 
                 return groups;
             },
@@ -86,7 +92,9 @@
 
         methods: {
 
-            sortBy(key) {
+            sortBy(column) {
+                let key = column.key;
+
                 if (key === this.sortKey) {
                     this.sortDirection *= -1;
                     return;
@@ -134,6 +142,7 @@
 
 <style lang="scss" scoped>
     @import "../assets/styles/abstract/_variables.scss";
+    @import "../assets/styles/abstract/_functions.scss";
 
     th {
         padding: 0;
@@ -141,9 +150,28 @@
 
     .datatable-column {
         display: block;
-        padding: $clearing-medium $clearing-default;
+        padding: rem-size(1.5) rem-size(2);
         cursor: pointer;
         user-select: none;
+    }
+
+    .datatable-cell-edit {
+        padding: 0;
+        overflow: visible;
+        
+        & input,
+        & select {
+            display: block;
+            width: 100%;
+            height: auto;
+            padding: rem-size(1) rem-size(2);
+            border: none;
+
+            &:focus,
+            &:active {
+                outline: 1px solid $colour-primary;
+            }
+        }
     }
 
 </style>

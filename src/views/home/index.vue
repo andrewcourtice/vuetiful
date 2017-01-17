@@ -81,7 +81,7 @@
                 });
             }
 
-            customers.rows = rows;
+            customers.rows = rows.reverse();
 
             return {
                 customers: customers

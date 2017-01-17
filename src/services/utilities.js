@@ -14,7 +14,9 @@ export function sortBy(array, key, direction) {
         throw new Error("Sort direction must be either 1 (ascending) or -1 (descending)");
     }
 
-    array.sort((a, b) => {
+    let sortArray = [...array];
+
+    sortArray.sort((a, b) => {
         let valueA = a[key];
         let valueB = b[key];
 
@@ -23,6 +25,7 @@ export function sortBy(array, key, direction) {
         return outcome * direction;
     });
 
+    return sortArray;    
 }
 
 /**

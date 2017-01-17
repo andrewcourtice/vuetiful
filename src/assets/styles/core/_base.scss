@@ -1,6 +1,4 @@
 
-@import "../abstract/_variables.scss";
-
 html,
 body {
     width: 100%;
@@ -26,4 +24,14 @@ body {
     line-height: $line-height;
     color: $colour-font;
     background-color: $colour-background;
+}
+
+button, 
+input, 
+textarea,
+select,
+optgroup {
+    color: inherit;
+    font: inherit;
+    margin: 0;
 }

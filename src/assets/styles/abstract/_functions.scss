@@ -8,3 +8,7 @@
 
     @return $value;
 }
+
+@function rem-size($factor: 1) {
+    @return $base-point-size * $factor;
+}

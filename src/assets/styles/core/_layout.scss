@@ -6,11 +6,11 @@
 }
 
 .grid {
-    margin-left: -$clearing-default;
-    margin-right: -$clearing-default;
+    margin-left: rem-size(-2);
+    margin-right: rem-size(-2);
 }
 
 .grid-cell {
-    padding-left: $clearing-default;
-    padding-right: $clearing-default;
+    padding-left: rem-size(2);
+    padding-right: rem-size(2);
 }
