@@ -6,7 +6,8 @@
         <a href="#" class="button button-yellow">Yellow Button</a>
         <input type="checkbox" v-model="customers.editable">
 
-        <div layout="row top-stretch">
+        <div class="grid" layout="row top-stretch">
+        <div class="grid-cell">
             <datatable id="data-table-1"
                 :columns="customers.columns" 
                 :rows="customers.rows"
@@ -19,6 +20,8 @@
                     <span class="date-of-birth" v-else>{{ cell.column.formatter(cell.value) }}</span>
                 </template>
             </datatable>
+        </div>
+        <div class="grid-cell">
             <datatable id="data-table-2"
                 :columns="customers.columns" 
                 :rows="customers.rows"
@@ -31,6 +34,7 @@
                     <span class="date-of-birth" v-else>{{ cell.column.formatter(cell.value) }}</span>
                 </template>
             </datatable>
+        </div> 
         </div>
     </div>
 </template>

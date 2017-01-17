@@ -3,8 +3,12 @@
 
 input {
 
+    &:not([type="checkbox"]),
+    &:not([type="radio"]),
     &:not([type="submit"]),
-    &:not([type="file"]) {
+    &:not([type="button"]),
+    &:not([type="file"]),
+    &:not([type="range"]) {
         display: inline-block;
         font-family: inherit;
         width: 250px;

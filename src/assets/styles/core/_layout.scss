@@ -4,3 +4,13 @@
     max-width: 1170px;
     margin: 0 auto;
 }
+
+.grid {
+    margin-left: -$clearing-default;
+    margin-right: -$clearing-default;
+}
+
+.grid-cell {
+    padding-left: $clearing-default;
+    padding-right: $clearing-default;
+}
