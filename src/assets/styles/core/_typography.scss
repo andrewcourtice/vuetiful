@@ -11,7 +11,7 @@ h6 {
     margin: 0.75em 0;
     font-weight: 600;
     line-height: $line-height;
-    color: $font-colour;
+    color: $colour-font;
 }
 
 h1 {
@@ -52,4 +52,13 @@ strong {
 
 em {
     font-style: italic;
+}
+
+a {
+    color: $colour-primary;
+    text-decoration: none;
+
+    &:hover {
+        color: darken($colour-primary, $colour-variation);
+    }
 }

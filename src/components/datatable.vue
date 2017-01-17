@@ -132,7 +132,7 @@
     }
 </script>
 
-<style>
+<style lang="scss" scoped>
     @import "../assets/styles/abstract/_variables.scss";
 
     th {

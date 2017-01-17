@@ -1,12 +1,13 @@
 
 @import "../abstract/_variables.scss";
+@import "../abstract/_mixins.scss";
 
 table {
     table-layout: fixed;
     width: 100%;
-    background-color: $background-colour;
+    background-color: $colour-background;
     border-collapse: collapse;
-    border: 1px solid $border-colour;
+    border: 1px solid $colour-border;
 
     &.table-striped {
 
@@ -39,7 +40,7 @@ tr {
 th,
 td {
     text-align: left;
-    border-right: 1px solid $border-colour;
+    border-right: 1px solid $colour-border;
 
     &:last-of-type {
         border-right: none;
@@ -50,12 +51,13 @@ th {
     padding: $clearing-medium $clearing-default;
     font-weight: 600;
     background-color: #FAFAFC;
-    border-bottom: 1px solid $border-colour;
+    border-bottom: 1px solid $colour-border;
 }
 
 td {
     padding: $clearing-small $clearing-default;
     border-bottom: 1px solid #EEEEEE;
+    @include truncate-text;
 }
 
 tbody {
@@ -77,7 +79,7 @@ tbody {
 .table-wrapper {
     display: block;
     width: 100%;
-    border: 1px solid $border-colour;
+    border: 1px solid $colour-border;
     border-radius: 2px;
 
     & table {

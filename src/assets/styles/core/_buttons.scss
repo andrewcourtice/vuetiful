@@ -1,0 +1,39 @@
+
+@import "../abstract/_variables.scss";
+
+.button {
+    display: inline-block;
+    margin: 0;
+    padding: $clearing-medium $clearing-large;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 600;
+    line-height: inherit;
+    text-align: center;
+    color: $colour-font-negative;
+    background-color: $colour-primary;
+    border: none;
+    border-radius: $border-radius;
+    outline: none;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+        color: $colour-font-negative;
+        background-color: darken($colour-primary, $colour-variation);
+    }
+}
+
+@each $name, $colour in $colour-accents {
+
+    .button-#{ $name } {
+        background-color: $colour;
+
+        &:hover,
+        &:active {
+            color: $colour-font-negative;
+            background-color: darken($colour, $colour-variation);
+        }
+    }
+
+} 

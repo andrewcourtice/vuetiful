@@ -2,19 +2,34 @@
 $base-point-size: 8px;
 
 $typography-ratio: 1.5;
-$font-size: $base-point-size * 2;
+$font-size: 16px;
 $line-height: 1.5em;
 
-$font-colour: #363945;
-$background-colour: #FFFFFF;
-$border-colour: #DDDDEE;
+$clearing-tiny: $base-point-size / 2;       // 4px
+$clearing-small: $base-point-size;          // 8px
+$clearing-medium: $base-point-size * 1.5;   // 12px
+$clearing-default: $base-point-size * 2;    // 16px
+$clearing-large: $base-point-size * 3;      // 24px
+$clearing-xlarge: $base-point-size * 4;     // 32px
+$clearing-xxlarge: $base-point-size * 6;    // 48px
 
-$clearing-tiny: $base-point-size / 2;
-$clearing-small: $base-point-size;
-$clearing-medium: $base-point-size * 1.5;
-$clearing-default: $base-point-size * 2;
-$clearing-large: $base-point-size * 3;
-$clearing-xlarge: $base-point-size * 4;
+$colour-font: #32394F;
+$colour-font-negative: #FFFFFF;
+$colour-background: #FFFFFF;
+$colour-border: #DDDDEE;
+$colour-primary: #2196F3;
+$colour-accents: (
+    blue: #2196F3,
+    green: #00B378,
+    red: #F44336,
+    yellow: #FFC107,
+    orange: #FF9800,
+    purple: #673AB7
+);
+
+$colour-variation: 10%;
+
+$border-radius: 2px;
 
 $alice-blue: #FBFCFD;
 $vulcan: #363945;
