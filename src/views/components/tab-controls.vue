@@ -4,8 +4,11 @@
         <div class="grid-row">
             <div class="grid-cell">
                 <tab-control>
-                    <tab-pane title="Tab Pane 1"></tab-pane>
-                    <tab-pane title="Tab Pane 2"></tab-pane>
+                    <template slot="tab-pane-2" scope="tab">
+                        <p>{{ tab.value.name }}</p>
+                    </template>
+                    <tab-pane name="tab-pane-1" label="Tab Pane 1"></tab-pane>
+                    <tab-pane name="tab-pane-2" label="Tab Pane 2"></tab-pane>
                 </tab-control>
             </div>
         </div>

@@ -1,7 +1,11 @@
 <template>
     <div class="tab-control">
         <div class="tabs-list" layout="row center-left">
-            <div v-for="tab in tabs" class="tab-item">{{ tab.title }}</div>
+            <div v-for="tab in tabs" class="tab-item" @click="selectTab(tab)">
+                <slot :name="tab.name" :value="tab">
+                    <span>{{ tab.label }}</span>
+                </slot>
+            </div>
         </div>
         <slot></slot>
     </div>

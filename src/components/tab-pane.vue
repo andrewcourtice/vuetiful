@@ -9,7 +9,12 @@
 
         props: {
 
-            title: {
+            name: {
+                type: String,
+                required: true
+            },
+
+            label: {
                 type: String,
                 required: true
             }
