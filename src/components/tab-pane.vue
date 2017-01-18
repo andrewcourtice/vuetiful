@@ -7,8 +7,21 @@
 <script>
     export default {
 
-        mounted() {
-            this.$parent.addTabPane(this);
+        props: {
+
+            title: {
+                type: String,
+                required: true
+            }
+
+        },
+
+        beforeMount() {
+            this.$parent.addTab(this);
+        },
+
+        beforeDestroy() {
+            this.$parent.removeTab(this);
         }
 
     }

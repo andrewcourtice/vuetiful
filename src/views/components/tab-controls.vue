@@ -4,7 +4,8 @@
         <div class="grid-row">
             <div class="grid-cell">
                 <tab-control>
-                    <tab-pane></tab-pane>
+                    <tab-pane title="Tab Pane 1"></tab-pane>
+                    <tab-pane title="Tab Pane 2"></tab-pane>
                 </tab-control>
             </div>
         </div>
