@@ -7,8 +7,6 @@
 <script>
     export default {
 
-        name: "tab-control",
-
         methods: {
 
             addTabPane(tab) {

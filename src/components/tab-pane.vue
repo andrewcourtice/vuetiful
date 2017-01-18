@@ -7,8 +7,6 @@
 <script>
     export default {
 
-        name: "tab-pane",
-
         mounted() {
             this.$parent.addTabPane(this);
         }
