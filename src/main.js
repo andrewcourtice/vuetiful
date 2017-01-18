@@ -50,27 +50,30 @@ function buildRoutes() {
 function buildRootInstance() {
     let routes = buildRoutes();
 
+    let menuItems = [
+        {
+            name: "Buttons",
+            route: "/components/buttons"
+        },
+        {
+            name: "Datatables",
+            route: "/components/datatables"
+        },
+        {
+            name: "Tab Controls",
+            route: "/components/tabcontrols"
+        }
+    ];
+
     new Vue({
         el: '#app',
+        
         data() {
             return {
-                menuItems: [{
-                    name: "Home",
-                    route: "/home/index"
-                }, {
-                    name: "About",
-                    route: "/home/about"
-                }, {
-                    name: "Contact",
-                    route: {
-                        path: "/home/contact",
-                        query: {
-                            name: "andrew"
-                        }
-                    }
-                }]
+                menuItems: menuItems
             }
         },
+
         router: new VueRouter({
             routes: routes
         })

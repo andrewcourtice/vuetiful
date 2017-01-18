@@ -11,17 +11,15 @@
 <body>
     <div id="app">
         <div class="container">
-            <div class="menu-list"> 
+            <div class="menu-list">
                 <div class="menu-item" v-for="menu in menuItems">
                     <router-link :to="menu.route" class="andrew">{{ menu.name }}</router-link>
                 </div>
             </div>
         </div>
-        <transition name="fade">
-            <keep-alive>
-                <router-view></router-view>
-            </keep-alive>
-        </transition>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
     <script src="/dist/app.bundle.js"></script>
 </body>

@@ -1,5 +1,5 @@
-import Home from "./home/home";
+import Components from "./components/components";
 
 export default {
-    home: Home
+    components: Components
 }

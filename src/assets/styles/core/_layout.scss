@@ -5,12 +5,16 @@
     margin: 0 auto;
 }
 
-.grid {
-    margin-left: rem-size(-2);
-    margin-right: rem-size(-2);
+.grid-row {
+    margin-left: rem-size(-1);
+    margin-right: rem-size(-1);
+
+    & + .grid-row {
+        margin-top: rem-size(2);
+    }
 }
 
 .grid-cell {
-    padding-left: rem-size(2);
-    padding-right: rem-size(2);
+    padding-left: rem-size();
+    padding-right: rem-size();
 }

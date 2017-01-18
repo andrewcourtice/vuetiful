@@ -2,6 +2,8 @@ import Dynamic from "./dynamic";
 import DataTable from "./datatable.vue";
 import DateTimePicker from "./datetime-picker.vue";
 import FloatingPanel from "./floating-panel.vue";
+import TabControl from "./tab-control.vue";
+import TabPane from "./tab-pane.vue";
 
 export default {
     dynamic: {
@@ -19,5 +21,13 @@ export default {
     floatingPanel: {
         tag: "floating-panel",
         definition: FloatingPanel
+    },
+    tabControl: {
+        tag: "tab-control",
+        definition: TabControl
+    },
+    tabPane: {
+        tag: "tab-pane",
+        definition: TabPane
     }
 }

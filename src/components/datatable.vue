@@ -1,6 +1,6 @@
 <template>
     <div class="table-wrapper" :id="id">
-        <table class="datatable" :class="{ 'table-striped': striped }">
+        <table class="datatable" :class="tableClasses">
             <thead>
                 <tr>
                     <th v-for="column in columns" :style="{ width: getCellWidth(column) }">
@@ -13,7 +13,7 @@
                     <td :colspan="columnSpan">{{ formatData(groupingColumn, group) }}</td>
                 </tr>
                 <tr v-for="row in rows">
-                    <td v-for="column in columns" :class="cellClass">
+                    <td v-for="column in columns" :class="cellClasses">
                         <slot :name="column.key" :row="row" :column="column" :value="row[column.key]">
                             <input type="text" v-model="row[column.key]" v-if="editable">
                             <span v-else>{{ formatData(column, row[column.key]) }}</span>
@@ -33,6 +33,11 @@
     export default {
 
         props: {
+
+            fixed: {
+                type: Boolean,
+                default: true
+            },
 
             striped: {
                 type: Boolean,
@@ -66,7 +71,14 @@
 
         computed: {
 
-            cellClass() {
+            tableClasses() {
+                return {
+                    "table-fixed": this.fixed,
+                    "table-striped": this.striped
+                };
+            },
+
+            cellClasses() {
                 return "datatable-cell-" + (this.editable ? "edit" : "view");
             },
 
