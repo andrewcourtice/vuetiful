@@ -49,20 +49,20 @@
         editable: false,
         columns: [
             {
-                key: "givenName",
+                id: "givenName",
                 label: "Given Name"
             },
             {
-                key: "surname",
+                id: "surname",
                 label: "Surname"
             },
             {
-                key: "email",
+                id: "email",
                 label: "Email",
                 width: 33
             },
             {
-                key: "dateOfBirth",
+                id: "dateOfBirth",
                 label: "Date of Birth",
                 formatter: value => format(value, "DD MMMM YYYY")
             }

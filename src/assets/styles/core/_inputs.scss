@@ -1,20 +1,17 @@
 
-input {
 
-    &:not([type="checkbox"]),
-    &:not([type="radio"]),
-    &:not([type="submit"]),
-    &:not([type="button"]),
-    &:not([type="file"]),
-    &:not([type="range"]) {
-        display: inline-block;
-        font-family: inherit;
-        width: 250px;
-        height: rem-size(6);
-        padding: 0 0.5em;
-        background-color: $colour-background;
-        border: 1px solid $colour-border;
-        border-radius: 2px;
-        outline: none;
-    }
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="datetime"],
+input[type="password"],
+input[type="search"] {
+    display: inline-block;
+    width: 250px;
+    height: rem-size(6);
+    padding: 0 rem-size(1.5);
+    background-color: $colour-background;
+    border: 1px solid $colour-border;
+    border-radius: 2px;
+    outline: none;
 }

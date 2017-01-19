@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th v-for="column in columns" :style="{ width: getCellWidth(column) }">
-                        <span class="datatable-column" @click="sortBy(column)">{{ column.label || column.key }}</span>
+                        <span class="datatable-column" @click="sortBy(column)">{{ column.label || column.id }}</span>
                     </th>
                 </tr>
             </thead>
@@ -14,9 +14,9 @@
                 </tr>
                 <tr v-for="row in rows">
                     <td v-for="column in columns" :class="cellClasses">
-                        <slot :name="column.key" :row="row" :column="column" :value="row[column.key]">
-                            <input type="text" v-model="row[column.key]" v-if="editable">
-                            <span v-else>{{ formatData(column, row[column.key]) }}</span>
+                        <slot :name="column.id" :row="row" :column="column" :value="row[column.id]">
+                            <input type="text" v-model="row[column.id]" v-if="editable">
+                            <span v-else>{{ formatData(column, row[column.id]) }}</span>
                         </slot>
                     </td>
                 </tr>
@@ -28,7 +28,7 @@
 <script>
     import Vue from "vue";
     import registerable from "../mixins/registerable.js";
-    import { sortBy, groupBy } from "../services/utilities.js";
+    import * as utilities from "../services/utilities.js";
 
     export default {
 
@@ -64,7 +64,7 @@
         data() {
             return {
                 groupingColumn: null,
-                sortKey: null,
+                sortId: null,
                 sortDirection: 1
             };
         },
@@ -86,12 +86,12 @@
 
                 let rows = this.rows;
 
-                if (this.sortKey) {
-                    rows = sortBy(rows, this.sortKey, this.sortDirection);
+                if (this.sortId) {
+                    rows = utilities.sortBy(rows, this.sortId, this.sortDirection);
                 }
 
-                let groupingKey = this.groupingColumn ? this.groupingColumn.key : null;
-                let groups = groupBy(rows, groupingKey);
+                let groupingId = this.groupingColumn ? this.groupingColumn.id : null;
+                let groups = utilities.groupBy(rows, groupingId);
 
                 return groups;
             },
@@ -105,14 +105,14 @@
         methods: {
 
             sortBy(column) {
-                let key = column.key;
+                let id = column.id;
 
-                if (key === this.sortKey) {
+                if (id === this.sortId) {
                     this.sortDirection *= -1;
                     return;
                 }
 
-                this.sortKey = key;
+                this.sortId = id;
                 this.sortDirection = 1;
             },
 
