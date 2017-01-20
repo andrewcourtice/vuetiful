@@ -62,6 +62,10 @@ function buildRootInstance() {
         {
             name: "Tab Controls",
             route: "/components/tabcontrols"
+        },
+        {
+            name: "Toggles",
+            route: "/components/toggles"
         }
     ];
 

@@ -12,6 +12,9 @@
                 <tr class="table-group-header" v-if="groupingColumn">
                     <td :colspan="columnSpan">{{ formatData(groupingColumn, group) }}</td>
                 </tr>
+                <tr v-if="rows.length == 0">
+                    <td :colspan="columnSpan">No results</td>
+                </tr>
                 <tr v-for="row in rows">
                     <td v-for="column in columns" :class="cellClasses">
                         <slot :name="column.id" :row="row" :column="column" :value="row[column.id]">
@@ -144,20 +147,23 @@
 
                 return filter.apply(this, args);
             }
-        
+
         },
 
-        mixins: [ registerable ]
+        mixins: [registerable]
 
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     @import "../assets/styles/abstract/_variables.scss";
     @import "../assets/styles/abstract/_functions.scss";
 
-    th {
-        padding: 0;
+    .datatable {
+
+        & th {
+            padding: 0;
+        }
     }
 
     .datatable-column {

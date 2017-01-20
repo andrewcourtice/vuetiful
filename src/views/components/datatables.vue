@@ -1,7 +1,7 @@
 <template>
     <div id="datatables" class="container">
         <h1>Datatables</h1>
-        <input type="checkbox" v-model="customers.editable">
+        <checkbox id="editable" v-model="customers.editable">Editable?</checkbox>
         <div class="grid-row" layout="row top-stretch">
             <div class="grid-cell">
                 <datatable id="data-table-1" :columns="customers.columns" :rows="customers.rows" :editable="customers.editable">
