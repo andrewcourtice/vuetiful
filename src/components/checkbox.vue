@@ -1,47 +1,22 @@
 <template>
     <div class="checkbox">
-        <input type="checkbox" v-model="value" :id="id" :name="id" :disabled="disabled">
+        <input type="checkbox" :id="id" :name="id" :disabled="disabled" v-model="value" @change="onChange">
         <label :for="id"></label>
     </div>
 </template>
 
 <script>
-    import Toggle from "./toggle.vue";
+    import toggle from "../mixins/toggle.js";
 
     export default {
-
-        functional: true,
-
-        props: {
-            
-            id: {
-                type: String,
-                required: true
-            },
-
-            value: {
-                required: true
-            },
-
-            disabled: {
-                type: Boolean,
-                default: false
-            }
-            
-        },
-
-        components: {
-            toggle: Toggle
-        },
-
-        render(createElement) {
-            return createElement("toggle", {
-                props: {
-                    id: this.id,
-                    
-                }
-            });
-        }
-
+        mixins: [ toggle ]
     }
 </script>
+
+<style lang="scss">
+
+    .checkbox {
+
+    }
+
+</style>

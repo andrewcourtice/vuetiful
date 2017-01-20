@@ -2,7 +2,7 @@
     <div class="tab-control">
         <div class="tabs-list" layout="row center-left">
             <div v-for="tab in tabs" class="tab-item" @click="selectTab(tab)">
-                <slot :name="tab.name" :value="tab">
+                <slot :name="tab.id" :value="tab">
                     <span>{{ tab.label }}</span>
                 </slot>
             </div>

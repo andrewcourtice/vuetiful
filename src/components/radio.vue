@@ -1,30 +1,22 @@
 <template>
-    <div class="checkbox">
-        <input type="checkbox" v-model="value" :id="id" :name="id" :disabled="disabled">
+    <div class="radio">
+        <input type="radio" :id="id" :name="id" :disabled="disabled" v-model="value" @change="onChange">
         <label :for="id"></label>
     </div>
 </template>
 
 <script>
+    import toggle from "../mixins/toggle.js";
+
     export default {
-
-        props: {
-            
-            id: {
-                type: String,
-                required: true
-            },
-
-            value: {
-                required: true
-            },
-
-            disabled: {
-                type: Boolean,
-                default: false
-            }
-            
-        }
-
+        mixins: [ toggle ]
     }
 </script>
+
+<style lang="scss">
+
+    .radio {
+
+    }
+
+</style>

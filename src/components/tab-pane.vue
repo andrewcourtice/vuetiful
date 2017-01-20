@@ -9,7 +9,7 @@
 
         props: {
 
-            name: {
+            id: {
                 type: String,
                 required: true
             },
