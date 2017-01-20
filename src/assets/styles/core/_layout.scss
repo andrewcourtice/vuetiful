@@ -6,15 +6,15 @@
 }
 
 .grid-row {
-    margin-left: rem-size(-1);
-    margin-right: rem-size(-1);
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
 
     & + .grid-row {
-        margin-top: rem-size(2);
+        margin-top: 1rem;
     }
 }
 
 .grid-cell {
-    padding-left: rem-size();
-    padding-right: rem-size();
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }

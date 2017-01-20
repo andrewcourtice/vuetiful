@@ -25,8 +25,7 @@
 
     .toggle {
         display: inline-block;
-        position: relative;
-        vertical-align: middle;   
+        vertical-align: baseline;   
         user-select: none;
 
         & label {

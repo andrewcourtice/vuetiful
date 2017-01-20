@@ -8,8 +8,8 @@ input[type="password"],
 input[type="search"] {
     display: inline-block;
     width: 250px;
-    height: rem-size(6);
-    padding: 0 rem-size(1.5);
+    height: 3rem;
+    padding: 0 0.75rem;
     background-color: $colour-background;
     border: 1px solid $colour-border;
     border-radius: 2px;

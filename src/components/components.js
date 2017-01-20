@@ -5,6 +5,7 @@ import DateTimePicker from "./datetime-picker.vue";
 import Dynamic from "./dynamic";
 import FloatingPanel from "./floating-panel.vue";
 import Radio from "./radio.vue";
+import Switch from "./switch.vue";
 import TabControl from "./tab-control.vue";
 import TabPane from "./tab-pane.vue";
 
@@ -32,6 +33,10 @@ export default {
     radio: {
         tag: "radio",
         definition: Radio
+    },
+    switch: {
+        tag: "switch",
+        definition: Switch
     },
     tabControl: {
         tag: "tab-control",

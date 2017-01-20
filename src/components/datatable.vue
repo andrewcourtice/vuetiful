@@ -157,7 +157,6 @@
 
 <style lang="scss">
     @import "../assets/styles/abstract/_variables.scss";
-    @import "../assets/styles/abstract/_functions.scss";
 
     .datatable {
 
@@ -168,7 +167,7 @@
 
     .datatable-column {
         display: block;
-        padding: rem-size(1.5) rem-size(2);
+        padding: 0.75rem 1rem;
         cursor: pointer;
         user-select: none;
     }
@@ -182,7 +181,7 @@
             display: block;
             width: 100%;
             height: auto;
-            padding: rem-size(1) rem-size(2);
+            padding: 0.5rem 1rem;
             border: none;
 
             &:focus,
