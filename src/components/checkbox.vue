@@ -34,4 +34,18 @@
         vertical-align: text-bottom;
     }
 
+    .toggle {
+
+        & input[type="checkbox"] {
+
+            &:checked {
+                
+                & + .checkbox {
+                    background-color: $colour-primary;
+                    border-color: $colour-primary;
+                }
+            }
+        }
+    }
+
 </style>

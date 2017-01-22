@@ -21,7 +21,7 @@
         <div class="grid-row">
             <div class="grid-cell">
                 <h3>Switches</h3>
-                <checkbox v-for="item in checkables" :id="'checkbox-' + item.name" :val="item" v-model="switches.selected">{{ item.name }}</checkbox>
+                <checkbox v-for="item in checkables" :id="'switch-' + item.name" :val="item" v-model="switches.selected">{{ item.name }}</checkbox>
                 <div>{{ switches.selected }}</div>
             </div>
         </div>

@@ -23,13 +23,16 @@ export function filterBy(array, filter) {
         for (let prop in item) {
             let value = item[prop];
 
-            if (!value || SEARCHABLE_TYPES.indexOf(typeof(value)) < 0) {
+            // Ensure the value is of a searchable type 
+            // This will automatically handle null values
+            if (SEARCHABLE_TYPES.indexOf(typeof(value)) < 0) {
                 continue;
             }
 
-            let sanitised = value.toString().toLowerCase();
+            // Normalise the value to get a consistent match
+            let normalised = value.toString().toLowerCase();
 
-            if (sanitised.indexOf(filter) > -1) {
+            if (normalised.indexOf(filter.toLowerCase()) > -1) {
                 filtered.push(item);
                 break;
             }

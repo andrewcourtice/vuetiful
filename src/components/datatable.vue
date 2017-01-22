@@ -13,7 +13,7 @@
                     <td :colspan="columnSpan">{{ formatData(groupingColumn, group) }}</td>
                 </tr>
                 <tr v-if="rows.length == 0">
-                    <td :colspan="columnSpan">No results</td>
+                    <td class="datatable-info-cell" :colspan="columnSpan">No results</td>
                 </tr>
                 <tr v-for="row in rows">
                     <td v-for="column in columns" :class="cellClasses">
@@ -179,6 +179,11 @@
         padding: 0.75rem 1rem;
         cursor: pointer;
         user-select: none;
+    }
+
+    .datatable-info-cell {
+        font-weight: 600;
+        text-align: center;
     }
 
     .datatable-cell-edit {
