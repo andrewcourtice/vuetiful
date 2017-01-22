@@ -25,6 +25,7 @@
                 </tr>
             </tbody>
         </table>
+        <input type="text" v-model="rowFilter">
     </div>
 </template>
 
@@ -66,6 +67,7 @@
 
         data() {
             return {
+                rowFilter: null,
                 groupingColumn: null,
                 sortId: null,
                 sortDirection: 1
@@ -88,11 +90,18 @@
             groups() {
 
                 let rows = this.rows;
-
+                
+                // Filter the rows first to reduce the set (if a filter is supplied) we need to sort
+                if (this.rowFilter) {
+                    rows = utilities.filterBy(rows, this.rowFilter);
+                }
+                
+                // Sort the filtered set
                 if (this.sortId) {
                     rows = utilities.sortBy(rows, this.sortId, this.sortDirection);
                 }
 
+                // Group the set regardless to ensure a consistent result for the template
                 let groupingId = this.groupingColumn ? this.groupingColumn.id : null;
                 let groups = utilities.groupBy(rows, groupingId);
 
