@@ -32,7 +32,7 @@
     }
 </script>
 
-<style>
+<style lang="scss">
 
     .float {
         display: inline-block;
