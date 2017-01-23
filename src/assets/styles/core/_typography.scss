@@ -60,3 +60,23 @@ a {
         color: darken($colour-primary, $colour-variation);
     }
 }
+
+blockquote {
+    display: block;
+    margin: 1em 0;
+    padding: 0 1em;
+    color: #888;
+    font-weight: 600;
+    border-left: 4px solid #2196F3;
+}
+
+code {
+    display: block;
+    margin: 1em 0;
+    padding: 1em;
+    font-family: monospace;
+    white-space: pre;
+    background-color: #FAFAFA;
+    border: 1px solid $colour-border;
+    border-radius: $border-radius;
+}

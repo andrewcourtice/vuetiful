@@ -67,6 +67,10 @@ function buildRootInstance() {
         {
             name: "Toggles",
             route: "/components/toggles"
+        },
+        {
+            name: "Typography",
+            route: "/components/typography"
         }
     ];
 

@@ -25,6 +25,7 @@
 
     .toggle {
         display: inline-block;
+        margin-right: 1rem;
         vertical-align: baseline;   
         user-select: none;
 

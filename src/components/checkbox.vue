@@ -26,12 +26,31 @@
 
     .checkbox {
         display: inline-block;
+        position: relative;
         width: 1.25rem;
         height: 1.25rem;
+        margin-right: 0.25rem;
         background-color: $colour-background;
         border: 1px solid $colour-border;
         border-radius: $border-radius;
         vertical-align: text-bottom;
+
+        &:after {
+            position: absolute;
+            display: block;
+            content: " ";
+            width: 0.375rem;
+            height: 0.75rem;
+            top: 0.125rem;
+            left: 0.385rem;
+            border-right: 0.2rem solid white;
+            border-bottom: 0.2rem solid white;
+            transform: rotate(45deg);
+        }
+
+        &:hover {
+            border-color: $colour-border;
+        }
     }
 
     .toggle {

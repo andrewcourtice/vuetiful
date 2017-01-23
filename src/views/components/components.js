@@ -3,6 +3,7 @@ import Buttons from "./buttons.vue";
 import Datatables from "./datatables.vue";
 import TabControls from "./tab-controls.vue";
 import Toggles from "./toggles.vue";
+import Typography from "./typography.vue";
 
 export default {
     buttons: {
@@ -16,5 +17,8 @@ export default {
     },
     toggles: {
         component: Toggles
+    },
+    typography: {
+        component: Typography
     }
 }
