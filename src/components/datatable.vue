@@ -187,6 +187,7 @@
     }
 
     .datatable-cell-edit {
+        position: relative;
         padding: 0;
         overflow: visible;
         
@@ -197,10 +198,11 @@
             height: auto;
             padding: 0.5rem 1rem;
             border: none;
+            border-radius: 0;
 
             &:focus,
             &:active {
-                outline: 1px solid $colour-primary;
+                box-shadow: 0 0 0 1px $colour-primary;
             }
         }
     }
