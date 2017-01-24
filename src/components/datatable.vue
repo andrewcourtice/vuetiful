@@ -33,7 +33,13 @@
                 </tr>
             </tfoot>
         </table>
-        <input type="text" v-model="rowFilter">
+        <div class="datatable-options">
+            <select v-model="groupingColumn">
+                <option :value="null">No grouping</option>
+                <option v-for="column in columns" :value="column">{{ column.label }}</option>
+            </select>
+            <input type="text" placeholder="Filter this dataset" v-model="rowFilter">
+        </div>
     </div>
 </template>
 
@@ -235,6 +241,12 @@
                 box-shadow: 0 0 0 1px $colour-primary;
             }
         }
+    }
+
+    .datatable-options {
+        padding: 0.75rem 1rem;
+        background-color: #FAFAFA;
+        border-top: 1px solid $colour-border;
     }
 
 </style>
