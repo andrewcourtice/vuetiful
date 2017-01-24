@@ -3,7 +3,7 @@ import Vue from "vue";
 // Here we can just wrap Vue's built-in pub-sub system
 // Saves me from writing my own or importing another dependency :)
 
-class EventEmitter {
+export class EventEmitter {
 
     constructor() {
         this.emitter = new Vue();

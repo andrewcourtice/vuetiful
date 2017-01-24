@@ -26,12 +26,52 @@
 
     .radio {
         display: inline-block;
+        position: relative;
         width: 1.25rem;
         height: 1.25rem;
         background-color: $colour-background;
         border: 1px solid $colour-border;
         border-radius: 50%;
         vertical-align: text-bottom;
+
+        &:after {
+            position: absolute;
+            display: block;
+            content: " ";
+            width: 0.5rem;
+            height: 0.5rem;
+            top: 50%;
+            left: 50%;
+            margin-top: -0.25rem;
+            margin-left: -0.25rem;
+            background-color: $colour-background;
+            border-radius: 50%;
+        }
+    }
+
+    .toggle {
+
+        &:hover {
+            
+            & .radio {
+                border-color: $colour-primary;
+
+                &:after {
+                    background-color: $colour-primary;
+                }
+            }
+        }
+
+        & input[type="radio"] {
+
+            &:checked {
+                
+                & + .radio {
+                    background-color: $colour-primary;
+                    border-color: $colour-primary;
+                }
+            }
+        }
     }
 
 </style>
