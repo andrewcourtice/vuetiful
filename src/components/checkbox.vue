@@ -1,5 +1,5 @@
 <template>
-    <div class="toggle checkbox">
+    <div class="checkbox">
         <input type="checkbox" :id="id" :name="id" :disabled="disabled" :value="val" v-model="checked" @change="onChange">
         <label :for="id"></label>
         <slot></slot>
@@ -20,6 +20,9 @@
     @import "../assets/styles/abstract/_variables.scss";
 
     .checkbox {
+        display: inline-block;
+        margin-right: 1rem;
+        vertical-align: baseline;
 
         & label {
             position: relative;
@@ -40,21 +43,28 @@
                 content: " ";
                 width: 0.375rem;
                 height: 0.75rem;
-                top: 0.125rem;
-                left: 0.385rem;
+                top: 0.15rem;
+                left: 0.4rem;
                 border-right: 0.2rem solid white;
                 border-bottom: 0.2rem solid white;
+                opacity: 0;
                 transform: rotate(45deg);
+                transition: opacity 150ms ease-out;
             }
         }
 
         & input[type="checkbox"] {
+            display: none;
 
             &:checked {
                 
                 & + label {
                     background-color: $colour-primary;
                     border-color: $colour-primary;
+
+                    &:after {
+                        opacity: 1;
+                    }
                 }
             }
         }

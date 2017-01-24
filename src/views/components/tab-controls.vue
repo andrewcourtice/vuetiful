@@ -5,10 +5,14 @@
             <div class="grid-cell">
                 <tab-control>
                     <template slot="tab-pane-2" scope="tab">
-                        <p>{{ tab.value.name }}</p>
+                        <span>{{ tab.value.id }}</span>
                     </template>
-                    <tab-pane name="tab-pane-1" label="Tab Pane 1"></tab-pane>
-                    <tab-pane name="tab-pane-2" label="Tab Pane 2"></tab-pane>
+                    <tab-pane id="tab-pane-1" label="Tab Pane 1">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </tab-pane>
+                    <tab-pane id="tab-pane-2" label="Tab Pane 2">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </tab-pane>
                 </tab-control>
             </div>
         </div>

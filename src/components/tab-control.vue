@@ -23,26 +23,14 @@
 
         methods: {
 
-            addTab(tab) {
-                this.tabs.push(tab);
-            },
-
-            removeTab(tab) {
-                let index = this.tabs.indexOf(tab);
-                this.tabs.splice(index, 1);
-            },
-
             selectTab(tab) {
                 this.selectedTab = tab;
             }
 
         },
 
-        beforeMount() {
-            console.log(this.$children);
-            this.$children.forEach(tab => {
-                this.tabs.push(tab);
-            });
+        created() {
+            this.tabs = this.$children;
         }
 
     }
@@ -59,7 +47,13 @@
     }
 
     .tabs-list {
+        background-color: #FAFAFA;
+        border-bottom: 1px solid $colour-border;
+    }
 
+    .tab-item {
+        padding: 0.75rem 1rem;
+        font-weight: 600;
     }
 
     .tab-pane {

@@ -20,9 +20,9 @@
         </div>
         <div class="grid-row">
             <div class="grid-cell">
-                <h3>Switches</h3>
-                <checkbox v-for="item in checkables" :id="'switch-' + item.name" :val="item" v-model="switches.selected">{{ item.name }}</checkbox>
-                <div>{{ switches.selected }}</div>
+                <h3>Toggles</h3>
+                <toggle v-for="item in checkables" :id="'switch-' + item.name" :val="item" v-model="toggles.selected">{{ item.name }}</toggle>
+                <div>{{ toggles.selected }}</div>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@
                     selected: null
                 },
 
-                switches: {
+                toggles: {
                     selected: []
                 },
 

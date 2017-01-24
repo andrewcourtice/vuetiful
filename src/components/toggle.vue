@@ -1,6 +1,6 @@
 <template>
-    <div class="radio">
-        <input type="radio" :id="id" :name="id" :disabled="disabled" :value="val" v-model="checked" @change="onChange">
+    <div class="toggle">
+        <input type="checkbox" :id="id" :name="id" :disabled="disabled" :value="val" v-model="checked" @change="onChange">
         <label :for="id"></label>
         <slot></slot>
     </div>
@@ -19,7 +19,7 @@
 <style lang="scss">
     @import "../assets/styles/abstract/_variables.scss";
 
-    .radio {
+    .toggle {
         display: inline-block;
         margin-right: 1rem;
         vertical-align: baseline;
@@ -27,11 +27,11 @@
         & label {
             position: relative;
             display: inline-block; 
-            width: 1.25rem;
+            width: 2.15rem;
             height: 1.25rem;
             background-color: $colour-background;
             border: 1px solid $colour-border;
-            border-radius: 50%;
+            border-radius: 0.625rem;
             vertical-align: text-bottom;
             cursor: pointer;
             user-select: none;
@@ -40,18 +40,18 @@
                 position: absolute;
                 display: block;
                 content: " ";
-                width: 0.5rem;
-                height: 0.5rem;
+                width: 0.8rem;
+                height: 0.8rem;
                 top: 50%;
-                left: 50%;
-                margin-top: -0.25rem;
-                margin-left: -0.25rem;
-                background-color: $colour-background;
+                left: 0.25rem;
+                margin-top: -0.4rem;
+                background-color: $colour-border;
                 border-radius: 50%;
+                transition: transform 150ms ease-out;
             }
         }
 
-        & input[type="radio"] {
+        & input[type="checkbox"] {
             display: none;
 
             &:checked {
@@ -59,6 +59,11 @@
                 & + label {
                     background-color: $colour-primary;
                     border-color: $colour-primary;
+
+                    &:after {
+                        background-color: $colour-background;
+                        transform: translate(0.75rem, 0);
+                    }
                 }
             }
         }
