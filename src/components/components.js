@@ -1,6 +1,7 @@
 
 import Checkbox from "./checkbox.vue";
 import DataTable from "./datatable.vue";
+import DataTableColumn from "./datatable-column.vue";
 import DateTimePicker from "./datetime-picker.vue";
 import Dynamic from "./dynamic";
 import FloatingPanel from "./floating-panel.vue";
@@ -17,6 +18,10 @@ export default {
     datatable: {
         tag: "datatable",
         definition: DataTable
+    },
+    datatableColumn: {
+        tag: "datatable-column",
+        definition: DataTableColumn
     },
     dateTimePicker: {
         tag: "datetime-picker",

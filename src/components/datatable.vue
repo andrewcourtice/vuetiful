@@ -3,14 +3,12 @@
         <table class="datatable" :class="tableClasses">
             <thead>
                 <tr>
-                    <th v-for="column in columns" :style="{ width: getCellWidth(column) }">
-                        <span class="datatable-column" @click="sortBy(column)">{{ column.label || column.id }}</span>
-                    </th>
+                    <slot></slot>
                 </tr>
             </thead>
             <tbody v-for="(rows, group) in groups">
                 <tr class="table-group-header" v-if="groupingColumn">
-                    <td :colspan="columnSpan">{{ formatData(groupingColumn, group) }}</td>
+                    <td :colspan="columnSpan">{{ groupingColumn.formatData(group) }}</td>
                 </tr>
                 <tr v-if="rows.length == 0">
                     <td class="datatable-info-cell" :colspan="columnSpan">No results</td>
@@ -19,14 +17,14 @@
                     <td v-for="column in columns" :class="cellClasses">
                         <slot :name="column.id" :row="row" :column="column" :value="row[column.id]">
                             <input type="text" v-model="row[column.id]" v-if="editable">
-                            <span v-else>{{ formatData(column, row[column.id]) }}</span>
+                            <span v-else>{{ column.formatData(row[column.id]) }}</span>
                         </slot>
                     </td>
                 </tr>
             </tbody>
             <tfoot v-if="showTotals">
                 <tr>
-                    <td :colspan="columnSpan">Total:</td>
+                    <td :colspan="columnSpan">Total</td>
                 </tr>
                 <tr>
                     <td v-for="column in columns">{{ calculateTotal(column) }}</td>
@@ -62,12 +60,7 @@
                 default: true
             },
 
-            columns: {
-                type: Array,
-                required: true
-            },
-
-            rows: {
+            source: {
                 type: Array,
                 default: () => []
             },
@@ -81,6 +74,7 @@
 
         data() {
             return {
+                columns: [],
                 rowFilter: null,
                 groupingColumn: null,
                 sortId: null,
@@ -103,7 +97,7 @@
 
             groups() {
 
-                let rows = this.rows;
+                let rows = this.source;
                 
                 // Filter the rows first to reduce the set (if a filter is supplied) we need to sort
                 if (this.rowFilter) {
@@ -134,6 +128,10 @@
 
         methods: {
 
+            addColumn(column) {
+                this.columns.push(column);
+            },
+
             sortBy(column) {
                 let id = column.id;
 
@@ -146,40 +144,11 @@
                 this.sortDirection = 1;
             },
 
-            groupBy(column) {
-                this.groupingColumn = column;
-            },
-
-            getCellWidth(column) {
-                if (!column.width) {
-                    return;
-                }
-
-                return column.width + (isNaN(column.width) ? "" : "%");
-            },
-
-            formatData(column, value) {
-                let formatter = column.formatter;
-
-                if (!formatter) {
-                    return value;
-                }
-
-                if (typeof formatter === "function") {
-                    return formatter(value);
-                }
-
-                let filter = Vue.filter(formatter.name);
-                let args = [value, ...formatter.args];
-
-                return filter.apply(this, args);
-            },
-
             calculateTotal(column) {
                 let total = 0;
 
-                for (let i = 0; i < this.rows.length; i++) {
-                    let row = this.rows[i];
+                for (let i = 0; i < this.source.length; i++) {
+                    let row = this.source[i];
 
                     let value = parseFloat(row[column.id]);
 
@@ -190,7 +159,7 @@
                     total += value;
                 }
 
-                return this.formatData(column, total);
+                return column.formatData(total);
             }
 
         },
@@ -208,13 +177,6 @@
         & th {
             padding: 0;
         }
-    }
-
-    .datatable-column {
-        display: block;
-        padding: 0.75rem 1rem;
-        cursor: pointer;
-        user-select: none;
     }
 
     .datatable-info-cell {
