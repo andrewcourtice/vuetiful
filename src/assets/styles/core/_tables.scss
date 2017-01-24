@@ -68,7 +68,8 @@ td {
     @include truncate-text;
 }
 
-tbody {
+tbody,
+tfoot {
 
     &:last-of-type {
 
@@ -79,6 +80,22 @@ tbody {
                 & td {
                     border-bottom: none;
                 }
+            }
+        }
+    }
+}
+
+tfoot {
+
+    tr {
+
+        &:first-of-type {
+
+            & td {
+                font-weight: 600;
+                background-color: #FAFAFC;
+                border-top: 1px solid $colour-border;
+                border-bottom: 1px solid $colour-border;
             }
         }
     }

@@ -24,6 +24,14 @@
                     </td>
                 </tr>
             </tbody>
+            <tfoot v-if="showTotals">
+                <tr>
+                    <td :colspan="columnSpan">Total:</td>
+                </tr>
+                <tr>
+                    <td v-for="column in columns">{{ calculateTotal(column) }}</td>
+                </tr>
+            </tfoot>
         </table>
         <input type="text" v-model="rowFilter">
     </div>
@@ -110,6 +118,10 @@
 
             columnSpan() {
                 return this.columns.length;
+            },
+
+            showTotals() {
+                return this.columns.some(column => column.total);
             }
 
         },
@@ -155,6 +167,24 @@
                 let args = [value, ...formatter.args];
 
                 return filter.apply(this, args);
+            },
+
+            calculateTotal(column) {
+                let total = 0;
+
+                for (let i = 0; i < this.rows.length; i++) {
+                    let row = this.rows[i];
+
+                    let value = parseFloat(row[column.id]);
+
+                    if (isNaN(value)) {
+                        return "n/a";
+                    }
+
+                    total += value;
+                }
+
+                return this.formatData(column, total);
             }
 
         },

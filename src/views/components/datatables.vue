@@ -49,6 +49,12 @@
         editable: false,
         columns: [
             {
+                id: "index",
+                label: "Index",
+                total: true,
+                formatter: value => `Index: ${ value }`
+            },
+            {
                 id: "givenName",
                 label: "Given Name"
             },
@@ -80,6 +86,7 @@
 
             for (let i = 0; i < 10; i++) {
                 rows.push({
+                    index: i + 1,
                     givenName: "John " + i,
                     surname: "Smith " + i,
                     email: `john${i}.smith${i}@random.com`,
