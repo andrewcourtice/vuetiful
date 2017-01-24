@@ -5,7 +5,8 @@ input[type="date"],
 input[type="time"],
 input[type="datetime"],
 input[type="password"],
-input[type="search"] {
+input[type="search"],
+select {
     display: inline-block;
     width: 250px;
     height: 3rem;

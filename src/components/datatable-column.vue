@@ -1,5 +1,5 @@
 <template>
-    <th :style="{ width: columnWidth }">
+    <th :style="{ width: columnWidth }" @click="sort">
         <div class="datatable-column">
             <slot>{{ label || id }}</slot>
         </div>
@@ -35,6 +35,21 @@
 
         },
 
+        data() {           
+            return {
+
+                proxy: {
+                    id: this.id,
+                    label: this.label,
+                    width: this.width,
+                    formatter: this.formatter,
+                    total: this.total,
+                    formatData: this.formatData
+                }
+
+            };
+        },
+
         computed: {
 
             columnWidth() {
@@ -43,13 +58,18 @@
                 }
 
                 let width = parseFloat(this.width);
-
-                return width + isNaN(width) ? "" : "%";
+                let suffix = isNaN(width) ? "" : "%";
+                
+                return width + suffix;
             }
 
         },
 
         methods: {
+
+            sort() {
+                this.$parent.sortBy(this.proxy);
+            },
 
             formatData(value) {
                 if (!this.formatter) {
@@ -62,13 +82,18 @@
         },
 
         created() {
-            this.$parent.addColumn({
-                id: this.id,
-                label: this.label,
-                formatter: this.formatter,
-                total: this.total,
-                formatData: this.formatData
-            });
+            let addColumn = this.$parent.addColumn;
+
+            if (!addColumn) {
+                console.warn("A datatable-column must be registered within a datatable component.");
+                return;
+            }
+
+            addColumn(this.proxy);
+        },
+
+        destroyed() {
+            this.$parent.removeColumn(this.proxy);
         }
 
     }

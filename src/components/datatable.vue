@@ -77,7 +77,7 @@
                 columns: [],
                 rowFilter: null,
                 groupingColumn: null,
-                sortId: null,
+                sortingColumn: null,
                 sortDirection: 1
             };
         },
@@ -105,13 +105,18 @@
                 }
                 
                 // Sort the filtered set
-                if (this.sortId) {
-                    rows = utilities.sortBy(rows, this.sortId, this.sortDirection);
+                if (this.sortingColumn) {
+                    rows = utilities.sortBy(rows, this.sortingColumn.id, this.sortDirection);
+                }
+
+                if (!this.groupingColumn) {
+                    return {
+                        data: rows
+                    };
                 }
 
                 // Group the set regardless to ensure a consistent result for the template
-                let groupingId = this.groupingColumn ? this.groupingColumn.id : null;
-                let groups = utilities.groupBy(rows, groupingId);
+                let groups = utilities.groupBy(rows, this.groupingColumn.id);
 
                 return groups;
             },
@@ -132,15 +137,19 @@
                 this.columns.push(column);
             },
 
-            sortBy(column) {
-                let id = column.id;
+            removeColumn(column) {
+                let index = this.columns.indexOf(column);
+                this.columns.splice(index, 1);
+            },
 
-                if (id === this.sortId) {
+            sortBy(column) {
+
+                if (column === this.sortingColumn) {
                     this.sortDirection *= -1;
                     return;
                 }
 
-                this.sortId = id;
+                this.sortingColumn = column;
                 this.sortDirection = 1;
             },
 
