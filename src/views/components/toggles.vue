@@ -30,6 +30,8 @@
 
 <script>
     export default {
+        
+        name: "toggles",
 
         data() {
             return {

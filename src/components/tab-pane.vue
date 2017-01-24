@@ -19,14 +19,6 @@
                 required: true
             }
 
-        },
-
-        beforeMount() {
-            this.$parent.addTab(this);
-        },
-
-        beforeDestroy() {
-            this.$parent.removeTab(this);
         }
 
     }

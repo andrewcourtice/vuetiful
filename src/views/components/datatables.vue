@@ -71,6 +71,9 @@
     };
 
     export default {
+
+        name: "datatables",
+
         data() {
 
             let rows = [];

@@ -23,15 +23,15 @@ var config = {
                     // the "scss" and "sass" values for the lang attribute to the right configs here.
                     // other preprocessors should work out of the box, no loader config like this nessessary.
                     "css": ExtractTextPlugin.extract({
-                        loader: "css-loader",
+                        loader: "css-loader!postcss-loader",
                         fallbackLoader: "vue-style-loader"
                     }),
                     "scss": ExtractTextPlugin.extract({
-                        loader: "css-loader!sass-loader",
+                        loader: "css-loader!postcss-loader!sass-loader",
                         fallbackLoader: "vue-style-loader"
                     }),
                     "sass": ExtractTextPlugin.extract({
-                        loader: "css-loader!sass-loader?indentedSyntax",
+                        loader: "css-loader!postcss-loader!sass-loader?indentedSyntax",
                         fallbackLoader: "vue-style-loader"
                     })
                 }
@@ -40,7 +40,7 @@ var config = {
         }, {
             test: /\.css$/,
             loaders: ExtractTextPlugin.extract({
-                loader: "css-loader",
+                loader: "css-loader!postcss-loader",
                 fallbackLoader: "style-loader"
             })
         }, {

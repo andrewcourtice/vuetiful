@@ -18,5 +18,7 @@
 <script>
     export default {
 
+        name: "tab-controls",
+
     }
 </script>

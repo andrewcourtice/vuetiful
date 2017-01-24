@@ -36,6 +36,13 @@
                 this.selectedTab = tab;
             }
 
+        },
+
+        beforeMount() {
+            console.log(this.$children);
+            this.$children.forEach(tab => {
+                this.tabs.push(tab);
+            });
         }
 
     }

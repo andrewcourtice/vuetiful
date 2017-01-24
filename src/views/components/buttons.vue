@@ -24,6 +24,9 @@
 
 <script>
     export default {
+
+        name: "buttons",
+
         methods: {
 
             buttonClick() {

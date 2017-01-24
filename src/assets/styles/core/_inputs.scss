@@ -15,3 +15,14 @@ input[type="search"] {
     border-radius: 2px;
     outline: none;
 }
+
+.toggle {
+    display: inline-block;
+    margin-right: 1rem;
+    vertical-align: baseline;   
+
+    & input[type="checkbox"],
+    & input[type="radio"] {
+        display: none;
+    }
+}
