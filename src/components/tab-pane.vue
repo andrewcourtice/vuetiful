@@ -1,5 +1,5 @@
 <template>
-    <div class="tab-pane">
+    <div class="tab-pane" v-if="selected">
         <slot></slot>
     </div>
 </template>
@@ -19,6 +19,12 @@
                 required: true
             }
 
+        },
+
+        data() {
+            return {
+                selected: false
+            };
         }
 
     }
@@ -27,7 +33,7 @@
 <style lang="scss">
 
     .tab-pane {
-        min-height: 6rem;
+        min-height: 2rem;
         padding: 1rem;
     }
 
