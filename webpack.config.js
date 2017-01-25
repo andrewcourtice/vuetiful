@@ -5,11 +5,9 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 var config = {
-    entry: {
-        app: "./src/main.js"
-    },
+    entry: "./build/app.js",
     output: {
-        path: path.resolve(__dirname, "./dist"),
+        path: path.resolve(__dirname, "./dist/app"),
         publicPath: "/dist/",
         filename: "app.bundle.js"
     },
@@ -107,6 +105,14 @@ if (process.env.NODE_ENV === "production") {
             minimize: true
         })
     ]);
+}
+
+if (process.env.SCOPE === "components") {
+    config.entry = "./build/components.js";
+    config.output = {
+        path: path.resolve(__dirname, "./dist/components"),
+        filename: "components.bundle.js"
+    };
 }
 
 module.exports = config;

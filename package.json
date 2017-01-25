@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "build:components": "cross-env NODE_ENV=production SCOPE=components webpack --progress --hide-modules",
+    "build:app": "cross-env NODE_ENV=production SCOPE=app webpack --progress --hide-modules",
     "start": "npm run dev"
   },
   "dependencies": {
