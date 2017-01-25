@@ -1,34 +1,66 @@
 <template>
     <div id="datatables" class="container">
         <h1>Datatables</h1>
-        <div class="grid-row" layout="row top-stretch">
-            <div class="grid-cell">
-                <toggle id="editable" v-model="customers.editable">Editable</toggle>
-                <toggle id="line-numbers" v-model="customers.lineNumbers">Line Numbers</toggle>
+        <div>
+            <h3>Configuration</h3>
+            <div class="grid-row" layout="row top-stretch">
+                <div class="grid-cell">
+                    <toggle id="editable" v-model="customers.editable">Editable</toggle>
+                    <toggle id="line-numbers" v-model="customers.lineNumbers">Line Numbers</toggle>
+                </div>
+            </div>
+            <div class="grid-row" layout="row top-stretch">
+                <div class="grid-cell">
+                    <datatable id="data-table-options" :source="customers.columns" editable>
+                        <datatable-column id="label" label="Column Name"></datatable-column>
+                        <datatable-column id="total" label="Calculate Total"></datatable-column>
+                        <template slot="total" scope="cell">
+                            <toggle :id="cell.row.id" v-model="cell.row.total"></toggle>
+                        </template>
+                    </datatable>
+                </div>
             </div>
         </div>
-        <div class="grid-row" layout="row top-stretch">
-            <div class="grid-cell">
-                <datatable id="data-table-options" :source="customers.columns">
-                    <datatable-column id="label" label="Column Name"></datatable-column>
-                    <datatable-column id="total" label="Calculate Total"></datatable-column>
-                    <template slot="total" scope="cell">
-                        <toggle :id="cell.row.id" v-model="cell.row.total">Total</toggle>
-                    </template>
-                </datatable>
+        <div>
+            <h3>Datatable</h3>
+            <div class="grid-row" layout="row top-stretch">
+                <div class="grid-cell">
+                    <datatable id="data-table-main" :source="customers.rows" :editable="customers.editable" :line-numbers="customers.lineNumbers">
+                        <datatable-column id="sel" label="sel" width="4.5rem" class="checkable-column">
+                            <checkbox id="sel-all" v-model="selectAll"></checkbox>
+                        </datatable-column>
+                        <datatable-column 
+                            v-for="column in customers.columns" 
+                            :id="column.id" 
+                            :label="column.label"
+                            :width="column.width" 
+                            :formatter="column.formatter"
+                            :total="column.total">
+                        </datatable-column>
+                        <template slot="sel" scope="cell">
+                            <div class="checkable-column">
+                                <checkbox :id="cell.row.index.toString()" :val="cell.row" v-model="customers.selected"></checkbox>
+                            </div>
+                        </template>
+                    </datatable>
+                </div>
             </div>
         </div>
-        <div class="grid-row" layout="row top-stretch">
-            <div class="grid-cell">
-                <datatable id="data-table-main" :source="customers.rows" :editable="customers.editable" :line-numbers="customers.lineNumbers">
-                    <datatable-column 
-                        v-for="column in customers.columns"
-                        :id="column.id" 
-                        :label="column.label" 
-                        :formatter="column.formatter" 
-                        :total="column.total">
-                    </datatable-column>
-                </datatable>
+        <div>
+            <h3>Selected Rows</h3>
+            <div class="grid-row" layout="row top-stretch">
+                <div class="grid-cell">
+                    <datatable id="data-table-selected" :source="customers.selected">
+                            <datatable-column 
+                                v-for="column in customers.columns" 
+                                :id="column.id" 
+                                :label="column.label"
+                                :width="column.width" 
+                                :formatter="column.formatter"
+                                :total="column.total">
+                            </datatable-column>
+                    </datatable>              
+                </div>
             </div>
         </div>
     </div>
@@ -59,6 +91,7 @@
             {
                 id: "email",
                 label: "Email",
+                width: 25,
                 total: false
             },
             {
@@ -68,7 +101,8 @@
                 formatter: value => format(value, "DD MMMM YYYY")
             }
         ],
-        rows: []
+        rows: [],
+        selected: []
     };
 
     export default {
@@ -94,6 +128,31 @@
             return {
                 customers: customers
             }
+        },
+
+        computed: {
+
+            selectAll: {
+                get() {
+                    return customers.selected.length == customers.rows.length;
+                },
+                set(value) {
+                    customers.selected = value ? customers.rows : [];
+                }
+            }
+
         }
     }
 </script>
+
+<style lang="scss">
+
+    .checkable-column {
+        text-align: center;
+
+        .checkbox {
+            margin: 0;
+        }
+    }
+
+</style>

@@ -39,9 +39,9 @@
             </tfoot>
         </table>
         <div class="datatable-options">
-            <select v-model="groupingColumn">
+            <select v-model="groupingId">
                 <option :value="null">No grouping</option>
-                <option v-for="column in columns" :value="column">{{ column.label }}</option>
+                <option v-for="column in columns" :value="column.id">{{ column.label }}</option>
             </select>
             <input type="text" placeholder="Filter this dataset" v-model="rowFilter">
         </div>
@@ -49,7 +49,6 @@
 </template>
 
 <script>
-    import Vue from "vue";
     import registerable from "../mixins/registerable.js";
     import * as utilities from "../services/utilities.js";
 
@@ -77,7 +76,7 @@
                 default: false
             },
 
-            lineNumbers : {
+            lineNumbers: {
                 type: Boolean,
                 default: false
             }
@@ -88,13 +87,20 @@
             return {
                 columns: [],
                 rowFilter: null,
-                groupingColumn: null,
-                sortingColumn: null,
-                sortDirection: 1
+                groupingId: null,
+                sortingId: null
             };
         },
 
         computed: {
+
+            groupingColumn() {
+                return this.columns.find(column => column.id === this.groupingId);
+            },
+
+            sortingColumn() {
+                return this.columns.find(column => column.id === this.sortingId);
+            },
 
             tableClasses() {
                 return {
@@ -110,15 +116,15 @@
             groups() {
 
                 let rows = this.source;
-                
+
                 // Filter the rows first to reduce the set (if a filter is supplied) we need to sort
                 if (this.rowFilter) {
                     rows = utilities.filterBy(rows, this.rowFilter);
                 }
-                
+
                 // Sort the filtered set
                 if (this.sortingColumn) {
-                    rows = utilities.sortBy(rows, this.sortingColumn.id, this.sortDirection);
+                    rows = utilities.sortBy(rows, this.sortingColumn.id, this.sortingColumn.sortingDirection);
                 }
 
                 if (!this.groupingColumn) {
@@ -159,18 +165,13 @@
                 this.columns.splice(index, 1);
             },
 
-            sortBy(column) {
+            calculateTotal(column) {
+                const noTotal = "n/a";
 
-                if (column === this.sortingColumn) {
-                    this.sortDirection *= -1;
-                    return;
+                if (!column.total) {
+                    return noTotal;
                 }
 
-                this.sortingColumn = column;
-                this.sortDirection = 1;
-            },
-
-            calculateTotal(column) {
                 let total = 0;
 
                 for (let i = 0; i < this.source.length; i++) {
@@ -179,7 +180,7 @@
                     let value = parseFloat(row[column.id]);
 
                     if (isNaN(value)) {
-                        return "n/a";
+                        return noTotal;
                     }
 
                     total += value;

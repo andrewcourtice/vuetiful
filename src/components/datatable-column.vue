@@ -17,11 +17,11 @@
             },
 
             label: {
-                type: String    
+                type: String
             },
 
             width: {
-                type: String
+                type: [ Number, String ]
             },
 
             formatter: {
@@ -35,18 +35,9 @@
 
         },
 
-        data() {           
+        data() {
             return {
-
-                proxy: {
-                    id: this.id,
-                    label: this.label,
-                    width: this.width,
-                    formatter: this.formatter,
-                    total: this.total,
-                    formatData: this.formatData
-                }
-
+                sortingDirection: 1
             };
         },
 
@@ -59,8 +50,30 @@
 
                 let width = parseFloat(this.width);
                 let suffix = isNaN(width) ? "" : "%";
-                
+
                 return width + suffix;
+            },
+
+            sorting: {
+                get() {
+                    return this.$parent.sortingId === this.id;
+                },
+                set(value) {
+                    if (value) {
+                        this.$parent.sortingId = this.id;
+                    }
+                }
+            },
+
+            grouping: {
+                get() {
+                    return this.$parent.groupingId === this.id;
+                },
+                set(value) {
+                    if (value) {
+                        this.$parent.groupingId = this.id;
+                    }
+                }
             }
 
         },
@@ -68,7 +81,20 @@
         methods: {
 
             sort() {
-                this.$parent.sortBy(this.proxy);
+                if (this.sorting) {
+                    this.sortingDirection *= -1;
+                    return;
+                }
+
+                this.sorting = true;
+            },
+
+            group() {
+                if (this.grouping) {
+                    return;
+                }
+
+                this.grouping = true;
             },
 
             formatData(value) {
@@ -89,11 +115,11 @@
                 return;
             }
 
-            addColumn(this.proxy);
+            addColumn(this);
         },
 
         destroyed() {
-            this.$parent.removeColumn(this.proxy);
+            this.$parent.removeColumn(this);
         }
 
     }
