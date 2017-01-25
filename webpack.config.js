@@ -113,6 +113,7 @@ if (process.env.SCOPE === "components") {
         path: path.resolve(__dirname, "./dist/components"),
         filename: "components.bundle.js"
     };
+    config.externals = ["vue"];
 }
 
 module.exports = config;
