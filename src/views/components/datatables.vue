@@ -9,15 +9,25 @@
         </div>
         <div class="grid-row" layout="row top-stretch">
             <div class="grid-cell">
-                <datatable id="data-table-1" :source="customers.rows" :editable="customers.editable" :line-numbers="customers.lineNumbers">
-                    <datatable-column id="index" label="Index" :formatter="formatIndex" total></datatable-column>
-                    <datatable-column id="givenName" label="Given Name"></datatable-column>
-                    <datatable-column id="surname" label="Surname"></datatable-column>
-                    <datatable-column id="email" label="Email" width="33"></datatable-column>
-                    <datatable-column id="dateOfBirth" label="Date of Birth" :formatter="formatDate"></datatable-column>
-                    <template slot="surname" scope="cell">
-                        <div class="surname">{{ cell.value }}</div>
+                <datatable id="data-table-options" :source="customers.columns">
+                    <datatable-column id="label" label="Column Name"></datatable-column>
+                    <datatable-column id="total" label="Calculate Total"></datatable-column>
+                    <template slot="total" scope="cell">
+                        <toggle :id="cell.row.id" v-model="cell.row.total">Total</toggle>
                     </template>
+                </datatable>
+            </div>
+        </div>
+        <div class="grid-row" layout="row top-stretch">
+            <div class="grid-cell">
+                <datatable id="data-table-main" :source="customers.rows" :editable="customers.editable" :line-numbers="customers.lineNumbers">
+                    <datatable-column 
+                        v-for="column in customers.columns"
+                        :id="column.id" 
+                        :label="column.label" 
+                        :formatter="column.formatter" 
+                        :total="column.total">
+                    </datatable-column>
                 </datatable>
             </div>
         </div>
@@ -30,6 +40,34 @@
     let customers = {
         editable: false,
         lineNumbers: false,
+        columns: [
+            {
+                id: "index",
+                label: "Index",
+                total: true
+            },
+            {
+                id: "givenName",
+                label: "Given Name",
+                total: false
+            },
+            {
+                id: "surname",
+                label: "Surname",
+                total: false
+            },
+            {
+                id: "email",
+                label: "Email",
+                total: false
+            },
+            {
+                id: "dateOfBirth",
+                label: "Date of Birth",
+                total: false,
+                formatter: value => format(value, "DD MMMM YYYY")
+            }
+        ],
         rows: []
     };
 
@@ -56,13 +94,6 @@
             return {
                 customers: customers
             }
-        },
-
-        methods: {
-
-            formatIndex: value => `Index: ${ value }`,
-            formatDate: value => format(value, "DD MMMM YYYY")
-            
         }
     }
 </script>
