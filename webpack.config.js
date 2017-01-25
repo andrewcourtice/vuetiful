@@ -111,7 +111,10 @@ if (process.env.SCOPE === "components") {
     config.entry = "./build/components.js";
     config.output = {
         path: path.resolve(__dirname, "./dist/components"),
-        filename: "components.bundle.js"
+        filename: "components.bundle.js",
+        library: "vuetiful",
+        libraryTarget: "umd",
+        umdNamedDefine: true
     };
     config.externals = ["vue"];
 }
