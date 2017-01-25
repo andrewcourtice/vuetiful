@@ -1,7 +1,7 @@
 <template>
     <div class="tab-control">
         <div class="tabs-list" layout="row center-left">
-            <div v-for="tab in tabs" class="tab-item" :class="{ active: tab.selected }" @click="selectTab(tab)">
+            <div v-for="tab in tabs" class="tab-item" :class="{ active: tab === selectedTab }" @click="selectTab(tab)">
                 <slot :name="tab.id" :value="tab">
                     <span>{{ tab.label }}</span>
                 </slot>
@@ -23,16 +23,26 @@
 
         methods: {
 
+            addTab(tab) {
+                this.tabs.push(tab);
+            },
+
+            removeTab(tab) {
+                let index = this.tabs.indexOf(tab);
+                this.tabs.splice(index, 1);
+            },
+
             selectTab(tab) {
-                this.tabs.forEach(t => {
-                    t.selected = (t === tab);
-                });
+                this.selectedTab = tab;
+                console.log(tab);
             }
 
         },
 
-        created() {
-            this.tabs = this.$children;
+        mounted() {
+            if (this.tabs.length > 0) {
+                this.selectedTab = this.tabs[0];
+            }
         }
 
     }

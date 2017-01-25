@@ -44,9 +44,10 @@
                 height: 0.8rem;
                 top: 50%;
                 left: 0.25rem;
-                margin-top: -0.4rem;
+                
                 background-color: $colour-border;
                 border-radius: 50%;
+                transform: translate(0, -50%);
                 transition: transform 150ms ease-out;
             }
         }
@@ -62,8 +63,16 @@
 
                     &:after {
                         background-color: $colour-background;
-                        transform: translate(0.75rem, 0);
+                        transform: translate(0.75rem, -50%);
                     }
+                }
+            }
+
+            &:disabled {
+
+                & + label {
+                    background-color: #FAFAFA;
+                    cursor: not-allowed;
                 }
             }
         }

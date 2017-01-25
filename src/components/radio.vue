@@ -61,6 +61,14 @@
                     border-color: $colour-primary;
                 }
             }
+
+            &:disabled {
+
+                & + label {
+                    background-color: #FAFAFA;
+                    cursor: not-allowed;
+                }
+            }
         }
     }
 

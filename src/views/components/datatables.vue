@@ -1,10 +1,15 @@
 <template>
     <div id="datatables" class="container">
         <h1>Datatables</h1>
-        <checkbox id="editable" v-model="customers.editable">Editable?</checkbox>
         <div class="grid-row" layout="row top-stretch">
             <div class="grid-cell">
-                <datatable id="data-table-1" :source="customers.rows" :editable="customers.editable">
+                <toggle id="editable" v-model="customers.editable">Editable</toggle>
+                <toggle id="line-numbers" v-model="customers.lineNumbers">Line Numbers</toggle>
+            </div>
+        </div>
+        <div class="grid-row" layout="row top-stretch">
+            <div class="grid-cell">
+                <datatable id="data-table-1" :source="customers.rows" :editable="customers.editable" :line-numbers="customers.lineNumbers">
                     <datatable-column id="index" label="Index" :formatter="formatIndex" total></datatable-column>
                     <datatable-column id="givenName" label="Given Name"></datatable-column>
                     <datatable-column id="surname" label="Surname"></datatable-column>
@@ -16,14 +21,6 @@
                 </datatable>
             </div>
         </div>
-        <div class="grid-row" layout="row top-stretch">
-            <div class="grid-cell">
-
-            </div>
-            <div class="grid-cell">
-
-            </div>
-        </div>
     </div>
 </template>
 
@@ -32,6 +29,7 @@
 
     let customers = {
         editable: false,
+        lineNumbers: false,
         rows: []
     };
 

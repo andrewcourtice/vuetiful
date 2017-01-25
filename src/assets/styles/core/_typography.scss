@@ -61,6 +61,12 @@ a {
     }
 }
 
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 1em/$typography-ratio;
+}
+
 blockquote {
     display: block;
     margin: 1em 0;

@@ -23,8 +23,36 @@
 
         data() {
             return {
-                selected: false
+                
+                proxy: {
+                    id: this.id,
+                    label: this.label,
+                }
+
             };
+        },
+
+        computed: {
+
+            selected() {
+                return this.$parent.selectedTab === this.proxy;
+            }
+
+        },
+
+        created() {
+            let addTab = this.$parent.addTab;
+
+            if (!addTab) {
+                console.warn("A tab-pane must be registered in a tab-control.");
+                return;
+            }
+
+            addTab(this.proxy);
+        },
+
+        destroyed() {
+            this.$parent.removeTab(this.proxy);
         }
 
     }

@@ -3,17 +3,23 @@
         <table class="datatable" :class="tableClasses">
             <thead>
                 <tr>
+                    <th v-if="lineNumbers" :style="{ width: lineColumnWidth }">
+                        <div class="datatable-column datatable-linenumber-column">#</div>
+                    </th>
                     <slot></slot>
                 </tr>
             </thead>
-            <tbody v-for="(rows, group) in groups">
+            <tbody v-for="(rows, group, groupIndex) in groups">
                 <tr class="table-group-header" v-if="groupingColumn">
                     <td :colspan="columnSpan">{{ groupingColumn.formatData(group) }}</td>
                 </tr>
                 <tr v-if="rows.length == 0">
                     <td class="datatable-info-cell" :colspan="columnSpan">No results</td>
                 </tr>
-                <tr v-for="row in rows">
+                <tr v-for="(row, rowIndex) in rows">
+                    <td class="datatable-linenumber-cell" v-if="lineNumbers">
+                        <span>{{ groupIndex + rowIndex + 1 }}</span>
+                    </td>
                     <td v-for="column in columns" :class="cellClasses">
                         <slot :name="column.id" :row="row" :column="column" :value="row[column.id]">
                             <input type="text" v-model="row[column.id]" v-if="editable">
@@ -27,6 +33,7 @@
                     <td :colspan="columnSpan">Total</td>
                 </tr>
                 <tr>
+                    <td v-if="lineNumbers">&nbsp;</td>
                     <td v-for="column in columns">{{ calculateTotal(column) }}</td>
                 </tr>
             </tfoot>
@@ -66,6 +73,11 @@
             },
 
             editable: {
+                type: Boolean,
+                default: false
+            },
+
+            lineNumbers : {
                 type: Boolean,
                 default: false
             }
@@ -122,7 +134,12 @@
             },
 
             columnSpan() {
-                return this.columns.length;
+                return this.columns.length + (this.lineNumbers ? 1 : 0);
+            },
+
+            lineColumnWidth() {
+                let count = this.source.length;
+                return count.toString().length + 2 + "em";
             },
 
             showTotals() {
@@ -186,6 +203,20 @@
         & th {
             padding: 0;
         }
+    }
+
+    .datatable-linenumber-column,
+    .datatable-linenumber-cell {
+        text-align: center;
+    }
+
+    .datatable-linenumber-column {
+        cursor: default !important;
+    }
+
+    .datatable-linenumber-cell {
+        font-weight: 600; 
+        background-color: #FDFDFD !important;
     }
 
     .datatable-info-cell {

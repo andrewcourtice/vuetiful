@@ -43,7 +43,7 @@
                 content: " ";
                 width: 0.375rem;
                 height: 0.75rem;
-                top: 0.15rem;
+                top: 0.125rem;
                 left: 0.4rem;
                 border-right: 0.2rem solid white;
                 border-bottom: 0.2rem solid white;
@@ -65,6 +65,14 @@
                     &:after {
                         opacity: 1;
                     }
+                }
+            }
+
+            &:disabled {
+
+                & + label {
+                    background-color: #FAFAFA;
+                    cursor: not-allowed;
                 }
             }
         }
