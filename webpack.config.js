@@ -116,7 +116,7 @@ if (process.env.SCOPE === "components") {
         libraryTarget: "umd",
         umdNamedDefine: true
     };
-    config.externals = ["vue"];
+    config.externals = ["vue", "date-fns"];
 }
 
 module.exports = config;
