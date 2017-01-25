@@ -1,11 +1,9 @@
-import Vue from "vue";
-
 import "flex-layout-attribute";
 import "../src/assets/styles/site.scss";
 
 import components from "../src/components/components";
 
-function registerComponents() {
+export default function Vuetiful(Vue) {
     for (let component in components) {
         let registration = components[component];
 
@@ -13,4 +11,6 @@ function registerComponents() {
     }
 }
 
-registerComponents();
+if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(Vuetiful);
+}
