@@ -46,7 +46,7 @@
         <div class="datatable-options">
             <select v-model="groupingId">
                 <option :value="null">No grouping</option>
-                <option v-for="column in columns" :value="column.id">{{ column.label }}</option>
+                <option v-for="column in groupableColumns" :value="column.id">{{ column.label }}</option>
             </select>
             <input type="text" placeholder="Filter this dataset" v-model="rowFilter">
         </div>
@@ -113,6 +113,10 @@
                     "table-fixed": this.fixed,
                     "table-striped": this.striped
                 };
+            },
+
+            groupableColumns() {
+                return this.columns.filter(column => column.groupable);
             },
 
             groups() {
@@ -268,7 +272,7 @@
 
                 &:focus,
                 &:active {
-                    box-shadow: 0 0 0 1px $colour-primary;
+                    box-shadow: 0 0 0 2px $colour-primary;
                 }
             }          
         }

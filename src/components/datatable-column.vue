@@ -40,6 +40,16 @@
             total: {
                 type: Boolean,
                 default: false
+            },
+
+            sortable: {
+                type: Boolean,
+                default: true
+            },
+
+            groupable: {
+                type: Boolean,
+                default: true
             }
 
         },
@@ -54,10 +64,10 @@
 
             sorting: {
                 get() {
-                    return this.$parent.sortingId === this.id;
+                    return (this.$parent.sortingId === this.id && this.sortable);
                 },
                 set(value) {
-                    if (value) {
+                    if (value && this.sortable) {
                         this.$parent.sortingId = this.id;
                     }
                 }
@@ -65,10 +75,10 @@
 
             grouping: {
                 get() {
-                    return this.$parent.groupingId === this.id;
+                    return (this.$parent.groupingId === this.id && this.groupable);
                 },
                 set(value) {
-                    if (value) {
+                    if (value && this.groupable) {
                         this.$parent.groupingId = this.id;
                     }
                 }
@@ -79,10 +89,9 @@
                     return;
                 }
 
-                let width = parseFloat(this.width);
-                let suffix = isNaN(width) ? "" : "%";
-
-                return width + suffix;
+                let suffix = isNaN(this.width) ? "" : "%";
+                
+                return this.width + suffix;
             },
 
             columnStyles() {
