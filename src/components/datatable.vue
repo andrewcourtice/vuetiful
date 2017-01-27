@@ -14,7 +14,7 @@
                     <td class="datatable-group-cell" :colspan="columnSpan">
                         <div layout="row center-justify">
                             <span>{{ groupingColumn.formatData(group) }}</span>
-                            <span class="label" v-if="rows.length > 1" @click="rowFilter = group">{{ rows.length }}</span>
+                            <span class="label datatable-row-count" @click="setFilter(group)" v-if="rows.length > 1">{{ rows.length }}</span>
                         </div>
                     </td>
                 </tr>
@@ -189,11 +189,13 @@
                 }
 
                 return column.formatData(total);
+            },
+
+            setFilter(phrase) {
+                this.rowFilter = phrase;
             }
 
-        },
-
-        mixins: [registerable]
+        }
 
     }
 </script>
@@ -235,6 +237,10 @@
     .datatable-info-cell {
         font-weight: 600;
         text-align: center;
+    }
+    
+    .datatable-row-count {
+        cursor: pointer;
     }
 
     .datatable-options {
