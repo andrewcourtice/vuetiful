@@ -1,4 +1,6 @@
 
+$color-table-row-alt: #FAFAFA;
+
 .table-wrapper {
     display: block;
     width: 100%;
@@ -27,20 +29,9 @@ table {
             &:nth-child(odd) {
 
                 & td {
-                    background-color: #FDFDFD;
+                    background-color: $color-table-row-alt;
                 }
             }
-        }
-    }
-}
-
-tr {
-
-    &.table-group-header {
-
-        & td {
-            font-weight: 600;
-            background-color: #FBFCFD;
         }
     }
 }
@@ -57,15 +48,15 @@ td {
 th {
     padding: 0.75rem 1rem;
     font-weight: 600;
-    background-color: #FAFAFC;
+    background-color: $colour-background-medium;
     border-right: 1px solid $colour-border;
     border-bottom: 1px solid $colour-border;
 }
 
 td {
     padding: 0.5rem 1rem;
-    border-right: 1px solid #EEEEEE;
-    border-bottom: 1px solid #EEEEEE;
+    border-right: 1px solid $colour-border-light;
+    border-bottom: 1px solid $colour-border-light;
     @include truncate-text;
 }
 
@@ -94,7 +85,7 @@ tfoot {
 
             & td {
                 font-weight: 600;
-                background-color: #FAFAFC;
+                background-color: $colour-background-medium;
                 border-top: 1px solid $colour-border;
                 border-bottom: 1px solid $colour-border;
             }

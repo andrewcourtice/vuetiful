@@ -52,7 +52,7 @@
         }
 
         & input[type="radio"] {
-            display: none;
+            display: none !important;
 
             &:checked {
                 

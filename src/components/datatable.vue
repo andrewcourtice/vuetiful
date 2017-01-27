@@ -10,8 +10,8 @@
                 </tr>
             </thead>
             <tbody v-for="(rows, group, groupIndex) in groups">
-                <tr class="table-group-header" v-if="groupingColumn">
-                    <td :colspan="columnSpan">{{ groupingColumn.formatData(group) }}</td>
+                <tr v-if="groupingColumn">
+                    <td class="datatable-group-cell" :colspan="columnSpan">{{ groupingColumn.formatData(group) }}</td>
                 </tr>
                 <tr v-if="rows.length == 0">
                     <td class="datatable-info-cell" :colspan="columnSpan">No results</td>
@@ -20,7 +20,7 @@
                     <td class="datatable-linenumber-cell" v-if="lineNumbers">
                         <span>{{ groupIndex + rowIndex + 1 }}</span>
                     </td>
-                    <td v-for="column in columns" :class="cellClasses">
+                    <td v-for="column in columns" class="datatable-cell">
                         <slot :name="column.id" :row="row" :column="column" :value="row[column.id]">
                             <input type="text" v-model="row[column.id]" v-if="editable">
                             <span v-else>{{ column.formatData(row[column.id]) }}</span>
@@ -104,13 +104,10 @@
 
             tableClasses() {
                 return {
+                    "datatable-editable": this.editable,
                     "table-fixed": this.fixed,
                     "table-striped": this.striped
                 };
-            },
-
-            cellClasses() {
-                return "datatable-cell-" + (this.editable ? "edit" : "view");
             },
 
             groups() {
@@ -217,7 +214,17 @@
 
     .datatable-linenumber-cell {
         font-weight: 600; 
-        background-color: #FDFDFD !important;
+        background-color: $colour-background-medium !important;
+        border-right-color: $colour-border;
+    }
+
+    .datatable-group-cell,
+    .datatable-info-cell {
+        background-color: $colour-background-medium !important;
+    }
+
+    .datatable-group-cell {
+        font-weight: 600;
     }
 
     .datatable-info-cell {
@@ -225,31 +232,35 @@
         text-align: center;
     }
 
-    .datatable-cell-edit {
-        position: relative;
-        padding: 0;
-        overflow: visible;
-        
-        & input,
-        & select {
-            display: block;
-            width: 100%;
-            height: auto;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 0;
-
-            &:focus,
-            &:active {
-                box-shadow: 0 0 0 1px $colour-primary;
-            }
-        }
-    }
-
     .datatable-options {
         padding: 0.75rem 1rem;
-        background-color: #FAFAFA;
+        background-color: $colour-background-medium;
         border-top: 1px solid $colour-border;
+    }
+
+    .datatable-editable {
+
+        & .datatable-cell {
+            position: relative;
+            padding: 0;
+            overflow: visible;
+
+            & input,
+            & select {
+                display: block;
+                width: 100%;
+                height: auto;
+                padding: 0.5rem 1rem;
+                background-color: transparent;
+                border: none;
+                border-radius: 0;
+
+                &:focus,
+                &:active {
+                    box-shadow: 0 0 0 1px $colour-primary;
+                }
+            }          
+        }
     }
 
 </style>

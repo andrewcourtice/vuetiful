@@ -54,7 +54,7 @@
         }
 
         & input[type="checkbox"] {
-            display: none;
+            display: none !important;
 
             &:checked {
                 
