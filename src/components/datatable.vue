@@ -11,7 +11,12 @@
             </thead>
             <tbody v-for="(rows, group, groupIndex) in groups">
                 <tr v-if="groupingColumn">
-                    <td class="datatable-group-cell" :colspan="columnSpan">{{ groupingColumn.formatData(group) }}</td>
+                    <td class="datatable-group-cell" :colspan="columnSpan">
+                        <div layout="row center-justify">
+                            <span>{{ groupingColumn.formatData(group) }}</span>
+                            <span class="label" v-if="rows.length > 1" @click="rowFilter = group">{{ rows.length }}</span>
+                        </div>
+                    </td>
                 </tr>
                 <tr v-if="rows.length == 0">
                     <td class="datatable-info-cell" :colspan="columnSpan">No results</td>
