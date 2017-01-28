@@ -1,5 +1,4 @@
 
-
 input[type="text"],
 input[type="date"],
 input[type="time"],
@@ -15,4 +14,9 @@ select {
     border: 1px solid $colour-border;
     border-radius: 2px;
     outline: none;
+
+    &:focus,
+    &:active {
+        border-color: $colour-primary;
+    }
 }

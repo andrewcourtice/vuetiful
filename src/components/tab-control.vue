@@ -1,10 +1,15 @@
 <template>
     <div class="tab-control">
-        <div class="tabs-list" layout="row center-left">
-            <div v-for="tab in tabs" class="tab-item" :class="{ active: tab === selectedTab }" @click="selectTab(tab)">
-                <slot :name="tab.id" :value="tab">
-                    <span>{{ tab.label }}</span>
-                </slot>
+        <div class="tabs-list" layout="row center-justify">
+            <div self="size-x1" layout="row center-left">
+                <div v-for="tab in tabs" class="tab-item" :class="{ active: tab === selectedTab }" @click="selectTab(tab)">
+                    <slot :name="tab.id" :value="tab">
+                        <span>{{ tab.label }}</span>
+                    </slot>
+                </div>
+            </div>
+            <div>
+                <slot name="tabs-extra"></slot>
             </div>
         </div>
         <slot></slot>

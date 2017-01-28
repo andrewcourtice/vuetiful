@@ -59,6 +59,14 @@ a {
     &:hover {
         color: darken($colour-primary, $colour-variation);
     }
+
+    &.escape-link {
+        color: inherit;
+
+        &:hover {
+            color: inherit;
+        }
+    }
 }
 
 label {
