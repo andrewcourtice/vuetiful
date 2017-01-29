@@ -5,9 +5,9 @@ import components from "../src/components/components";
 
 export default function Vuetiful(Vue) {
     for (let component in components) {
-        let registration = components[component];
+        let definition = components[component];
 
-        Vue.component(registration.tag, registration.definition);
+        Vue.component(component, definition);
     }
 }
 

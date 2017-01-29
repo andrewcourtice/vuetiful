@@ -12,48 +12,15 @@ import TabPane from "./tab-pane.vue";
 import Toggle from "./toggle.vue";
 
 export default {
-    checkbox: {
-        tag: "checkbox",
-        definition: Checkbox
-    },
-    datatable: {
-        tag: "datatable",
-        definition: DataTable
-    },
-    datatableColumn: {
-        tag: "datatable-column",
-        definition: DataTableColumn
-    },
-    dateTimePicker: {
-        tag: "datetime-picker",
-        definition: DateTimePicker
-    },
-    dynamic: {
-        tag: "dynamic",
-        definition: Dynamic
-    },
-    floatingPanel: {
-        tag: "floating-panel",
-        definition: FloatingPanel
-    },
-    modal: {
-        tag: "modal",
-        definition: Modal
-    },
-    radio: {
-        tag: "radio",
-        definition: Radio
-    },
-    toggle: {
-        tag: "toggle",
-        definition: Toggle
-    },
-    tabControl: {
-        tag: "tab-control",
-        definition: TabControl
-    },
-    tabPane: {
-        tag: "tab-pane",
-        definition: TabPane
-    }
+    checkbox: Checkbox,
+    datatable: DataTable,
+    datatableColumn: DataTableColumn,
+    datetimePicker: DateTimePicker,
+    dynamic: Dynamic,
+    floatingPanel: FloatingPanel,
+    modal: Modal,
+    radio: Radio,
+    toggle: Toggle,
+    tabControl: TabControl,
+    tabPane: TabPane
 }

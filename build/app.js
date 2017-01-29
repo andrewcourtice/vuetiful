@@ -17,9 +17,9 @@ function registerPlugins() {
 
 function registerComponents() {
     for (let component in components) {
-        let registration = components[component];
+        let definition = components[component];
 
-        Vue.component(registration.tag, registration.definition);
+        Vue.component(component, definition);
     }
 }
 
