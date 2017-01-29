@@ -61,6 +61,10 @@ function buildRootInstance() {
             route: "/components/datatables"
         },
         {
+            name: "Modals",
+            route: "/components/modals"
+        },
+        {
             name: "Tab Controls",
             route: "/components/tabcontrols"
         },

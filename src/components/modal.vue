@@ -1,24 +1,25 @@
 <template>
-
-    <div class="modal-shade" layout="row center-center" v-if="showing">
-        <div class="modal">
-            <div class="modal-header">
-                <div layout="row center-justify">
-                    <span class="modal-title" self="size-x1">{{ title }}</span>
-                    <div>
-                        <slot name="modal-header"></slot>
-                        <div class="modal-close-button"></div>
+    <transition name="fade">
+        <div class="modal-shade" layout="row center-center" v-show="showing">
+            <div class="modal">
+                <div class="modal-header">
+                    <div layout="row center-justify">
+                        <span class="modal-title" self="size-x1">{{ title }}</span>
+                        <div>
+                            <slot name="modal-header"></slot>
+                            <div class="modal-close-button"></div>
+                        </div>
                     </div>
-                </div>  
-            </div>
-            <div class="modal-body">
-                <slot></slot>
-            </div>
-            <div class="modal-footer">
-                <slot name="modal-footer"></slot>
+                </div>
+                <div class="modal-body">
+                    <slot></slot>
+                </div>
+                <div class="modal-footer">
+                    <slot name="modal-footer"></slot>
+                </div>
             </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -71,6 +72,37 @@
 
     .modal {
         width: 640px;
+        background-color: $colour-background;
+        border-radius: $border-radius;
+        box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem;
+    }
+
+    .modal-header,
+    .modal-footer {
+        background-color: $colour-background-medium;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid $colour-border;
+    }
+
+    .modal-footer {
+        border-top: 1px solid $colour-border;
+    }
+
+    .modal-body {
+
+    }
+
+    .modal-title {
+        font-weight: 600;
     }
 
 </style>
