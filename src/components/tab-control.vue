@@ -55,7 +55,6 @@
 
 <style lang="scss">
     @import "../assets/styles/abstract/_variables.scss";
-    @import "../assets/styles/abstract/_functions.scss";
 
     .tab-control {
         display: block;

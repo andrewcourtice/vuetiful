@@ -5,6 +5,7 @@ import DataTableColumn from "./datatable-column.vue";
 import DateTimePicker from "./datetime-picker.vue";
 import Dynamic from "./dynamic";
 import FloatingPanel from "./floating-panel.vue";
+import Modal from "./modal.vue";
 import Radio from "./radio.vue";
 import TabControl from "./tab-control.vue";
 import TabPane from "./tab-pane.vue";
@@ -34,6 +35,10 @@ export default {
     floatingPanel: {
         tag: "floating-panel",
         definition: FloatingPanel
+    },
+    modal: {
+        tag: "modal",
+        definition: Modal
     },
     radio: {
         tag: "radio",
