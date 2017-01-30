@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition name="modal-transition">
         <div class="modal-shade" layout="row center-center" v-show="showing">
             <div class="modal">
                 <div class="modal-header">
@@ -59,6 +59,27 @@
 
 <style lang="scss">
     @import "../assets/styles/abstract/_variables.scss";
+
+    .modal-transition {
+
+        &-enter-active,
+        &-leave-active {
+            transition: opacity 200ms ease-out;
+
+            & .modal {
+                transition: transform 200ms ease-out;
+            }
+        }
+
+        &-enter,
+        &-leave {
+            opacity: 0;
+
+            & .modal {
+                transform: scale(0.8, 0.8);
+            }
+        }
+    }
 
     .modal-shade {
         position: fixed;
