@@ -47,6 +47,7 @@
 
             selectTab(tab) {
                 this.selectedTabId = tab.id;
+                this.$emit("tab-change", tab);
             }
 
         },

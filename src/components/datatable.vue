@@ -1,5 +1,5 @@
 <template>
-    <div class="table-wrapper" :id="id">
+    <div class="table-wrapper">
         <table class="datatable" :class="tableClasses">
             <thead>
                 <tr>
