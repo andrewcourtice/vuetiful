@@ -110,6 +110,8 @@
         methods: {
 
             sort() {
+                this.$emit("sort", this);
+                
                 if (this.sorting) {
                     this.sortingDirection *= -1;
                     return;

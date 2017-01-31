@@ -21,21 +21,10 @@
 
         },
 
-        data() {
-            return {
-                
-                proxy: {
-                    id: this.id,
-                    label: this.label,
-                }
-
-            };
-        },
-
         computed: {
 
             selected() {
-                return this.$parent.selectedTab === this.proxy;
+                return this.$parent.selectedTab === this;
             }
 
         },
@@ -48,11 +37,11 @@
                 return;
             }
 
-            addTab(this.proxy);
+            addTab(this);
         },
 
         destroyed() {
-            this.$parent.removeTab(this.proxy);
+            this.$parent.removeTab(this);
         }
 
     }

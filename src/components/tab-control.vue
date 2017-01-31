@@ -2,7 +2,7 @@
     <div class="tab-control">
         <div class="tabs-list" layout="row center-justify">
             <div self="size-x1" layout="row center-left">
-                <div v-for="tab in tabs" class="tab-item" :class="{ active: tab === selectedTab }" @click="selectTab(tab)">
+                <div v-for="tab in tabs" class="tab-item" :class="{ active: tab.selected }" @click="selectTab(tab)">
                     <slot :name="tab.id" :value="tab">
                         <span>{{ tab.label }}</span>
                     </slot>
@@ -22,8 +22,16 @@
         data() {
             return {
                 tabs: [],
-                selectedTab: null
+                selectedTabId: null
             };
+        },
+
+        computed: {
+
+            selectedTab() {
+                return this.tabs.find(tab => tab.id === this.selectedTabId);
+            }
+
         },
 
         methods: {
@@ -38,15 +46,14 @@
             },
 
             selectTab(tab) {
-                this.selectedTab = tab;
-                console.log(tab);
+                this.selectedTabId = tab.id;
             }
 
         },
 
         mounted() {
             if (this.tabs.length > 0) {
-                this.selectedTab = this.tabs[0];
+                this.selectedTabId = this.tabs[0].id;
             }
         }
 

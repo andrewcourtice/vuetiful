@@ -1,6 +1,7 @@
 import Buttons from "./buttons.vue";
 import Datatables from "./datatables.vue";
 import Modals from "./modals.vue";
+import Panels from "./panels.vue";
 import TabControls from "./tab-controls.vue";
 import Toggles from "./toggles.vue";
 import Typography from "./typography.vue";
@@ -14,6 +15,9 @@ export default {
     },
     modals: {
         component: Modals
+    },
+    panels: {
+        component: Panels
     },
     tabControls: {
         component: TabControls

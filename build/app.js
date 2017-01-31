@@ -65,6 +65,10 @@ function buildRootInstance() {
             route: "/components/modals"
         },
         {
+            name: "Panels",
+            route: "/components/panels"
+        },
+        {
             name: "Tab Controls",
             route: "/components/tabcontrols"
         },
