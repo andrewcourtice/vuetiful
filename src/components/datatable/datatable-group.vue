@@ -4,7 +4,7 @@
             <td :colspan="columnSpan">
                 <div>
                     <div class="datatable-group-expander"></div>
-                    <span>{{ group.name }}</span>
+                    <span>{{ name }}</span>
                     <span class="label datatable-row-count" v-if="group.rows.length > 1">{{ group.rows.length }}</span>
                 </div>
             </td>
@@ -20,10 +20,14 @@
                 </slot>
             </td>
         </tr>
-        <tr v-for="group in groups">
-            <td>
-                <datatable-group>
-                    <template></template>></template>
+        <tr v-for="(rows, group, groupIndex) in groups">
+            <td :colspan="columnSpan">
+                <datatable-group 
+                    :name="group" 
+                    :source="rows" 
+                    :columns="columns" 
+                    :grouping-keys="groupingColumns"
+                    :grouping-index="groupingIndex + 1">
                 </datatable-group>
             </td>
         </tr>
@@ -31,18 +35,34 @@
 </template>
 
 <script>
+    import * as utilities from "../../services/utilities.js";
+
     export default {
 
         props: {
 
-            group: {
-                type: Object,
+            name: {
+                type: String,
+                required: true
+            },
+
+            source: {
+                type: Array,
                 required: true
             },
 
             columns: {
                 type: Array,
                 required: true
+            },
+
+            groupingKeys: {
+                type: Array
+            },
+
+            groupingIndex: {
+                type: Number,
+                default: 0
             }
 
         }

@@ -9,6 +9,18 @@
                     <slot></slot>
                 </tr>
             </thead>
+            <tbody>
+                <tr v-for="(rows, group, groupIndex) in groups">
+                    <td :colspan="columnSpan">
+                        <datatable-group 
+                            :name="group" 
+                            :source="rows" 
+                            :columns="columns" 
+                            :grouping-keys="groupingColumns">
+                        </datatable-group>
+                    </td>
+                </tr>
+            </tbody>
             <tbody v-for="(rows, group, groupIndex) in groups">
                 <tr v-if="groupingColumn">
                     <td class="datatable-group-cell" :colspan="columnSpan">
