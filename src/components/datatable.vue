@@ -43,12 +43,12 @@
                 </tr>
             </tfoot>
         </table>
-        <div class="datatable-options">
+        <div class="datatable-options" layout="row center-justify">
             <select v-model="groupingId">
                 <option :value="null">No grouping</option>
                 <option v-for="column in groupableColumns" :value="column.id">{{ column.label }}</option>
             </select>
-            <input type="text" placeholder="Filter this dataset" v-model="rowFilter">
+            <input type="text" placeholder="Filter this dataset" v-model="rowFilter" self="size-x1">
         </div>
     </div>
 </template>
