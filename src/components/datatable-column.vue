@@ -103,6 +103,10 @@
             sortArrowClass() {
                 let direction = sortClassMap[this.sortingDirection];
                 return "datatable-sort-arrow-" + direction;
+            },
+
+            template() {
+                return this.$parent.$scopedSlots[this.id];
             }
 
         },
@@ -151,6 +155,10 @@
 
         destroyed() {
             this.$parent.removeColumn(this);
+        },
+
+        mounted() {
+            //console.log(this.$parent.$scopedSlots[this.id]);
         }
 
     }
