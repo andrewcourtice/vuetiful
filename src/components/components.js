@@ -1,7 +1,7 @@
 
 import Checkbox from "./checkbox.vue";
-import DataTable from "./datatable.vue";
-import DataTableColumn from "./datatable-column.vue";
+import DataTable from "./datatable/datatable.vue";
+import DataTableColumn from "./datatable/datatable-column.vue";
 import DateTimePicker from "./datetime-picker.vue";
 import Dynamic from "./dynamic";
 import FloatingPanel from "./floating-panel.vue";

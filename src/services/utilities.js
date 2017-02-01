@@ -1,6 +1,5 @@
-
 // Need to add support for searching dates
-const SEARCHABLE_TYPES = [ "string", "number", "boolean" ];
+const SEARCHABLE_TYPES = ["string", "number", "boolean"];
 
 /**
  * Filter an array of objects by the given phrase
@@ -25,7 +24,7 @@ export function filterBy(array, filter) {
 
             // Ensure the value is of a searchable type 
             // This will automatically handle null values
-            if (SEARCHABLE_TYPES.indexOf(typeof(value)) < 0) {
+            if (SEARCHABLE_TYPES.indexOf(typeof (value)) < 0) {
                 continue;
             }
 
@@ -68,7 +67,7 @@ export function sortBy(array, key, direction) {
         return outcome * direction;
     });
 
-    return sortArray;    
+    return sortArray;
 }
 
 /**
@@ -80,23 +79,45 @@ export function sortBy(array, key, direction) {
  * @returns Object
  */
 export function groupBy(array, key) {
-    let groups = {
-        data: array
-    };
+    if (!key) {
+        return array;
+    }
 
-    if (key) {
-        groups = {};
+    let groups = {};
 
-        for (let row of array) {
-            let cell = row[key];
+    for (let row of array) {
+        let cell = row[key];
 
-            if (!groups.hasOwnProperty(cell)) {
-                groups[cell] = [];
-            }
-
-            groups[cell].push(row);
+        if (!groups.hasOwnProperty(cell)) {
+            groups[cell] = [];
         }
+
+        groups[cell].push(row);
     }
 
     return groups;
+}
+
+export function mapValues(object, callback) {
+    let mapped = {};
+
+    for (let prop in object) {
+        mapped[prop] = callback(object[prop]);
+    }
+
+    return mapped;
+}
+
+export function nest(array, keys) {
+    if (!keys.length) {
+        return array;
+    }
+
+    let key = keys.shift();
+
+    let group = groupBy(array, key);
+
+    return mapValues(group, (value, prop) => {
+        return nest(value, [...keys]);
+    });
 }

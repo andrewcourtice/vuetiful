@@ -56,7 +56,7 @@
 
 <script>
     import DatatableCell from "./datatable-cell.js";
-    import * as utilities from "../services/utilities.js";
+    import * as utilities from "../../services/utilities.js";
 
     export default {
 
@@ -210,7 +210,7 @@
 </script>
 
 <style lang="scss">
-    @import "../assets/styles/abstract/_variables.scss";
+    @import "../../assets/styles/abstract/_variables.scss";
 
     .datatable {
 
