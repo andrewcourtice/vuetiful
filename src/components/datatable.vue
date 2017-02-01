@@ -25,12 +25,13 @@
                     <td class="datatable-linenumber-cell" v-if="lineNumbers">
                         <span>{{ groupIndex + rowIndex + 1 }}</span>
                     </td>
-                    <td v-for="column in columns" class="datatable-cell">
+                    <datatable-cell v-for="column in columns" :column="column" :row="row" :editable="editable"></datatable-cell>
+                    <!--<td v-for="column in columns" class="datatable-cell">
                         <slot :name="column.id" :row="row" :column="column" :value="row[column.id]">
                             <input type="text" v-model="row[column.id]" v-if="editable">
                             <span v-else>{{ column.formatData(row[column.id]) }}</span>
                         </slot>
-                    </td>
+                    </td>-->
                 </tr>
             </tbody>
             <tfoot v-if="showTotals">
@@ -54,7 +55,7 @@
 </template>
 
 <script>
-    import registerable from "../mixins/registerable.js";
+    import DatatableCell from "./datatable-cell.js";
     import * as utilities from "../services/utilities.js";
 
     export default {
@@ -199,6 +200,10 @@
                 this.rowFilter = phrase;
             }
 
+        },
+
+        components: {
+            datatableCell: DatatableCell
         }
 
     }
