@@ -43,7 +43,8 @@
 
 <script>
     import DatatableCollection from "./datatable-collection.vue"; 
-    import * as utilities from "../../services/utilities.js";
+    import { filterBy } from "../../utilities/filter-by.js";
+    import { sortBy } from "../../utilities/sort-by.js";
 
     export default {
 
@@ -108,12 +109,12 @@
 
                 // Filter the rows first to reduce the set (if a filter is supplied) we need to sort
                 if (this.rowFilter) {
-                    rows = utilities.filterBy(rows, this.rowFilter);
+                    rows = filterBy(rows, this.rowFilter);
                 }
 
                 // Sort the filtered set
                 if (this.sortingColumn) {
-                    rows = utilities.sortBy(rows, this.sortingColumn.id, this.sortingColumn.sortingDirection);
+                    rows = sortBy(rows, this.sortingColumn.id, this.sortingColumn.sortingDirection);
                 }
 
                 return rows;

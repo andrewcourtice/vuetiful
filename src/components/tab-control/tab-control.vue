@@ -62,7 +62,7 @@
 </script>
 
 <style lang="scss">
-    @import "../assets/styles/abstract/_variables.scss";
+    @import "../../assets/styles/abstract/_variables.scss";
 
     .tab-control {
         display: block;
