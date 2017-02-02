@@ -18,7 +18,8 @@
                             :striped="striped"
                             :editable="editable"
                             :line-numbers="lineNumbers"
-                            :grouping-columns="groupingColumns">
+                            :grouping-columns="groupingColumns"
+                            :margin="lineColumnWidth">
                         </datatable-collection>
                     </td>
                 </tr>
@@ -206,22 +207,31 @@
         border-right-color: $colour-border;
     }
 
-    .datatable-group-cell,
-    .datatable-info-cell {
-        background-color: $colour-background-medium !important;
+    .datatable-group {
+        padding: 0;
+        background-color: $colour-background;
+        border-bottom: 1px solid $colour-border;
     }
 
-    .datatable-group-cell {
+    .datatable-group-header {
+        padding: 0.5rem 1rem;
+        background-color: $colour-background-medium;
+        border-bottom: 1px solid $colour-border;
+    }
+
+    .datatable-row-indent {
+        display: inline-block;
+        width: 1.5rem;
+        height: 1em;
+    }
+
+    .datatable-group-label {
         font-weight: 600;
     }
 
     .datatable-info-cell {
-        font-weight: 600;
         text-align: center;
-    }
-    
-    .datatable-row-count {
-        cursor: pointer;
+        font-weight: 600;
     }
 
     .datatable-options {
@@ -254,5 +264,6 @@
             }          
         }
     }
+
 
 </style>

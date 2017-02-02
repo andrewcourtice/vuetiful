@@ -3,9 +3,10 @@
         <table v-if="groupable" :class="{ 'table-striped': striped }">
             <tr v-for="(data, group, index) in groups">
                 <td class="datatable-group" :colspan="columnSpan">
-                    <div class="datatable-group-header">
-                        <div class="datatable-row-indent" v-for="num in groupingIndex - 1"></div>
-                        <span>{{ groupingColumn.formatData(group) }}</span>
+                    <div class="datatable-group-header" layout="row center-justify">
+                        <div self="size-x1">
+                            <span class="datatable-group-label" :style="indentStyle">{{ groupingColumn.formatData(group) }}</span>
+                        </div> 
                         <span class="label datatable-row-count" v-if="data.length > 1">{{ data.length }}</span>
                     </div>
                     <datatable-collection 
@@ -13,15 +14,21 @@
                         :columns="columns" 
                         :striped="striped"
                         :editable="editable" 
-                        :line-numbers="lineNumbers" 
+                        :line-numbers="lineNumbers"
+                        :margin="margin" 
                         :grouping-columns="groupingColumns"
-                        :grouping-index="groupingIndex + 1">
+                        :grouping-index="groupingIndex + 1"
+                        :collection-index="collectionIndex * index">
                     </datatable-collection>
                 </td>
             </tr>
         </table>
-        <table v-else :class="{ 'table-striped': striped }">
+        <table v-else class="datatable-resultset" :class="{ 'table-striped': striped }">
+            <tr v-if="rows.length < 1">
+                <td class="datatable-info-cell" :colspan="columnSpan">No Results</td>
+            </tr>
             <tr v-for="(row, index) in rows">
+                <td v-if="lineNumbers" class="datatable-cell datatable-linenumber-cell" :style="{ width: margin }">{{ collectionIndex + index + 1 }}</td>
                 <datatable-cell v-for="column in columns" :column="column" :row="row" :editable="editable"></datatable-cell>
             </tr>
         </table>
@@ -53,7 +60,7 @@
 
             groupingIndex: {
                 type: Number,
-                default: 1
+                default: 0
             },
 
             striped: {
@@ -69,6 +76,16 @@
             lineNumbers: {
                 type: Boolean,
                 default: false
+            },
+
+            margin: {
+                type: String,
+                default: "1.5em"
+            },
+
+            collectionIndex: {
+                type: Number,
+                default: 0
             }
 
         },
@@ -76,11 +93,11 @@
         computed: {
 
             groupable() {
-                return this.groupingIndex <= this.groupingColumns.length;
+                return this.groupingIndex < this.groupingColumns.length;
             },
 
             groupingColumn() {
-                let columnId = this.groupingColumns[this.groupingIndex - 1];
+                let columnId = this.groupingColumns[this.groupingIndex];
                 return this.columns.find(column => column.id === columnId);
             },
 
@@ -90,6 +107,14 @@
 
             columnSpan() {
                 return this.columns.length + (this.lineNumbers ? 1 : 0);
+            },
+
+            indentStyle() {
+                let margin = this.groupingIndex * 1.5;
+
+                return { 
+                    "margin-left": margin + "rem"
+                };
             }
 
         },
@@ -100,35 +125,3 @@
 
     }
 </script>
-
-<style lang="scss">
-    @import "../../assets/styles/abstract/_variables.scss";
-
-    .datatable-collection {
-
-        & .datatable-group {
-            border-bottom: 1px solid $colour-border;
-        }
-    }
-
-    .datatable-row-indent {
-        display: inline-block;
-        width: 1rem;
-        height: 1em;
-    }
-
-    .datatable-group {
-        padding: 0;
-    }
-
-    .datatable-group-header,
-    .datatable-cell {
-        padding: 0.5rem 1rem;
-        border-bottom: 1px solid $colour-border;
-    }
-
-    .datatable-group-header {
-        background-color: $colour-background-medium;
-    }
-
-</style>
