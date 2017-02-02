@@ -22,15 +22,12 @@ table {
 
 .table-striped {
 
-    & tbody {
+    & tr {
 
-        & tr {
+        &:nth-child(odd) {
 
-            &:nth-child(odd) {
-
-                & td {
-                    background-color: $color-table-row-alt;
-                }
+            & td {
+                background-color: $color-table-row-alt;
             }
         }
     }

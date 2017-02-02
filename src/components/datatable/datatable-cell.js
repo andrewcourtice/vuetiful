@@ -28,6 +28,9 @@ export default {
         let cellProps = {
             class: {
                 "datatable-cell": true
+            },
+            style: {
+                width: column.columnWidth
             }
         };
 
