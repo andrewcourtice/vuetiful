@@ -1,5 +1,5 @@
 <template>
-    <div class="toggle">
+    <div class="checkbox">
         <input type="checkbox" :id="id" :name="id" :disabled="disabled" :value="val" v-model="checked" @change="onChange">
         <label :for="id"></label>
         <slot></slot>
@@ -7,31 +7,32 @@
 </template>
 
 <script>
-    import checkable from "../mixins/checkable.js";
+    import checkable from "../../mixins/checkable.js";
 
     export default {
 
         mixins: [ checkable ]
-        
+
     }
 </script>
 
 <style lang="scss">
-    @import "../assets/styles/abstract/_variables.scss";
+    @import "../../assets/styles/abstract/_variables.scss";
 
-    .toggle {
+    .checkbox {
         display: inline-block;
         margin-right: 1rem;
         vertical-align: baseline;
 
         & label {
             position: relative;
-            display: inline-block; 
-            width: 2.15rem;
+            display: inline-block;
+            width: 1.25rem;
             height: 1.25rem;
+            margin-right: 0.25rem;
             background-color: $colour-background;
             border: 1px solid $colour-border;
-            border-radius: 0.625rem;
+            border-radius: $border-radius;
             vertical-align: text-bottom;
             cursor: pointer;
             user-select: none;
@@ -40,15 +41,15 @@
                 position: absolute;
                 display: block;
                 content: " ";
-                width: 0.8rem;
-                height: 0.8rem;
-                top: 50%;
-                left: 0.25rem;
-                
-                background-color: $colour-border;
-                border-radius: 50%;
-                transform: translate(0, -50%);
-                transition: transform 150ms ease-out;
+                width: 0.375rem;
+                height: 0.75rem;
+                top: 0.125rem;
+                left: 0.4rem;
+                border-right: 0.2rem solid white;
+                border-bottom: 0.2rem solid white;
+                opacity: 0;
+                transform: rotate(45deg);
+                transition: opacity 150ms ease-out;
             }
         }
 
@@ -62,8 +63,7 @@
                     border-color: $colour-primary;
 
                     &:after {
-                        background-color: $colour-background;
-                        transform: translate(0.75rem, -50%);
+                        opacity: 1;
                     }
                 }
             }

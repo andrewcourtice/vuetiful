@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import checkable from "../mixins/checkable.js";
+    import checkable from "../../mixins/checkable.js";
 
     export default {
 
@@ -17,7 +17,7 @@
 </script>
 
 <style lang="scss">
-    @import "../assets/styles/abstract/_variables.scss";
+    @import "../../assets/styles/abstract/_variables.scss";
 
     .radio {
         display: inline-block;

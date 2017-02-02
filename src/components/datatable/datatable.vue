@@ -9,29 +9,19 @@
                     <slot></slot>
                 </tr>
             </thead>
-            <tbody v-for="(rows, group, groupIndex) in groups">
-                <tr v-if="groupingColumn">
-                    <td class="datatable-group-cell" :colspan="columnSpan">
-                        <div layout="row center-justify">
-                            <span>{{ groupingColumn.formatData(group) }}</span>
-                            <span class="label datatable-row-count" @click="setFilter(group)" v-if="rows.length > 1">{{ rows.length }}</span>
-                        </div>
+            <tbody>
+                <tr>
+                    <td class="datatable-group" :colspan="columnSpan">
+                        <datatable-collection 
+                            :rows="rows" 
+                            :columns="columns" 
+                            :striped="striped"
+                            :editable="editable"
+                            :line-numbers="lineNumbers"
+                            :grouping-columns="groupingColumns"
+                            :margin="lineColumnWidth">
+                        </datatable-collection>
                     </td>
-                </tr>
-                <tr v-if="rows.length == 0">
-                    <td class="datatable-info-cell" :colspan="columnSpan">No results</td>
-                </tr>
-                <tr v-for="(row, rowIndex) in rows">
-                    <td class="datatable-linenumber-cell" v-if="lineNumbers">
-                        <span>{{ groupIndex + rowIndex + 1 }}</span>
-                    </td>
-                    <datatable-cell v-for="column in columns" :column="column" :row="row" :editable="editable"></datatable-cell>
-                    <!--<td v-for="column in columns" class="datatable-cell">
-                        <slot :name="column.id" :row="row" :column="column" :value="row[column.id]">
-                            <input type="text" v-model="row[column.id]" v-if="editable">
-                            <span v-else>{{ column.formatData(row[column.id]) }}</span>
-                        </slot>
-                    </td>-->
                 </tr>
             </tbody>
             <tfoot v-if="showTotals">
@@ -44,19 +34,17 @@
                 </tr>
             </tfoot>
         </table>
-        <div class="datatable-options">
-            <select v-model="groupingId">
-                <option :value="null">No grouping</option>
-                <option v-for="column in groupableColumns" :value="column.id">{{ column.label }}</option>
-            </select>
-            <input type="text" placeholder="Filter this dataset" v-model="rowFilter">
+        <div class="datatable-options" layout="row center-justify">
+            <checkbox v-for="column in groupableColumns" :id="column.id" :val="column.id" v-model="groupingColumns">{{ column.label }}</checkbox>
+            <input type="text" placeholder="Filter this dataset" v-model="rowFilter" self="size-x1">
         </div>
     </div>
 </template>
 
 <script>
-    import DatatableCell from "./datatable-cell.js";
-    import * as utilities from "../services/utilities.js";
+    import DatatableCollection from "./datatable-collection.vue"; 
+    import { filterBy } from "../../utilities/filter-by.js";
+    import { sortBy } from "../../utilities/sort-by.js";
 
     export default {
 
@@ -93,16 +81,12 @@
             return {
                 columns: [],
                 rowFilter: null,
-                groupingId: null,
-                sortingId: null
+                sortingId: null,
+                groupingColumns: [],
             };
         },
 
         computed: {
-
-            groupingColumn() {
-                return this.columns.find(column => column.id === this.groupingId);
-            },
 
             sortingColumn() {
                 return this.columns.find(column => column.id === this.sortingId);
@@ -111,8 +95,7 @@
             tableClasses() {
                 return {
                     "datatable-editable": this.editable,
-                    "table-fixed": this.fixed,
-                    "table-striped": this.striped
+                    "table-fixed": this.fixed
                 };
             },
 
@@ -120,30 +103,21 @@
                 return this.columns.filter(column => column.groupable);
             },
 
-            groups() {
+            rows() {
 
                 let rows = this.source;
 
                 // Filter the rows first to reduce the set (if a filter is supplied) we need to sort
                 if (this.rowFilter) {
-                    rows = utilities.filterBy(rows, this.rowFilter);
+                    rows = filterBy(rows, this.rowFilter);
                 }
 
                 // Sort the filtered set
                 if (this.sortingColumn) {
-                    rows = utilities.sortBy(rows, this.sortingColumn.id, this.sortingColumn.sortingDirection);
+                    rows = sortBy(rows, this.sortingColumn.id, this.sortingColumn.sortingDirection);
                 }
 
-                if (!this.groupingColumn) {
-                    return {
-                        data: rows
-                    };
-                }
-
-                // Group the set regardless to ensure a consistent result for the template
-                let groups = utilities.groupBy(rows, this.groupingColumn.id);
-
-                return groups;
+                return rows;
             },
 
             columnSpan() {
@@ -203,14 +177,14 @@
         },
 
         components: {
-            datatableCell: DatatableCell
+            datatableCollection: DatatableCollection
         }
 
     }
 </script>
 
 <style lang="scss">
-    @import "../assets/styles/abstract/_variables.scss";
+    @import "../../assets/styles/abstract/_variables.scss";
 
     .datatable {
 
@@ -234,22 +208,31 @@
         border-right-color: $colour-border;
     }
 
-    .datatable-group-cell,
-    .datatable-info-cell {
-        background-color: $colour-background-medium !important;
+    .datatable-group {
+        padding: 0;
+        background-color: $colour-background;
+        border-bottom: 1px solid $colour-border;
     }
 
-    .datatable-group-cell {
+    .datatable-group-header {
+        padding: 0.5rem 1rem;
+        background-color: $colour-background-medium;
+        border-bottom: 1px solid $colour-border;
+    }
+
+    .datatable-row-indent {
+        display: inline-block;
+        width: 1.5rem;
+        height: 1em;
+    }
+
+    .datatable-group-label {
         font-weight: 600;
     }
 
     .datatable-info-cell {
-        font-weight: 600;
         text-align: center;
-    }
-    
-    .datatable-row-count {
-        cursor: pointer;
+        font-weight: 600;
     }
 
     .datatable-options {
@@ -262,7 +245,7 @@
 
         & .datatable-cell {
             position: relative;
-            padding: 0;
+            padding: 0 !important;
             overflow: visible;
 
             & input,
@@ -282,5 +265,6 @@
             }          
         }
     }
+
 
 </style>

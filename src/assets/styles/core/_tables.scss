@@ -22,15 +22,12 @@ table {
 
 .table-striped {
 
-    & tbody {
+    & tr {
 
-        & tr {
+        &:nth-child(even) {
 
-            &:nth-child(odd) {
-
-                & td {
-                    background-color: $color-table-row-alt;
-                }
+            & > td {
+                background-color: $color-table-row-alt;
             }
         }
     }
@@ -69,7 +66,7 @@ tfoot {
 
             &:last-of-type {
 
-                & td {
+                & > td {
                     border-bottom: none;
                 }
             }
