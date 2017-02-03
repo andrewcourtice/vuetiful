@@ -1,5 +1,5 @@
 <template>
-    <div id="typography" class="container">
+    <div id="typography">
         <h1>This is the first heading</h1>
         <h2>This is the second heading</h2>
         <h3>This is the third heading</h3>

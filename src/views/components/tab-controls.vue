@@ -1,5 +1,5 @@
 <template>
-    <div id="tab-controls" class="container">
+    <div id="tab-controls">
         <h1>Tab Controls</h1>
         <div class="grid-row">
             <div class="grid-cell">

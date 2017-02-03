@@ -1,5 +1,5 @@
 <template>
-    <div id="panels" class="container">
+    <div id="panels">
         <h1>Panels</h1>
         <div class="grid-row" layout="row top-stretch">
             <div class="grid-cell">

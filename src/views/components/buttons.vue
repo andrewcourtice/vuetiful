@@ -1,5 +1,5 @@
 <template>
-    <div id="buttons" class="container">
+    <div id="buttons">
         <h1>Buttons</h1>
         <div class="grid-row">
             <div class="grid-cell">

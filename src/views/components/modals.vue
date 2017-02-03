@@ -1,5 +1,5 @@
 <template>
-    <div id="modals" class="container">
+    <div id="modals">
         <h1>Modals</h1>
         <div class="grid-row">
             <div class="grid-cell">

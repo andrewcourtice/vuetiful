@@ -1,5 +1,5 @@
 <template>
-    <div id="datatables" class="container">
+    <div id="datatables">
         <h1>Datatables</h1>
         <div>
             <h3>Configuration</h3>
