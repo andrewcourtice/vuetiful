@@ -1,7 +1,7 @@
 <template>
     <div class="paginator">
         <div class="paginator-body">
-            <slot :data="data" :page="page"></slot>
+            <slot :data="page" :page-number="pageNumber"></slot>
         </div>
         <div class="paginator-footer" layout="row center-justify">
             <div class="paginator-page-previous">Prev</div>
@@ -40,30 +40,32 @@
 
         data() {
             return {
-                page: 1
+                pageNumber: 1
             };
         },
 
         computed: {
 
             pages() {
-                let pages = [];
-
-                let index = 0;
-
-                while ((index + this.pageSize) < this.source.length) {
-
-                }
-            },
-
-            data() {
                 let data = this.source;
 
                 if (this.filter) {
                     data = filterBy(data, this.filter);
                 }
 
-                return 
+                let pages = [];
+                let index = 0;
+
+                while ((index + this.pageSize) <= data.length) {
+                    let page = data.slice(index, this.pageSize);
+                    pages.push(page);
+                }
+
+                return pages;
+            },
+
+            page() {
+                return this.pages[this.pageNumber];
             }
 
         }
