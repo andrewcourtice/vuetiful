@@ -7,14 +7,15 @@
     font-weight: 600;
     line-height: inherit;
     text-align: center;
-    color: $colour-font-negative;
-    background-color: $colour-primary;
+    color: $colour-font;
+    background-color: $colour-background-medium;
     border-radius: $border-radius;
 }
 
 @each $name, $colour in $colour-accents {
 
     .label-#{ $name } {
+        color: $colour-font-negative;
         background-color: $colour;
     }
 

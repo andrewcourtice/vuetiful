@@ -1,6 +1,6 @@
 <template>
-    <div class="table-wrapper">
-        <table class="datatable" :class="tableClasses">
+    <div class="datatable table-wrapper">
+        <table :class="tableClasses">
             <thead>
                 <tr>
                     <th v-if="lineNumbers" :style="{ width: lineColumnWidth }">

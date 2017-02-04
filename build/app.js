@@ -65,6 +65,10 @@ function buildRootInstance() {
             route: "/components/modals"
         },
         {
+            name: "Paginators",
+            route: "/components/paginators"
+        },
+        {
             name: "Panels",
             route: "/components/panels"
         },

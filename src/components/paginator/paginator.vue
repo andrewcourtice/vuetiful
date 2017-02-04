@@ -1,22 +1,23 @@
 <template>
     <div class="paginator">
         <div class="paginator-body">
-            <slot :data="page" :page-number="pageNumber"></slot>
+            <slot :data="data" :page-number="pageNumber"></slot>
         </div>
         <div class="paginator-footer" layout="row center-justify">
-            <div class="paginator-page-previous">Prev</div>
+            <div class="paginator-page-previous" @click="movePrevious">Prev</div>
             <div class="paginator-page-numbers">
-                <div class="paginator-page-number" v-for="num in pageCount">
-                    <span class="label">{{ num }}</span>
+                <div class="paginator-page-number" v-for="num in pages.length" @click="moveTo(num)">
+                    <span class="label" :class="{ 'label-blue': num === pageNumber }">{{ num }}</span>
                 </div>
             </div>
-            <div class="paginator-page-next">Next</div>
+            <div class="paginator-page-next" @click="moveNext">Next</div>
         </div>
     </div>
 </template>
 
 <script>
     import { filterBy } from "../../utilities/filter-by.js";
+    import { page } from "../../utilities/page.js";
 
     export default {
 
@@ -40,7 +41,7 @@
 
         data() {
             return {
-                pageNumber: 1
+                index: 0
             };
         },
 
@@ -53,22 +54,72 @@
                     data = filterBy(data, this.filter);
                 }
 
-                let pages = [];
-                let index = 0;
+                let pages = page(data, this.pageSize);
 
-                while ((index + this.pageSize) <= data.length) {
-                    let page = data.slice(index, this.pageSize);
-                    pages.push(page);
+                // need to reset the page number if the data length changes
+                // otherwise the index will be outside the bounds of the data
+                if (this.pageNumber > pages.length) {
+                    this.pageNumber = 1;
                 }
 
                 return pages;
             },
 
-            page() {
-                return this.pages[this.pageNumber];
+            pageNumber: {
+                get() {
+                    return this.index + 1;
+                },
+                set(value) {
+                    this.index = value - 1;
+                    this.$emit("page-changed", value);
+                }
+            },
+
+            data() {
+                return this.pages[this.index];
+            }
+
+        },
+
+        methods: {
+
+            movePrevious() {
+                this.pageNumber -= this.pageNumber > 1 ? 1 : 0;
+            },
+
+            moveNext() {
+                this.pageNumber += (this.pageNumber != this.pages.length) ? 1 : 0;
+            },
+
+            moveTo(pageNumber) {
+                if (pageNumber > 0 && pageNumber <= this.pages.length) {
+                    this.pageNumber = pageNumber;
+                }
             }
 
         }
 
     }
 </script>
+
+<style lang="scss">
+    @import "../../assets/styles/abstract/_variables.scss";
+
+    .paginator {
+        border: 1px solid $colour-border;
+        border-radius: $border-radius;
+    }
+
+    .paginator-footer {
+        padding: 1rem;
+        background-color: $colour-background-medium;
+        border-top: 1px solid $colour-border;
+    }
+
+    .paginator-page-number {
+        display: inline-block;
+        margin: 0 0.25rem;
+        cursor: pointer;
+    }
+
+</style>

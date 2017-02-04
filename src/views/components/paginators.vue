@@ -1,80 +1,16 @@
 <template>
-    <div id="datatables">
-        <h1>Datatables</h1>
+    <div id="paginators">
+        <h1>Paginator</h1>
         <div>
-            <h3>Configuration</h3>
-            <div class="grid-row" layout="row top-stretch">
+            <h3>Paginated Datatable</h3>
+            <div class="grid-row">
                 <div class="grid-cell">
-                    <toggle id="striped" v-model="customers.striped">Striped</toggle>
-                    <toggle id="line-numbers" v-model="customers.lineNumbers">Line Numbers</toggle>
-                    <toggle id="editable" v-model="customers.editable">Editable</toggle>
+                    <input type="text" placeholder="Filter data" v-model="customers.filter">
                 </div>
             </div>
             <div class="grid-row" layout="row top-stretch">
                 <div class="grid-cell">
-                    <datatable id="data-table-options" :source="customers.columns" editable>
-                        <datatable-column id="label" label="Column Name"></datatable-column>
-                        <datatable-column id="width" label="Width"></datatable-column>
-                        <datatable-column id="sortable" label="Sortable"></datatable-column>
-                        <datatable-column id="groupable" label="Groupable"></datatable-column>
-                        <datatable-column id="total" label="Calculate Total"></datatable-column>
-                        <template slot="sortable" scope="cell">
-                            <div class="datatable-options-toggle">
-                                <toggle :id="cell.row.id + '-sortable'" v-model="cell.row.sortable"></toggle>
-                            </div>
-                        </template>
-                        <template slot="groupable" scope="cell">
-                            <div class="datatable-options-toggle">
-                                <toggle :id="cell.row.id + '-groupable'" v-model="cell.row.groupable"></toggle>
-                            </div>
-                        </template>
-                        <template slot="total" scope="cell">
-                            <div class="datatable-options-toggle">
-                                <toggle :id="cell.row.id + '-total'" v-model="cell.row.total"></toggle>
-                            </div>
-                        </template>
-                    </datatable>
-                </div>
-            </div>
-        </div>
-        <div>
-            <h3>Datatable</h3>
-            <div class="grid-row" layout="row top-stretch">
-                <div class="grid-cell">
-                    <datatable id="data-table-main" :source="customers.rows" :striped="customers.striped" :editable="customers.editable" :line-numbers="customers.lineNumbers">
-                        <datatable-column id="sel" label="sel" width="3.25rem" :sortable="false" :groupable="false" class="checkable-column">
-                            <checkbox id="sel-all" v-model="selectAll"></checkbox>
-                        </datatable-column>
-                        <datatable-column v-for="column in customers.columns" :id="column.id" :label="column.label" :width="column.width" :formatter="column.formatter"
-                            :sortable="column.sortable" :groupable="column.groupable" :total="column.total">
-                            </datatable-column>
-                            <template slot="sel" scope="cell">
-                                <div class="checkable-column">
-                                    <checkbox :id="cell.row.id" :val="cell.row" v-model="customers.selected"></checkbox>
-                                </div>
-                            </template>
-                    </datatable>
-                </div>
-            </div>
-        </div>
-        <div>
-            <h3>Selected Rows</h3>
-            <div class="grid-row" layout="row top-stretch">
-                <div class="grid-cell">
-                    <datatable id="data-table-selected" :source="customers.selected">
-                        <datatable-column v-for="column in customers.columns" :id="column.id" :label="column.label" :width="column.width" :formatter="column.formatter"
-                            :total="column.total">
-                            </datatable-column>
-                    </datatable>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <h3>Paginated</h3>
-            <div class="grid-row" layout="row top-stretch">
-                <div class="grid-cell">
-                    <paginator :source="customers.rows" :page-size="3">
+                    <paginator :source="customers.rows" :page-size="4" :filter="customers.filter">
                         <template scope="page">
                             <datatable id="data-table-main" :source="page.data" :striped="customers.striped" :editable="customers.editable" :line-numbers="customers.lineNumbers">
                                 <datatable-column id="sel" label="sel" width="3.25rem" :sortable="false" :groupable="false" class="checkable-column">
@@ -223,12 +159,13 @@
             }
         ],
 
+        filter: null,
         selected: []
     };
 
     export default {
 
-        name: "datatables",
+        name: "paginators",
 
         data() {
             return {
@@ -262,6 +199,13 @@
 
         .checkbox {
             margin: 0;
+        }
+    }
+
+    .paginator {
+
+        & .datatable {
+            border: none;
         }
     }
 

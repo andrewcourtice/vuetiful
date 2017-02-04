@@ -6,6 +6,7 @@ import DateTimePicker from "./datetime-picker/datetime-picker.vue";
 import Dynamic from "./dynamic/dynamic";
 import FloatingPanel from "./floating-panel/floating-panel.vue";
 import Modal from "./modal/modal.vue";
+import Paginator from "./paginator/paginator.vue";
 import Panel from "./panel/panel.vue";
 import Radio from "./toggles/radio.vue";
 import TabControl from "./tab-control/tab-control.vue";
@@ -20,6 +21,7 @@ export default {
     dynamic: Dynamic,
     floatingPanel: FloatingPanel,
     modal: Modal,
+    paginator: Paginator,
     panel: Panel,
     radio: Radio,
     toggle: Toggle,
