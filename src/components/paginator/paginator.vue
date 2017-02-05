@@ -4,13 +4,17 @@
             <slot :data="data" :page-number="pageNumber"></slot>
         </div>
         <div class="paginator-footer" layout="row center-justify">
-            <div class="paginator-page-previous" @click="movePrevious">Prev</div>
+            <div class="paginator-button paginator-page-previous" @click="movePrevious">
+                <span>Prev</span>
+            </div>
             <div class="paginator-page-numbers">
-                <div class="paginator-page-number" v-for="num in pages.length" @click="moveTo(num)">
-                    <span class="label" :class="{ 'label-blue': num === pageNumber }">{{ num }}</span>
+                <div class="paginator-button paginator-page-number" :class="{ 'active': num === pageNumber }" v-for="num in pages.length" @click="moveTo(num)">
+                    <span>{{ num }}</span>
                 </div>
             </div>
-            <div class="paginator-page-next" @click="moveNext">Next</div>
+            <div class="paginator-button paginator-page-next" @click="moveNext">
+                <span>Next</span>
+            </div>
         </div>
     </div>
 </template>
@@ -116,10 +120,23 @@
         border-top: 1px solid $colour-border;
     }
 
-    .paginator-page-number {
+    .paginator-button {
         display: inline-block;
-        margin: 0 0.25rem;
+        min-width: 1.5em;
+        padding: 0 0.5rem;
+        font-weight: 600;
+        background-color: $colour-border;
+        border-radius: $border-radius;
         cursor: pointer;
+
+        &.active {
+            color: $colour-font-negative;
+            background-color: $colour-primary;
+        }
+    }
+
+    .paginator-page-number {
+        margin: 0 0.25rem;
     }
 
 </style>
