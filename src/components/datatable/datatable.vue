@@ -1,6 +1,6 @@
 <template>
-    <div class="datatable table-wrapper">
-        <table :class="tableClasses">
+    <div class="datatable table-wrapper" :class="tableClasses">
+        <table>
             <thead>
                 <tr>
                     <th v-if="lineNumbers" :style="{ width: lineColumnWidth }">
@@ -9,7 +9,21 @@
                     <slot></slot>
                 </tr>
             </thead>
-            <tbody v-drag:drop="doDrop" v-drag:over="doDragOver">
+            <tbody v-if="groupingColumnIds.length > 0">
+                <tr>
+                    <td class="datatable-groups-header" :colspan="columnSpan">
+                        <chip class="datatable-group-chip" v-for="(column, index) in groupingColumns" @remove="degroupColumn(column)">
+                            <div>
+                                <small>
+                                    <strong>{{ index == 0 ? "Grouping By:" : "Then:" }}</strong>
+                                </small>
+                            </div>
+                            <div>{{ column.label }}</div>
+                        </chip>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody v-drag:enter="dragEnter" v-drag:leave="dragLeave" v-drag:over="dragOver" v-drag:drop="dragDrop">
                 <tr>
                     <td class="datatable-group" :colspan="columnSpan">
                         <datatable-collection 
@@ -18,7 +32,7 @@
                             :striped="striped"
                             :editable="editable"
                             :line-numbers="lineNumbers"
-                            :grouping-columns="groupingColumns"
+                            :grouping-columns="groupingColumnIds"
                             :margin="lineColumnWidth">
                         </datatable-collection>
                     </td>
@@ -34,9 +48,8 @@
                 </tr>
             </tfoot>
         </table>
-        <div class="datatable-options" layout="row center-justify">
-            <checkbox v-for="column in groupableColumns" :id="column.id" :val="column.id" v-model="groupingColumns">{{ column.label }}</checkbox>
-            <input type="text" placeholder="Filter this dataset" v-model="rowFilter" self="size-x1">
+        <div class="datatable-options" layout="row center-justify" v-if="filterable">
+            <input type="text" placeholder="Filter this dataset" v-model="filter" self="size-x1">
         </div>
     </div>
 </template>
@@ -70,6 +83,11 @@
                 default: false
             },
 
+            filterable: {
+                type: Boolean,
+                default: true
+            },
+
             lineNumbers: {
                 type: Boolean,
                 default: false
@@ -80,9 +98,10 @@
         data() {
             return {
                 columns: [],
-                rowFilter: null,
+                filter: null,
                 sortingId: null,
-                groupingColumns: [],
+                groupingColumnIds: [],
+                groupingDropzoneActive: false
             };
         },
 
@@ -90,6 +109,12 @@
 
             sortingColumn() {
                 return this.columns.find(column => column.id === this.sortingId);
+            },
+
+            groupingColumns() {
+                return this.groupableColumns.filter(column => {
+                    return this.groupingColumnIds.indexOf(column.id) > -1;
+                });
             },
 
             tableClasses() {
@@ -108,8 +133,8 @@
                 let rows = this.source;
 
                 // Filter the rows first to reduce the set (if a filter is supplied) we need to sort
-                if (this.rowFilter) {
-                    rows = filterBy(rows, this.rowFilter);
+                if (this.filter) {
+                    rows = filterBy(rows, this.filter);
                 }
 
                 // Sort the filtered set
@@ -174,27 +199,43 @@
                 this.rowFilter = phrase;
             },
 
-            groupBy(column) {
-                this.groupingColumns.push(column.id);
+            groupColumn(column) {
+                this.groupingColumnIds.push(column.id);
             },
 
-            doDrop(event) {
+            degroupColumn(column) {
+                let index = this.groupingColumnIds.indexOf(column.id);
+                this.groupingColumnIds.splice(index, 1);
+            },
+
+            dragDrop(event) {
                 event.preventDefault();
 
                 let columnId = event.dataTransfer.getData("text");
-                
+
                 let column = this.groupableColumns.find(item => {
                     return item.id === columnId;
                 });
 
                 if (column && !column.grouping) {
-                    this.groupBy(column);
+                    this.groupColumn(column);
                 }
             },
 
-            doDragOver(event) {
+            dragOver(event) {
+                event.preventDefault();
+            },
+
+            dragEnter(event) {
                 event.preventDefault();
 
+                this.groupingDropzoneActive = true;
+            },
+
+            dragLeave(event) {
+                event.preventDefault();
+
+                this.groupingDropzoneActive = false;
             }
  
         },
@@ -231,16 +272,28 @@
         border-right-color: $colour-border;
     }
 
+    .datatable-group-chip {
+        margin-right: 0.5rem;
+    }
+
     .datatable-group {
         padding: 0;
         background-color: $colour-background;
         border-bottom: 1px solid $colour-border;
     }
 
+    .datatable-groups-header,
+    .datatable-group-header {
+        border-bottom: 1px solid $colour-border;
+    }
+
     .datatable-group-header {
         padding: 0.5rem 1rem;
         background-color: $colour-background-medium;
-        border-bottom: 1px solid $colour-border;
+    }
+
+    .datatable-grouping-over {
+        box-shadow: 0 0 0 2px $colour-primary;
     }
 
     .datatable-row-indent {

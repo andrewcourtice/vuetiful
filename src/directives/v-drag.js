@@ -1,6 +1,6 @@
 
 function genericHandler(event) {
-    console.log(event);
+
 }
 
 const eventHandlerMap = {

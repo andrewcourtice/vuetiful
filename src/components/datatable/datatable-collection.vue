@@ -7,7 +7,7 @@
                         <div self="size-x1">
                             <span class="datatable-group-label" :style="indentStyle">{{ groupingColumn.formatData(group) }}</span>
                         </div> 
-                        <span class="label datatable-row-count" v-if="data.length > 1">{{ data.length }}</span>
+                        <span class="label label-primary datatable-row-count" v-if="data.length > 1">{{ data.length }}</span>
                     </div>
                     <datatable-collection 
                         :rows="data" 

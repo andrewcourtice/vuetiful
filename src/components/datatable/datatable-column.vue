@@ -1,5 +1,5 @@
 <template>
-    <th :style="columnStyles" @click="sort" v-drag:start="dragStart">
+    <th :style="columnStyles" title="Click to sort. Drag to center to group." @click="sort" v-drag:start="dragStart">
         <div class="datatable-column" layout="row center-justify">
             <div>
                 <slot>{{ label || id }}</slot>
@@ -75,7 +75,7 @@
 
             grouping: {
                 get() {
-                    return (this.$parent.groupingColumns.indexOf(this.id) > -1);
+                    return (this.$parent.groupingColumnIds.indexOf(this.id) > -1);
                 }
             },
 

@@ -12,7 +12,7 @@
             </div>
             <div class="grid-row" layout="row top-stretch">
                 <div class="grid-cell">
-                    <datatable id="data-table-options" :source="customers.columns" editable>
+                    <datatable id="data-table-options" :source="customers.columns" :filterable="false" editable>
                         <datatable-column id="label" label="Column Name"></datatable-column>
                         <datatable-column id="width" label="Width"></datatable-column>
                         <datatable-column id="sortable" label="Sortable"></datatable-column>

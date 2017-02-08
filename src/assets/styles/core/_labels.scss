@@ -12,6 +12,11 @@
     border-radius: $border-radius;
 }
 
+.label-primary {
+    color: $colour-font-negative;
+    background-color: $colour-primary;
+}
+
 @each $name, $colour in $colour-accents {
 
     .label-#{ $name } {

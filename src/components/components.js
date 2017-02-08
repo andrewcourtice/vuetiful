@@ -1,5 +1,6 @@
 
 import Checkbox from "./toggles/checkbox.vue";
+import Chip from "./chip/chip.vue";
 import DataTable from "./datatable/datatable.vue";
 import DataTableColumn from "./datatable/datatable-column.vue";
 import DateTimePicker from "./datetime-picker/datetime-picker.vue";
@@ -15,6 +16,7 @@ import Toggle from "./toggles/toggle.vue";
 
 export default {
     checkbox: Checkbox,
+    chip: Chip,
     datatable: DataTable,
     datatableColumn: DataTableColumn,
     datetimePicker: DateTimePicker,
