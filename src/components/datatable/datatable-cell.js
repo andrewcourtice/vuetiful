@@ -12,6 +12,8 @@ const editableCell = {
 export default {
     functional: true,
 
+    name: "datatable-cell",
+
     props: {
 
         row: Object,

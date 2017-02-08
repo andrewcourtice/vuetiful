@@ -1,7 +1,7 @@
 {
-  "name": "test-webpack",
-  "description": "A webpack test",
-  "version": "1.0.0",
+  "name": "vuetiful",
+  "description": "Component framework written on top of the Vue reactive library",
+  "version": "0.1.0",
   "author": "Andrew Courtice",
   "private": true,
   "scripts": {

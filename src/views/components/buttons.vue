@@ -4,7 +4,7 @@
         <div class="grid-row">
             <div class="grid-cell">
                 <h3>Button Elements</h3>
-                <button class="button" @click="buttonClick()">Primary Button</button>
+                <button class="button" @click="buttonClick()" v-drag:drag="">Primary Button</button>
                 <button class="button button-green" @click="buttonClick()">Green Button</button>
                 <button class="button button-red" @click="buttonClick()">Red Button</button>
                 <button class="button button-yellow" @click="buttonClick()">Yellow Button</button>

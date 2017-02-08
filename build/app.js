@@ -1,26 +1,13 @@
 // Import Vue and Vue plugins
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Vuetiful from "../src/main";
 
-// Import the core styles
-import "flex-layout-attribute";
-import "../src/assets/styles/site.scss";
-
-// Import the route directory
-import components from "../src/components/components";
 import views from "../src/views/views";
 
-
 function registerPlugins() {
+    Vue.use(Vuetiful);
     Vue.use(VueRouter);
-}
-
-function registerComponents() {
-    for (let component in components) {
-        let definition = components[component];
-
-        Vue.component(component, definition);
-    }
 }
 
 function buildRoutes() {
@@ -103,7 +90,6 @@ function buildRootInstance() {
 
 function bootstrap() {
     registerPlugins();
-    registerComponents();
     buildRootInstance();
 }
 
