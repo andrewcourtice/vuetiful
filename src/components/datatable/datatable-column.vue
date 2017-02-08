@@ -1,5 +1,5 @@
 <template>
-    <th :style="columnStyles" @click="sort">
+    <th :style="columnStyles" @click="sort" v-drag:start="dragStart">
         <div class="datatable-column" layout="row center-justify">
             <div>
                 <slot>{{ label || id }}</slot>
@@ -75,12 +75,7 @@
 
             grouping: {
                 get() {
-                    return (this.$parent.groupingId === this.id && this.groupable);
-                },
-                set(value) {
-                    if (value && this.groupable) {
-                        this.$parent.groupingId = this.id;
-                    }
+                    return (this.$parent.groupingColumns.indexOf(this.id) > -1);
                 }
             },
 
@@ -125,11 +120,11 @@
             },
 
             group() {
-                if (this.grouping) {
+                if (this.grouping || !this.groupable) {
                     return;
                 }
 
-                this.grouping = true;
+                this.$parent.groupBy(this);
             },
 
             formatData(value) {
@@ -138,6 +133,12 @@
                 }
 
                 return this.formatter(value);
+            },
+
+            dragStart(event) {
+                event.stopPropagation();
+                event.dataTransfer.dropEffect = "copy";
+                event.dataTransfer.setData("text", this.id);
             }
 
         },

@@ -9,7 +9,7 @@
                     <slot></slot>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-drag:drop="doDrop" v-drag:over="doDragOver">
                 <tr>
                     <td class="datatable-group" :colspan="columnSpan">
                         <datatable-collection 
@@ -172,8 +172,31 @@
 
             setFilter(phrase) {
                 this.rowFilter = phrase;
-            }
+            },
 
+            groupBy(column) {
+                this.groupingColumns.push(column.id);
+            },
+
+            doDrop(event) {
+                event.preventDefault();
+
+                let columnId = event.dataTransfer.getData("text");
+                
+                let column = this.groupableColumns.find(item => {
+                    return item.id === columnId;
+                });
+
+                if (column && !column.grouping) {
+                    this.groupBy(column);
+                }
+            },
+
+            doDragOver(event) {
+                event.preventDefault();
+
+            }
+ 
         },
 
         components: {
