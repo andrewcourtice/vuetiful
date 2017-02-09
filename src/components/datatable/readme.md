@@ -8,6 +8,21 @@ If you would like a feature added to the datatable or if you find a bug, please 
 
 To see a demo of this component in action check out this codepen example: [http://codepen.io/andrewcourtice/full/woQzpa](http://codepen.io/andrewcourtice/full/woQzpa).
 
+- [Getting Started](#getting-started)
+- [Props](#props)
+	- [Datatable](#datatable-1)
+	- [Datatable Column](#datatable-column)
+- [Formatting Data](#formatting-data)
+- [Sorting Data](#sorting-data)
+- [Grouping Data](#grouping-data)
+- [Editing Data](#editing-data)
+- [Customizing the Datatable](#customizing-the-datatable)
+	- [Header Templates](#header-templates)
+	- [Cell Templates](#cell-templates)
+		- [View Mode](#view-mode)
+		- [Edit Mode](#edit-mode)
+- [Pagination](#pagination)
+
 ## Getting Started
 
 Using the datatable is trivial. Just drop a `datatable` element in your html and start defining some `datatable-columns`. Refer to the **props** section below to see what props you can use with this component. I'll also talk about customizing cell and header templates using slots later. Here's a basic example:
