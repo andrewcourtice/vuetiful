@@ -1,6 +1,6 @@
 # Datatable
 
-The datatable component is essentially a "glorified table" designed to efficiently display dense data. Datatables aren't a heavily used component but they are fundamental to business applications - particularly ones displaying financial data or dashboards. A good datatable is hard to come by these. Often they are too bulky, poorly designed, rigid, lack features or have too many dependencies on other frameworks. I have aimed to mitigate most of these problems with the Vuetiful datatable but I expect there will be features lacking that you need. 
+The datatable component is essentially a "glorified table" designed to efficiently display dense data. Datatables aren't a heavily used component but they are fundamental to business applications - particularly ones displaying financial data or dashboards. A good datatable is hard to come by these days. Often they are too bulky, poorly designed, rigid, lack features or have too many dependencies on other frameworks. I have aimed to mitigate most of these problems with the Vuetiful datatable but I expect there will be features lacking that you need. 
 
 If you would like a feature added to the datatable or if you find a bug, please open an issue on this repo.
 
@@ -20,7 +20,7 @@ Using the datatable is trivial. Just drop a `datatable` element in your html and
 </datatable>
 ```
 
-You can also use Vue's list rendering features to define columns in you viewmodel.
+You can also use Vue's list rendering features to define columns in your viewmodel.
 
 ```javascript
 new Vue({
@@ -67,7 +67,7 @@ new Vue({
 | source | array[object] | no | [] | An array of objects to display in the table. a.k.a. - the data. This is often JSON fetched from your application and parsed |
 | striped | boolean | no | true | Whether the table should display alternate row coloring |
 | filterable | boolean | no | true | Whether the table should display a textbox in the footer for filtering the current dataset |
-| editable | boolean | no | false | Whether the table should be displayed in edit mode (more on this later) |
+| editable | boolean | no | false | Whether the table should be displayed in edit mode. See [Editing Data](#editing-data) |
 | line-numbers | boolean | no | true | Whether the table should display line numbers on the left of each row |
 **Note:** For specifying literal true values on props you can use a shorthand version. eg. instead of writing `editable="true"` you can just use the existence of the prop to define it's value eg. `editable`.
 
@@ -93,7 +93,7 @@ new Vue({
 | sortable | boolean | no | true | Whether this row can be used for sorting |
 | groupable | boolean | no | true | Whether this row can be used for grouping |
 | total | boolean | no | false | Whether data in this column should be totalled and displayed at the bottom of the table. **Note:** for obvious reasons this is only available if the column has numeric data |
-| formatter | function | no | | A function used to format the data in this column before it is displayed. This is particularly useful for dates and numeric values (more on this later) |
+| formatter | function | no | | A function used to format the data in this column before it is displayed. This is particularly useful for dates and numeric value. See [Formatting Data](#formatting-data) |
 
 
 ## Formatting Data
@@ -137,6 +137,23 @@ The format function signature expects one parameter which will be the value of t
     <datatable-column id="datatable-column-3" label="Column 3" :formatter="formatCurrency"></datatable-column>
 </datatable>
 ```
+
+
+## Sorting Data
+
+The datatable allows you to easily sort your data. To sort by a particular column, click the column header at the top of the table. The data will be displayed in ascending order by default. Clicking the same column header again will reverse the sort order (descending).
+
+
+## Grouping Data
+
+In addition to sorting, the datatable allows you to group your data by multiple columns. 
+
+This probably best illustrated with an example. Let's say you have an online T-Shirt business and want to see specific profiles for purchases. Your purchases dataset may have the following columns: **Name**, **Email**, **Product Name**, **Quantity**, **Purchase Date**. Now that you have your data you may want to know which customers bought more than one of a particular T-Shirt on any given day. The process for this would be to group the data by **Purchase Date**, then group those groups by **Product Name**, then finally group the resulting group by **Quantity**. This can be repeated for as many columns as you have in any order.
+
+To group by a particular column, simply drag the column header from the top of the table into the middle of the table. Keep repeating this step for each subsequent column you would like to group by. The columns being grouped on will be displayed at the top of the table under the headers.
+
+To remove a column from the grouping, click the **x** button on the corresponding group at the top of the table.
+
 
 ## Editing Data
 
