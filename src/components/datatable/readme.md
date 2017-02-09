@@ -166,3 +166,88 @@ The datatable is very flexible with customizing how your users interact with the
 
 ### Header Templates
 
+The default slot on the `datatable-column` component allows you to easily customize the content displayed in the column header. Let's look at an example where we want to have a column to allow users to select rows using a checkbox.
+
+```html
+<datatable-column id="select-all" width="3.25rem" :sortable="false" :groupable="false">
+    <checkbox id="select-all-checkbox" v-model="selectAll"></checkbox>
+</datatable-column>
+```
+
+**Note:** The `checkbox` component used in the example above is also part of the Vuetiful component framework. Refer to **components/toggles** for how to use `checkbox`, `radio` and `toggle` components.
+
+### Cell Templates
+
+Here is where the flexibility of this component really comes in handy. Sometimes you may want to go beyond just using the default cell template and a custom formatter. Custom cell templates allow you to define specific types of markup or custom components to be used for a particular column instead of the default one built into the component. By default, each cell gets a different template for view and edit modes respectively. Here's what gets rendered into each cell by default:
+
+#### View Mode
+```html
+<span>{{ column.formatData(row[column.id]) }}</span>
+```
+
+#### Edit Mode
+```html
+<input type="text" v-model="row[column.id]" />
+```
+
+To override this all we have to do is define a template in our datatable and tell it to slot into the column we want. Here's an example extending on the custom header template example above:
+
+```html
+<datatable :source="customers.data" :editable="customers.editable">
+    <datatable-column id="select-all" width="3.25rem" :sortable="false" :groupable="false">
+        <checkbox id="select-all-checkbox" v-model="selectAll"></checkbox>
+    </datatable-column>
+
+    <!-- Define the rest of our columns here -->
+
+    <template slot="sel" scope="cell">
+        <div class="checkable-column">
+            <checkbox :id="cell.row.id" :val="cell.row" v-model="customers.selected"></checkbox>
+        </div>
+    </template>
+</datatable>
+```
+
+Notice how the `slot="select-all"` prop on the `template` matches the `id="select-all"` prop of the column we want to define a custom template for. Within your custom template a `cell` variable will be available for binding. Here's an outline of the properties available on the `cell` variable:
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| row | object | The current object that represents this row. This object will have all the properties on it as defined in your data source. This is handy for accessing values for other columns in the current row. |
+| column | datatable-column | This is the viewmodel of the current column that the repeater is using to get the value in the row. Calling `formatData(value)` on the column will call the formatter function defined in your `datatable-column`. |
+| value | any | This is just some sugar to simplify getting the value for the cell. It is equivalent to calling `row[column.id]` | 
+
+At this point you may be wondering how to define a different template for when the datatable is in edit mode. The short answer is: you don't have to. Just use Vue's `v-if` and `v-else` conditional bindings to change the content of the cell. Using this approach means you are in complete control over what gets rendered for the cell. You could even change the components based on the type of value that is in the current cell. Let's see what conditional rendering based on the datatables `editable` prop would look like:
+
+```html
+<template slot="sel" scope="cell">
+    <div v-if="customers.editable">
+        <!-- Put your custom edit template here -->
+    </div>
+    <div v-else>
+        <!-- Put your custom view template here -->
+    </div>
+</template>
+```
+
+
+## Pagination
+
+Pagination is particularly useful for when you need to display a large set of data but don't want to take up large amounts of screen real-estate displaying it all. It also means our datatable has to do less work by rendering smaller chunks of data at a time. 
+
+You may have noticed that there is no option on the datatable for pagination. This is because pagination is not built into the datatable component. The `paginator` is actually a standalone component that allows you to paginate data and inject any child component into it's scope. Given that the `paginator` is a separate component I won't go into too much detail here on how to use it but I will show you a simple example of bundling it with the `datagrid`. To see how the `paginator` component works in detail, check out the **components/paginator** folder.
+
+Here's a basic example of using the paginator with the `datagrid`:
+
+```html
+<paginator :source="customers.data" :page-size="5">
+    <template scope="page">
+        <!-- Notice here how we bind the datatable source to the data property exposed from the paginator -->
+        <!-- this ensures that the only data the datatable is aware of is the current page -->
+        <datatable id="data-table-main" :source="page.data">
+            <!-- Datatable columns & templates -->
+        </datatable>
+    </template>
+</paginator>
+```
+
+All we've done here is bound the `paginator` to the root data source instead of the `datatable`. The `datatable` source is then bound to the data exposed by the current page.
