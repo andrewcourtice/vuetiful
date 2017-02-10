@@ -7,7 +7,7 @@
  * @param {String} key The key of the object to sort on
  * @param {Number} direction The direction of the sort
  */
-export function sortBy(array, key, direction) {
+export default function sortBy(array, key, direction) {
 
     if (Math.abs(direction) !== 1) {
         throw new Error("Sort direction must be either 1 (ascending) or -1 (descending)");

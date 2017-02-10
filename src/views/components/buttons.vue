@@ -23,6 +23,8 @@
 </template>
 
 <script>
+    import CalendarMonth from "../../services/calendar.js";
+
     export default {
 
         name: "buttons",
@@ -33,6 +35,10 @@
                 alert("Button Clicked!");
             }
 
+        },
+
+        created() {
+            console.log(new CalendarMonth(new Date(2017, 3, 18)));
         }
     }
 </script>

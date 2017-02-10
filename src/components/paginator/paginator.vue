@@ -20,8 +20,8 @@
 </template>
 
 <script>
-    import { filterBy } from "../../utilities/filter-by.js";
-    import { page } from "../../utilities/page.js";
+    import filterBy from "../../utilities/filter-by.js";
+    import page from "../../utilities/page.js";
 
     export default {
 

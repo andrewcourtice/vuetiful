@@ -37,7 +37,7 @@
 
 <script>
     import DatatableCell from "./datatable-cell.js";
-    import { groupBy } from "../../utilities/group-by.js";
+    import groupBy from "../../utilities/group-by.js";
 
     export default {
         name: "datatable-collection",
@@ -102,7 +102,8 @@
             },
 
             groups() {
-                return groupBy(this.rows, this.groupingColumn.id);
+                let columnId = this.groupingColumn.id;
+                return groupBy(this.rows, row => row[columnId]);
             },
 
             columnSpan() {

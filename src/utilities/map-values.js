@@ -1,4 +1,4 @@
-export function mapValues(object, callback) {
+export default function mapValues(object, callback) {
     let mapped = {};
 
     for (let prop in object) {

@@ -6,21 +6,17 @@
  * @param {String} key The key to group the array by
  * @returns Object
  */
-export function groupBy(array, key) {
-    if (!key) {
-        return array;
-    }
-
+export default function groupBy(array, callback) {
     let groups = {};
 
-    for (let row of array) {
-        let cell = row[key];
+    for (let item of array) {
+        let value = callback.call(array, item);
 
-        if (!groups.hasOwnProperty(cell)) {
-            groups[cell] = [];
+        if (!groups.hasOwnProperty(value)) {
+            groups[value] = [];
         }
 
-        groups[cell].push(row);
+        groups[value].push(item);
     }
 
     return groups;

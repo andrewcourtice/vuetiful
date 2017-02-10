@@ -56,8 +56,8 @@
 
 <script>
     import DatatableCollection from "./datatable-collection.vue"; 
-    import { filterBy } from "../../utilities/filter-by.js";
-    import { sortBy } from "../../utilities/sort-by.js";
+    import filterBy from "../../utilities/filter-by.js";
+    import sortBy from "../../utilities/sort-by.js";
 
     export default {
 

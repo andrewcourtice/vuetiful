@@ -9,7 +9,7 @@ const SEARCHABLE_TYPES = ["string", "number", "boolean"];
  * @param {String} filter
  * @returns Array
  */
-export function filterBy(array, filter) {
+export default function filterBy(array, filter) {
     if (!filter) {
         return array;
     }

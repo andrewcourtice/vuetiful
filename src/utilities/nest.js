@@ -1,4 +1,6 @@
-export function nest(array, keys) {
+import mapValues from "./map-values";
+
+export default function nest(array, keys) {
     if (!keys.length) {
         return array;
     }

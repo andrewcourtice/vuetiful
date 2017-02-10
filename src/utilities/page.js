@@ -1,4 +1,4 @@
-export function page(array, pageSize) {
+export default function page(array, pageSize) {
     let pages = [];
     let start = 0;
     let length = array.length;
