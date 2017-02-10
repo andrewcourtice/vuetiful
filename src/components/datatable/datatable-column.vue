@@ -108,23 +108,13 @@
 
         methods: {
 
-            sort() {
-                this.$emit("sort", this);
-                
+            sort() {              
                 if (this.sorting) {
                     this.sortingDirection *= -1;
                     return;
                 }
 
                 this.sorting = true;
-            },
-
-            group() {
-                if (this.grouping || !this.groupable) {
-                    return;
-                }
-
-                this.$parent.groupBy(this);
             },
 
             formatData(value) {
@@ -156,10 +146,6 @@
 
         destroyed() {
             this.$parent.removeColumn(this);
-        },
-
-        mounted() {
-            //console.log(this.$parent.$scopedSlots[this.id]);
         }
 
     }

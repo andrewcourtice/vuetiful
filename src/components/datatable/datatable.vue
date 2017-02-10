@@ -171,6 +171,15 @@
                 this.columns.splice(index, 1);
             },
 
+            groupColumn(column) {
+                this.groupingColumnIds.push(column.id);
+            },
+
+            degroupColumn(column) {
+                let index = this.groupingColumnIds.indexOf(column.id);
+                this.groupingColumnIds.splice(index, 1);
+            },
+
             calculateTotal(column) {
                 const noTotal = "n/a";
 
@@ -195,19 +204,6 @@
                 return column.formatData(total);
             },
 
-            setFilter(phrase) {
-                this.rowFilter = phrase;
-            },
-
-            groupColumn(column) {
-                this.groupingColumnIds.push(column.id);
-            },
-
-            degroupColumn(column) {
-                let index = this.groupingColumnIds.indexOf(column.id);
-                this.groupingColumnIds.splice(index, 1);
-            },
-
             dragDrop(event) {
                 event.preventDefault();
 
@@ -228,13 +224,11 @@
 
             dragEnter(event) {
                 event.preventDefault();
-
                 this.groupingDropzoneActive = true;
             },
 
             dragLeave(event) {
                 event.preventDefault();
-
                 this.groupingDropzoneActive = false;
             }
  

@@ -105,18 +105,10 @@
         padding: 1rem;
     }
 
-    /*.modal-header,
     .modal-footer {
         background-color: $colour-background-medium;
-    }*/
-
-    /*.modal-header {
-        border-bottom: 1px solid $colour-border;
+        border-top: 1px solid $colour-border-light;
     }
-
-    .modal-footer {
-        border-top: 1px solid $colour-border;
-    }*/
 
     .modal-body {
 

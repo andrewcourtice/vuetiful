@@ -11,10 +11,8 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "bluebird": "^3.4.6",
     "date-fns": "^1.21.1",
     "flex-layout-attribute": "^1.0.3",
-    "lodash": "^4.17.2",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1"
   },
