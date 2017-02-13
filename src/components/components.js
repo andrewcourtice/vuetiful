@@ -1,4 +1,5 @@
 
+import Calendar from "./calendar/calendar.vue";
 import Checkbox from "./toggles/checkbox.vue";
 import Chip from "./chip/chip.vue";
 import DataTable from "./datatable/datatable.vue";
@@ -15,6 +16,7 @@ import TabPane from "./tab-control/tab-pane.vue";
 import Toggle from "./toggles/toggle.vue";
 
 export default {
+    calendar: Calendar,
     checkbox: Checkbox,
     chip: Chip,
     datatable: DataTable,

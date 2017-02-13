@@ -17,6 +17,7 @@
                 <a href="#" class="button button-green" @click.prevent="buttonClick()">Green Button</a>
                 <a href="#" class="button button-red" @click.prevent="buttonClick()">Red Button</a>
                 <a href="#" class="button button-yellow" @click.prevent="buttonClick()">Yellow Button</a>
+                <calendar></calendar>
             </div>
         </div>
     </div>
