@@ -38,7 +38,9 @@
         },
 
         created() {
-            console.log(new CalendarMonth(new Date(2017, 3, 18)));
+            let calendar = new CalendarMonth(new Date(2017, 3, 18));
+            console.log(calendar.generate());
+            console.log(calendar.nextMonth());
         }
     }
 </script>
