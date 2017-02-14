@@ -37,15 +37,8 @@ export default {
             },
             set(value) {
                 this.proxy = value;
+                this.$emit("input", this.proxy);
             }
-        }
-
-    },
-
-    methods: {
-
-        onChange(event) {
-            this.$emit("input", this.proxy);
         }
 
     }
