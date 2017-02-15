@@ -8,6 +8,8 @@ import subMonths from "date-fns/sub_months";
 import setMonth from "date-fns/set_month";
 
 import pageBy from "../utilities/page-by";
+import firstOf from "../utilities/first-of.js";
+import lastOf from "../utilities/last-of.js";
 
 const EPOCH_MIN = new Date(-8640000000000000);
 const EPOCH_MAX = new Date(8640000000000000);
@@ -25,6 +27,8 @@ const weekdays = [
 function cleanDate(date) {
     return isValid(date) ? date : new Date();
 }
+
+
 
 export default class CalendarMonth {
 
@@ -60,13 +64,28 @@ export default class CalendarMonth {
         }
     }
 
+    get paddingStart() {
+        let firstWeek = firstOf(this.weeks);
+        let firstDay = firstOf(firstWeek);
+
+        return firstDay.getDay();
+    }
+
+    get paddingEnd() {
+        let weeks = this.weeks;
+        let lastWeek = lastOf(weeks);
+        let lastDay = lastOf(lastWeek);
+
+        return 6 - lastDay.getDay();
+    }
+
     generate() {
         let monthStart = startOfMonth(this.startDate);
         let monthEnd = endOfMonth(this.startDate);
 
         let days = eachDay(monthStart, monthEnd);
 
-        this.month = pageBy(days, day => {
+        this.weeks = pageBy(days, day => {
             let weekPosition = day.getDay() + 1;
             let monthPosition = day.getDate();
 
@@ -75,7 +94,7 @@ export default class CalendarMonth {
             return Math.floor(position);
         });
 
-        return this.month;
+        return this.weeks;
     }
 
     previousMonth() {
