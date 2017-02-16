@@ -5,7 +5,7 @@ const defaultCell = {
 };
 
 const editableCell = {
-    template: '<input type="text" v-model="row[column.id]" />',
+    template: '<input type="text" v-model="row[column.id]"/>',
     props: [ "row", "column" ]
 };
 

@@ -112,8 +112,8 @@
             },
 
             groupingColumns() {
-                return this.groupableColumns.filter(column => {
-                    return this.groupingColumnIds.indexOf(column.id) > -1;
+                return this.groupingColumnIds.map(columnId => {
+                    return this.columns.find(column => column.id === columnId);
                 });
             },
 
