@@ -1,6 +1,11 @@
 
 export default {
 
+    model: {
+        prop: "source",
+        event: "change"
+    },
+
     props: {
 
         id: {
@@ -8,11 +13,11 @@ export default {
             required: true
         },
 
-        value: {
+        source: {
             required: true
         },
 
-        val: {
+        value: {
             required: false
         },
 
@@ -33,11 +38,11 @@ export default {
 
         checked: {
             get() {
-                return this.value
+                return this.source;
             },
             set(value) {
                 this.proxy = value;
-                this.$emit("input", this.proxy);
+                this.$emit("change", this.proxy);
             }
         }
 

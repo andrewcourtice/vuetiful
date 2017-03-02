@@ -12,7 +12,7 @@
             <tbody v-if="groupingColumnIds.length > 0">
                 <tr>
                     <td class="datatable-groups-header" :colspan="columnSpan">
-                        <chip class="datatable-group-chip" v-for="(column, index) in groupingColumns" @remove="degroupColumn(column)">
+                        <chip class="datatable-group-chip" v-for="(column, index) in groupingColumns" :key="column.id" @remove="degroupColumn(column)">
                             <div>
                                 <small>
                                     <strong>{{ index == 0 ? "Grouping By:" : "Then:" }}</strong>

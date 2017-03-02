@@ -1,6 +1,6 @@
 <template>
     <div class="toggle">
-        <input type="checkbox" :id="id" :name="id" :disabled="disabled" :value="val" v-model="checked">
+        <input type="checkbox" :id="id" :name="id" :disabled="disabled" :value="value" v-model="checked">
         <label :for="id"></label>
         <slot></slot>
     </div>

@@ -16,12 +16,12 @@
                                 <datatable-column id="sel" label="sel" width="3.25rem" :sortable="false" :groupable="false" class="checkable-column">
                                     <checkbox id="sel-all" v-model="selectAll"></checkbox>
                                 </datatable-column>
-                                <datatable-column v-for="column in customers.columns" :id="column.id" :label="column.label" :width="column.width" :formatter="column.formatter"
+                                <datatable-column v-for="column in customers.columns" :key="column.id" :id="column.id" :label="column.label" :width="column.width" :formatter="column.formatter"
                                     :sortable="column.sortable" :groupable="column.groupable" :total="column.total">
                                     </datatable-column>
                                     <template slot="sel" scope="cell">
                                         <div class="checkable-column">
-                                            <checkbox :id="cell.row.id" :val="cell.row" v-model="customers.selected"></checkbox>
+                                            <checkbox :id="cell.row.id" :value="cell.row" v-model="customers.selected"></checkbox>
                                         </div>
                                     </template>
                             </datatable>

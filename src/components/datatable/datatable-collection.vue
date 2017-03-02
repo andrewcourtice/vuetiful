@@ -29,7 +29,7 @@
             </tr>
             <tr v-for="(row, index) in rows">
                 <td v-if="lineNumbers" class="datatable-cell datatable-linenumber-cell" :style="{ width: margin }">{{ collectionIndex + index + 1 }}</td>
-                <datatable-cell v-for="column in columns" :column="column" :row="row" :editable="editable"></datatable-cell>
+                <datatable-cell v-for="column in columns" :key="column.id" :column="column" :row="row" :editable="editable"></datatable-cell>
             </tr>
         </table>
     </div>
