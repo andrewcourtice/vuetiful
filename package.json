@@ -11,6 +11,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "core-js": "^2.4.1",
     "date-fns": "^1.28.0",
     "flex-layout-attribute": "^1.0.3",
     "vue": "^2.2.1",

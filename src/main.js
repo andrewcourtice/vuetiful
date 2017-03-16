@@ -1,3 +1,5 @@
+import "./polyfills";
+
 import "flex-layout-attribute";
 import "./assets/styles/site.scss";
 
