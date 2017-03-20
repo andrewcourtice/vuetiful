@@ -84,6 +84,7 @@ new Vue({
 | filterable | boolean | no | true | Whether the table should display a textbox in the footer for filtering the current dataset |
 | editable | boolean | no | false | Whether the table should be displayed in edit mode. See [Editing Data](#editing-data) |
 | line-numbers | boolean | no | true | Whether the table should display line numbers on the left of each row |
+
 **Note:** For specifying literal true values on props you can use a shorthand version. eg. instead of writing `editable="true"` you can just use the existence of the prop to define it's value eg. `editable`.
 
 ### Datatable Column
