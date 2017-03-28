@@ -3,11 +3,15 @@ import max from "./max";
 import count from "./count";
 import average from "./average";
 import total from "./total";
+import variance from "./variance";
+import standardDeviation from "./standard-deviation";
 
 export default {
     min,
     max,
     count,
     average,
-    total
+    total,
+    variance,
+    standardDeviation
 }

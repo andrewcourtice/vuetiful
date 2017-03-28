@@ -1,7 +1,7 @@
-import min from "../utilities/min";
+import minOf from "../utilities/min-of";
 
 export default {
     label: "Minimum",
-    callback: min,
+    callback: minOf,
     format: true
 }

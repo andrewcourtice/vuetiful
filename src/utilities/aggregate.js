@@ -3,7 +3,7 @@ export default function aggregate(array, key, callback, startValue) {
     let accumulator = startValue || 0;
 
     for (let item of array) {
-        let rawValue = item[key];
+        let rawValue = key ? item[key] : item;
         let numericValue = parseFloat(rawValue);
 
         if (isNaN(numericValue)) {

@@ -1,7 +1,7 @@
-import average from "../utilities/average";
+import averageOf from "../utilities/average-of";
 
 export default {
     label: "Average",
-    callback: average,
+    callback: averageOf,
     format: true
 }

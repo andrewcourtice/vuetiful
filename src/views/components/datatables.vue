@@ -141,7 +141,9 @@
                     aggregators.max,
                     aggregators.total,
                     aggregators.average,
-                    aggregators.count
+                    aggregators.count,
+                    aggregators.variance,
+                    aggregators.standardDeviation
                 ]
             }
         ],

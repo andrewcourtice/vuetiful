@@ -1,6 +1,6 @@
-import count from "../utilities/count";
+import countOf from "../utilities/count-of";
 
 export default {
     label: "Count",
-    callback: count
+    callback: countOf
 }

@@ -1,7 +1,7 @@
-import max from "../utilities/max";
+import maxOf from "../utilities/max-of";
 
 export default {
     label: "Maximum",
-    callback: max,
+    callback: maxOf,
     format: true
 }
