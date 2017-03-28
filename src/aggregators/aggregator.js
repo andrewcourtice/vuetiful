@@ -16,7 +16,7 @@ export default class Aggregator {
                 return "n/a";
             }
 
-            aggregate = this.callback.call(array, aggregate, numericValue);
+            aggregate = this.callback.call(this, aggregate, numericValue, array);
         }
 
         return aggregate;

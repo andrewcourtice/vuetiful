@@ -139,26 +139,27 @@
                 aggregators: [ 
                     { 
                         name: "Count", 
-                        aggregator: aggregators.count, 
-                        order: 1
+                        aggregator: aggregators.count
                     },
                     { 
                         name: "Minimum", 
                         aggregator: aggregators.min, 
-                        format: true,
-                        order: 2
+                        format: true
                     },
                     { 
                         name: "Maximum", 
                         aggregator: aggregators.max, 
-                        format: true,
-                        order: 3
+                        format: true
                     },
                     { 
                         name: "Total", 
                         aggregator: aggregators.total, 
-                        format: true,
-                        order: 4
+                        format: true
+                    },
+                    { 
+                        name: "Average", 
+                        aggregator: aggregators.average, 
+                        format: true
                     }
                 ]
             }
