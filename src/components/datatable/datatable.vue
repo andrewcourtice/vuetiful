@@ -38,7 +38,16 @@
                     </td>
                 </tr>
             </tbody>
-            <tfoot v-if="showTotals">
+            <tfoot v-for="aggregator in aggregators" :key="aggregator.name">
+                <tr>
+                    <td :colspan="columnSpan">{{ aggregator.name }}</td>
+                </tr>
+                <tr>
+                    <td v-if="lineNumbers">&nbsp;</td>
+                    <td v-for="column in columns">{{ aggregate(column, aggregator) }}</td>
+                </tr>
+            </tfoot>
+<!--            <tfoot v-if="showTotals">
                 <tr>
                     <td :colspan="columnSpan">Total</td>
                 </tr>
@@ -46,7 +55,7 @@
                     <td v-if="lineNumbers">&nbsp;</td>
                     <td v-for="column in columns">{{ calculateTotal(column) }}</td>
                 </tr>
-            </tfoot>
+            </tfoot>-->
         </table>
         <div class="datatable-options" layout="row center-justify" v-if="filterable">
             <input type="text" placeholder="Filter this dataset" v-model="filter" self="size-x1">
@@ -58,6 +67,7 @@
     import DatatableCollection from "./datatable-collection.vue"; 
     import filterBy from "../../utilities/filter-by.js";
     import sortBy from "../../utilities/sort-by.js";
+    import isArray from "../../utilities/is-array.js";
 
     export default {
 
@@ -154,8 +164,20 @@
                 return count.toString().length + 2 + "em";
             },
 
-            showTotals() {
-                return this.columns.some(column => column.total);
+            aggregators() {
+                let aggregators = [];
+
+                for (let column of this.columns) {
+                    if (!column.aggregators) {
+                        continue;
+                    }
+
+                    aggregators = aggregators.concat(column.aggregators);
+                }
+                
+                return aggregators.filter((item, index, arr) => {
+                    return index === arr.indexOf(item);
+                });
             }
 
         },
@@ -180,28 +202,15 @@
                 this.groupingColumnIds.splice(index, 1);
             },
 
-            calculateTotal(column) {
-                const noTotal = "n/a";
-
-                if (!column.total) {
-                    return noTotal;
+            aggregate(column, aggregator) {
+ 
+                if (!column.aggregators || column.aggregators.indexOf(aggregator) === -1) {
+                    return "n/a";
                 }
 
-                let total = 0;
-
-                for (let i = 0; i < this.source.length; i++) {
-                    let row = this.source[i];
-
-                    let value = parseFloat(row[column.id]);
-
-                    if (isNaN(value)) {
-                        return noTotal;
-                    }
-
-                    total += value;
-                }
-
-                return column.formatData(total);
+                let result = aggregator.aggregator.aggregate(this.rows, column.id);
+                
+                return aggregator.format ? column.formatData(result) : result;
             },
 
             dragDrop(event) {

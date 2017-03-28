@@ -37,11 +37,6 @@
                 type: Function
             },
 
-            total: {
-                type: Boolean,
-                default: false
-            },
-
             sortable: {
                 type: Boolean,
                 default: true
@@ -50,6 +45,10 @@
             groupable: {
                 type: Boolean,
                 default: true
+            },
+
+            aggregators: {
+                type: Array
             }
 
         },

@@ -17,7 +17,6 @@
                         <datatable-column id="width" label="Width"></datatable-column>
                         <datatable-column id="sortable" label="Sortable"></datatable-column>
                         <datatable-column id="groupable" label="Groupable"></datatable-column>
-                        <datatable-column id="total" label="Calculate Total"></datatable-column>
                         <template slot="sortable" scope="cell">
                             <div class="datatable-options-toggle">
                                 <toggle :id="cell.row.id + '-sortable'" v-model="cell.row.sortable"></toggle>
@@ -26,11 +25,6 @@
                         <template slot="groupable" scope="cell">
                             <div class="datatable-options-toggle">
                                 <toggle :id="cell.row.id + '-groupable'" v-model="cell.row.groupable"></toggle>
-                            </div>
-                        </template>
-                        <template slot="total" scope="cell">
-                            <div class="datatable-options-toggle">
-                                <toggle :id="cell.row.id + '-total'" v-model="cell.row.total"></toggle>
                             </div>
                         </template>
                     </datatable>
@@ -46,7 +40,7 @@
                             <checkbox id="sel-all" v-model="selectAll"></checkbox>
                         </datatable-column>
                         <datatable-column v-for="column in customers.columns" :key="column.id" :id="column.id" :label="column.label" :width="column.width" :formatter="column.formatter"
-                            :sortable="column.sortable" :groupable="column.groupable" :total="column.total">
+                            :sortable="column.sortable" :groupable="column.groupable" :aggregators="column.aggregators">
                             </datatable-column>
                             <template slot="sel" scope="cell">
                                 <div class="checkable-column">
@@ -62,9 +56,7 @@
             <div class="grid-row" layout="row top-stretch">
                 <div class="grid-cell">
                     <datatable id="data-table-selected" :source="customers.selected">
-                        <datatable-column v-for="column in customers.columns" :key="column.id" :id="column.id" :label="column.label" :width="column.width" :formatter="column.formatter"
-                            :total="column.total">
-                            </datatable-column>
+                        <datatable-column v-for="column in customers.columns" :key="column.id" :id="column.id" :label="column.label" :width="column.width" :formatter="column.formatter"></datatable-column>
                     </datatable>
                 </div>
             </div>
@@ -81,7 +73,7 @@
                                     <checkbox id="sel-all" v-model="selectAll"></checkbox>
                                 </datatable-column>
                                 <datatable-column v-for="column in customers.columns" :key="column.id" :id="column.id" :label="column.label" :width="column.width" :formatter="column.formatter"
-                                    :sortable="column.sortable" :groupable="column.groupable" :total="column.total">
+                                    :sortable="column.sortable" :groupable="column.groupable">
                                     </datatable-column>
                                     <template slot="sel" scope="cell">
                                         <div class="checkable-column">
@@ -99,6 +91,7 @@
 
 <script>
     import { format } from "date-fns";
+    import aggregators from "../../aggregators/aggregators.js";
 
     let customers = {
         striped: true,
@@ -111,16 +104,14 @@
                 label: "Client Name",
                 width: null,
                 sortable: true,
-                groupable: true,
-                total: false
+                groupable: true
             },
             {
                 id: "purchasor_email",
                 label: "Client Email",
                 width: 25,
                 sortable: true,
-                groupable: true,
-                total: false
+                groupable: true
             },
             {
                 id: "purchase_date",
@@ -128,7 +119,6 @@
                 width: null,
                 sortable: true,
                 groupable: true,
-                total: false,
                 formatter: value => format(value, "DD MMMM YYYY")
             },
             {
@@ -137,7 +127,6 @@
                 width: null,
                 sortable: true,
                 groupable: true,
-                total: true,
                 formatter: value => {
                     var currency = parseFloat(value);
 
@@ -146,7 +135,32 @@
                     }
 
                     return "$" + currency.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
-                }
+                },
+                aggregators: [ 
+                    { 
+                        name: "Count", 
+                        aggregator: aggregators.count, 
+                        order: 1
+                    },
+                    { 
+                        name: "Minimum", 
+                        aggregator: aggregators.min, 
+                        format: true,
+                        order: 2
+                    },
+                    { 
+                        name: "Maximum", 
+                        aggregator: aggregators.max, 
+                        format: true,
+                        order: 3
+                    },
+                    { 
+                        name: "Total", 
+                        aggregator: aggregators.total, 
+                        format: true,
+                        order: 4
+                    }
+                ]
             }
         ],
 
