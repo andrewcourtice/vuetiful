@@ -1,5 +1,7 @@
-import Aggregator from "./aggregator";
+import total from "../utilities/total";
 
-export default new Aggregator((aggregate, value) => {
-    return aggregate + value;
-})
+export default {
+    label: "Total",
+    callback: total,
+    format: true
+}

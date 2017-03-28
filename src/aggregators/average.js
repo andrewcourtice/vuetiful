@@ -1,12 +1,7 @@
-import Aggregator from "./aggregator";
-import total from "./total";
+import average from "../utilities/average";
 
-class Average extends Aggregator {
-    aggregate(array, key) { 
-        let value = total.aggregate(array, key);
-
-        return value / array.length;
-    }
+export default {
+    label: "Average",
+    callback: average,
+    format: true
 }
-
-export default new Average();

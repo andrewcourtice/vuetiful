@@ -137,30 +137,11 @@
                     return "$" + currency.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
                 },
                 aggregators: [ 
-                    { 
-                        name: "Count", 
-                        aggregator: aggregators.count
-                    },
-                    { 
-                        name: "Minimum", 
-                        aggregator: aggregators.min, 
-                        format: true
-                    },
-                    { 
-                        name: "Maximum", 
-                        aggregator: aggregators.max, 
-                        format: true
-                    },
-                    { 
-                        name: "Total", 
-                        aggregator: aggregators.total, 
-                        format: true
-                    },
-                    { 
-                        name: "Average", 
-                        aggregator: aggregators.average, 
-                        format: true
-                    }
+                    aggregators.min, 
+                    aggregators.max,
+                    aggregators.total,
+                    aggregators.average,
+                    aggregators.count
                 ]
             }
         ],

@@ -1,5 +1,6 @@
-import Aggregator from "./aggregator";
+import count from "../utilities/count";
 
-export default new Aggregator((aggregate, value) => {
-    return aggregate + 1;
-})
+export default {
+    label: "Count",
+    callback: count
+}

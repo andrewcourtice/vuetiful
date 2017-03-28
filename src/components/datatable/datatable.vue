@@ -38,9 +38,9 @@
                     </td>
                 </tr>
             </tbody>
-            <tfoot v-for="aggregator in aggregators" :key="aggregator.name">
+            <tfoot v-for="aggregator in aggregators" :key="aggregator.label">
                 <tr>
-                    <td :colspan="columnSpan">{{ aggregator.name }}</td>
+                    <td :colspan="columnSpan">{{ aggregator.label }}</td>
                 </tr>
                 <tr>
                     <td v-if="lineNumbers">&nbsp;</td>
@@ -208,7 +208,7 @@
                     return "n/a";
                 }
 
-                let result = aggregator.aggregator.aggregate(this.rows, column.id);
+                let result = aggregator.callback.call(column, this.rows, column.id);
                 
                 return aggregator.format ? column.formatData(result) : result;
             },

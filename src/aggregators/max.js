@@ -1,3 +1,7 @@
-import Aggregator from "./aggregator";
+import max from "../utilities/max";
 
-export default new Aggregator((aggregate, value, array) => Math.max(aggregate, value), -Infinity);
+export default {
+    label: "Maximum",
+    callback: max,
+    format: true
+}

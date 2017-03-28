@@ -1,3 +1,7 @@
-import Aggregator from "./aggregator";
+import min from "../utilities/min";
 
-export default new Aggregator((aggregate, value, array) => Math.min(aggregate, value), Infinity);
+export default {
+    label: "Minimum",
+    callback: min,
+    format: true
+}
