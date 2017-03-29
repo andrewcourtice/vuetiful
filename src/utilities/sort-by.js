@@ -16,8 +16,13 @@ export default function sortBy(array, key, direction) {
     let sortArray = [...array];
 
     sortArray.sort((a, b) => {
-        let valueA = a[key];
-        let valueB = b[key];
+        let valueA = a;
+        let valueB = b;
+
+        if (key) {
+            valueA = a[key];
+            valueB = b[key];
+        }
 
         let outcome = valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
 
