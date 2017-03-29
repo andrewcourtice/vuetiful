@@ -9,6 +9,8 @@
  */
 export default function sortBy(array, key, direction) {
 
+    direction = direction || 1;
+
     if (Math.abs(direction) !== 1) {
         throw new Error("Sort direction must be either 1 (ascending) or -1 (descending)");
     }
