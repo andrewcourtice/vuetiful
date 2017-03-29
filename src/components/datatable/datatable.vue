@@ -208,7 +208,7 @@
                     return "n/a";
                 }
 
-                let result = aggregator.callback.call(column, this.rows, column.id);
+                let result = aggregator.callback.call(column, this.rows, row => row[column.id]);
                 
                 if (!result) {
                     return "n/a";

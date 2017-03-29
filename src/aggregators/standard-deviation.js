@@ -1,6 +1,6 @@
-import standardDveiationOf from "../utilities/standard-deviation-of";
+import standardDeviationOf from "../utilities/standard-deviation-of";
 
 export default {
     label: "Standard Deviation",
-    callback: standardDveiationOf
+    callback: standardDeviationOf
 }

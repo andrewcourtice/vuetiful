@@ -1,7 +1,7 @@
 import varianceOf from "./variance-of";
 
-export default function standardDeviationOf(array, key) {
-    let variance = varianceOf(array, key);
+export default function standardDeviationOf(array, callback) {
+    let variance = varianceOf(array, callback);
 
     return Math.sqrt(variance);
 }

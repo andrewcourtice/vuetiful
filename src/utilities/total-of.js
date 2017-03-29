@@ -3,7 +3,7 @@ import aggregate from "./aggregate";
 function total(accumulator, value) {
     let num = parseFloat(value);
 
-    return isNaN(num) ? false : accumulator + value;
+    return isNaN(num) ? false : accumulator + num;
 }
 
 export default function totalOf(array, callback) {

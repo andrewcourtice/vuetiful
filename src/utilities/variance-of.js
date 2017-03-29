@@ -1,11 +1,13 @@
 import aggregate from "./aggregate";
 import averageOf from "./average-of";
 
-export default function varianceOf(array, key) {
+export default function varianceOf(array, callback) {
     let count = array.length;
-    let average = averageOf(array, key);
+    let average = averageOf(array, callback);
     
-    let totalVariance = aggregate(array, key, (accumulator, value) => { 
+    let totalVariance = aggregate(array, (accumulator, item, array) => { 
+        let value = callback.call(array, item);
+
         return accumulator + Math.pow(value - average, 2);
     });
     
