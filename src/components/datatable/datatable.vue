@@ -149,7 +149,7 @@
 
                 // Sort the filtered set
                 if (this.sortingColumn) {
-                    rows = sortBy(rows, this.sortingColumn.id, this.sortingColumn.sortingDirection);
+                    rows = sortBy(rows, row => row[this.sortingColumn.id], this.sortingColumn.sortingDirection);
                 }
 
                 return rows;

@@ -7,9 +7,10 @@
  * @param {String} key The key of the object to sort on
  * @param {Number} direction The direction of the sort
  */
-export default function sortBy(array, key, direction) {
+export default function sortBy(array, callback, direction) {
 
     direction = direction || 1;
+    callback = callback || (item => item);
 
     if (Math.abs(direction) !== 1) {
         throw new Error("Sort direction must be either 1 (ascending) or -1 (descending)");
@@ -18,13 +19,8 @@ export default function sortBy(array, key, direction) {
     let sortArray = [...array];
 
     sortArray.sort((a, b) => {
-        let valueA = a;
-        let valueB = b;
-
-        if (key) {
-            valueA = a[key];
-            valueB = b[key];
-        }
+        let valueA = callback.call(array, a);
+        let valueB = callback.call(array, b);
 
         let outcome = valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
 

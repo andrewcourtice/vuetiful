@@ -68,7 +68,7 @@ describe("Sort By", () => {
     it("should sort a complex array in ascending order", () => {
         const key = "age";
 
-        let sortedArray = sortBy(complexArray, key);
+        let sortedArray = sortBy(complexArray, item => item.age);
         let isSorted = verifySortedArray(sortedArray, comparitiveOperators.lt, key);
 
         assert.isTrue(isSorted);
@@ -77,7 +77,7 @@ describe("Sort By", () => {
     it("should sort a complex array in descending order", () => {
         const key = "age";
 
-        let sortedArray = sortBy(complexArray, key, -1);
+        let sortedArray = sortBy(complexArray, item => item.age, -1);
         let isSorted = verifySortedArray(sortedArray, comparitiveOperators.gt, key);
 
         assert.isTrue(isSorted);
