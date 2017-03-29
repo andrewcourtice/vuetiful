@@ -7,6 +7,9 @@
  * @returns Object
  */
 export default function groupBy(array, callback) {
+
+    callback = callback || (item => item);
+
     let groups = {};
 
     for (let item of array) {

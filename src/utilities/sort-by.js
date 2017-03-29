@@ -4,7 +4,7 @@
  * 
  * @export
  * @param {Array} array The array to be sorted
- * @param {String} key The key of the object to sort on
+ * @param {Function} callback The callback function to invoke to receive the key to sort on
  * @param {Number} direction The direction of the sort
  */
 export default function sortBy(array, callback, direction) {
