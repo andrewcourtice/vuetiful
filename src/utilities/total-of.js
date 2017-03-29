@@ -1,9 +1,18 @@
 import aggregate from "./aggregate";
 
-function _total(accumulator, value) {
-    return accumulator + value;
+function total(accumulator, value) {
+    let num = parseFloat(value);
+
+    return isNaN(num) ? false : accumulator + value;
 }
 
-export default function totalOf(array, key) {
-    return aggregate(array, key, _total);
+export default function totalOf(array, callback) {
+
+    callback = callback || (item => item);
+
+    return aggregate(array, (accumulator, item, array) => {
+        let value = callback.call(array, item);
+
+        return total.call(array, accumulator, value);
+    });
 }

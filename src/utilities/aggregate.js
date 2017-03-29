@@ -1,16 +1,16 @@
-export default function aggregate(array, key, callback, startValue) {
+export default function aggregate(array, callback, startValue) {
 
     let accumulator = startValue || 0;
 
     for (let item of array) {
-        let rawValue = key ? item[key] : item;
-        let numericValue = parseFloat(rawValue);
 
-        if (isNaN(numericValue)) {
-            return "n/a";
+        let result = callback.call(this, accumulator, item, array);
+
+        if (!result) {
+            return false;
         }
 
-        accumulator = callback.call(this, accumulator, numericValue, array);
+        accumulator = result;
     }
     
     return accumulator;

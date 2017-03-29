@@ -1,5 +1,18 @@
 import aggregate from "./aggregate";
 
-export default function minOf(array, key) {
-    return aggregate(array, key, (a, b) => Math.min(a, b), Infinity);
+function min(accumulator, value) {
+    let num = parseFloat(value);
+
+    return isNaN(num) ? false : Math.min(accumulator, value);
+}
+
+export default function minOf(array, callback) {
+
+    callback = callback || (item => item);    
+
+    return aggregate(array, (accumulator, item, array) => { 
+        let value = callback.call(array, item);
+
+        return min(accumulator, value);
+    }, Infinity);
 }

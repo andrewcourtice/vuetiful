@@ -1,7 +1,7 @@
 import totalOf from "./total-of";
 
-export default function averageOf(array, key) {
-    let value = totalOf(array, key);
+export default function averageOf(array, callback) {
+    let value = totalOf(array, callback);
     
-    return value / array.length;
+    return value ? value / array.length : false;
 }

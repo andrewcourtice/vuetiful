@@ -210,6 +210,10 @@
 
                 let result = aggregator.callback.call(column, this.rows, column.id);
                 
+                if (!result) {
+                    return "n/a";
+                }
+
                 return aggregator.format ? column.formatData(result) : result;
             },
 
