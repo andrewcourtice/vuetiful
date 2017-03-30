@@ -6,7 +6,7 @@ export default function aggregate(array, callback, startValue) {
 
         let result = callback.call(this, accumulator, item, array);
 
-        if (!result) {
+        if (result === false) {
             return false;
         }
 

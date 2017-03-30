@@ -3,7 +3,7 @@ import aggregate from "./aggregate";
 function min(accumulator, value) {
     let num = parseFloat(value);
 
-    return isNaN(num) ? false : Math.min(accumulator, value);
+    return isNaN(num) ? false : Math.min(accumulator, num);
 }
 
 export default function minOf(array, callback) {

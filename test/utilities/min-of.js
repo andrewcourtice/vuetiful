@@ -1,53 +1,34 @@
 import {
     assert
 } from "chai";
+
 import minOf from "../../src/utilities/min-of";
-
-const simpleArray = [5, 6, 1, 9, 4];
-
-const complexArray = [
-    {
-        name: "Robert",
-        age: 21
-    },
-    {
-        name: "Cindy",
-        age: 18
-    },
-    {
-        name: "Samantha",
-        age: 35
-    },
-    {
-        name: "Phillip",
-        age: 52
-    },
-    {
-        name: "Scott",
-        age: 23
-    }
-];
+import { arrays } from "../test-data";
 
 describe("Min Of", () => {
 
-    it("should calculate the minimum value of a simple array with numeric values", () => {       
-        let min = minOf(simpleArray);
+    it("should calculate the minimum value of a simple array with numeric values", () => {    
+        const testData = arrays.simple.numeric;
 
+        let min = minOf(testData.data);
+        
         assert.isNumber(min);
-        assert.equal(min, 1);
+        assert.equal(min, testData.expected.min);
     });
 
-    it("should calculate the minimum value of a complex array with numeric values", () => {       
-        let min = minOf(complexArray, item => item.age);
+    it("should calculate the minimum value of a complex array with numeric values", () => {  
+        const testData = arrays.complex;
+
+        let min = minOf(testData.data, item => item.purchaseAmount);
 
         assert.isNumber(min);
-        assert.equal(min, 18);
+        assert.equal(min, testData.expected.purchaseAmount.min);
     });
     
     it("should return false if the array contains a non-numeric value", () => {
-        const array = [5, "hello", 7, 4];
+        const testData = arrays.simple.mixed;
 
-        let min = minOf(array);
+        let min = minOf(testData.data);
         
         assert.isNotNumber(min);
         assert.isFalse(min);
