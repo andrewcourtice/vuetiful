@@ -119,7 +119,11 @@
                 width: null,
                 sortable: true,
                 groupable: true,
-                formatter: value => format(value, "DD MMMM YYYY")
+                formatter: value => format(value, "DD MMMM YYYY"),
+                aggregators: [
+                    aggregators.min,
+                    aggregators.max
+                ]
             },
             {
                 id: "purchase_amount",

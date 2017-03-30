@@ -63,7 +63,7 @@
     import DatatableCollection from "./datatable-collection.vue"; 
     import filterBy from "../../utilities/filter-by.js";
     import sortBy from "../../utilities/sort-by.js";
-    import { isCollection } from "../../utilities/validators.js";
+    import { isCollection } from "../../utilities/base/type-validator.js";
 
     export default {
 

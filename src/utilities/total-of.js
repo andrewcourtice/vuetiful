@@ -1,4 +1,4 @@
-import aggregate from "./aggregate";
+import aggregate from "./base/aggregator";
 
 function total(accumulator, value) {
     let num = parseFloat(value);

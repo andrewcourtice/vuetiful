@@ -1,4 +1,4 @@
-import aggregate from "./aggregate";
+import aggregate from "./base/aggregator";
 import averageOf from "./average-of";
 
 export default function varianceOf(array, callback) {
