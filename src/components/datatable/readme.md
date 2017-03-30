@@ -8,6 +8,8 @@ If you would like a feature added to the datatable or if you find a bug, please 
 
 To see a demo of this component in action check out this codepen example: [http://codepen.io/andrewcourtice/full/woQzpa](http://codepen.io/andrewcourtice/full/woQzpa).
 
+![General](https://cloud.githubusercontent.com/assets/11718453/24491089/f2641d34-1568-11e7-8b84-dd4fd53ed0ff.png)
+
 - [Getting Started](#getting-started)
 - [Props](#props)
 	- [Datatable](#datatable-1)
@@ -171,6 +173,7 @@ To group by a particular column, simply drag the column header from the top of t
 
 To remove a column from the grouping, click the **x** button on the corresponding group at the top of the table.
 
+![Grouping](https://cloud.githubusercontent.com/assets/11718453/24491151/52d4ef22-1569-11e7-9f62-9f2235467cf4.png)
 
 ## Editing Data
 
@@ -263,6 +266,8 @@ The datatable component supports aggregate functions out-of-the-box. The aggrega
 If an aggregate function is applied to a column with an unsupported type in it, a null value will be displayed. 
 
 To apply aggregation to a column(s) first you need to import the aggregate functions.
+
+![Aggregation](https://cloud.githubusercontent.com/assets/11718453/24491113/0b46ad26-1569-11e7-9eeb-706b3539f770.png)
 
 ```javascript
 import aggregators from "../../aggregators/aggregators.js";
