@@ -3,6 +3,8 @@
   "description": "Component framework written on top of the Vue reactive library",
   "version": "0.1.0",
   "author": "Andrew Courtice",
+  "repository": "https://github.com/andrewcourtice/vuetiful.git",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
@@ -13,30 +15,30 @@
   },
   "dependencies": {
     "core-js": "^2.4.1",
-    "date-fns": "^1.28.0",
+    "date-fns": "^1.28.2",
     "flex-layout-attribute": "^1.0.3",
-    "vue": "^2.2.1",
-    "vue-router": "^2.1.1"
+    "vue": "^2.2.6",
+    "vue-router": "^2.3.1"
   },
   "devDependencies": {
-    "babel-core": "^6.23.1",
-    "babel-loader": "^6.3.2",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
     "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-es2015": "^6.24.0",
     "chai": "^3.5.0",
     "cross-env": "^3.0.0",
-    "css-loader": "^0.26.2",
+    "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.10.1",
     "mocha": "^3.2.0",
-    "node-sass": "^4.0.0",
+    "node-sass": "^4.5.2",
     "postcss-loader": "^1.3.3",
-    "sass-loader": "^6.0.2",
-    "style-loader": "^0.13.1",
-    "vue-loader": "^11.1.3",
-    "vue-template-compiler": "^2.2.1",
-    "webpack": "^2.2.1",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
+    "vue-loader": "^11.3.4",
+    "vue-template-compiler": "^2.2.6",
+    "webpack": "^2.3.2",
     "webpack-bundle-analyzer": "^2.2.0",
-    "webpack-dev-server": "^2.4.1"
+    "webpack-dev-server": "^2.4.2"
   }
 }
