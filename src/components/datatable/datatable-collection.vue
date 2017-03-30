@@ -15,6 +15,7 @@
                         :striped="striped"
                         :editable="editable" 
                         :line-numbers="lineNumbers"
+                        :aggregated="aggregated"
                         :margin="margin" 
                         :grouping-columns="groupingColumns"
                         :grouping-index="groupingIndex + 1"
@@ -29,6 +30,7 @@
             </tr>
             <tr v-for="(row, index) in rows">
                 <td v-if="lineNumbers" class="datatable-cell datatable-linenumber-cell" :style="{ width: margin }">{{ collectionIndex + index + 1 }}</td>
+                <td v-if="aggregated" class="datatable-cell datatable-aggregate-cell">&nbsp;</td>
                 <datatable-cell v-for="column in columns" :key="column.id" :column="column" :row="row" :editable="editable"></datatable-cell>
             </tr>
         </table>
@@ -74,6 +76,11 @@
             },
 
             lineNumbers: {
+                type: Boolean,
+                default: false
+            },
+
+            aggregated: {
                 type: Boolean,
                 default: false
             },

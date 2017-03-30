@@ -1,15 +1,18 @@
 <template>
     <div class="datatable table-wrapper" :class="tableClasses">
         <table>
-            <thead>
+            <thead class="datatable-columns">
                 <tr>
                     <th v-if="lineNumbers" :style="{ width: lineColumnWidth }">
                         <div class="datatable-column datatable-linenumber-column">#</div>
                     </th>
+                    <th v-if="aggregated">
+                        <div class="datatable-column datatable-aggregate-column">Aggregate</div>
+                    </th>
                     <slot></slot>
                 </tr>
             </thead>
-            <tbody v-if="groupingColumnIds.length > 0">
+            <tbody class="datatable-groups" v-if="groupingColumnIds.length > 0">
                 <tr>
                     <td class="datatable-groups-header" :colspan="columnSpan">
                         <chip class="datatable-group-chip" v-for="(column, index) in groupingColumns" :key="column.id" @remove="degroupColumn(column)">
@@ -23,7 +26,7 @@
                     </td>
                 </tr>
             </tbody>
-            <tbody v-drag:enter="dragEnter" v-drag:leave="dragLeave" v-drag:over="dragOver" v-drag:drop="dragDrop">
+            <tbody class="datatable-collections" v-drag:enter="dragEnter" v-drag:leave="dragLeave" v-drag:over="dragOver" v-drag:drop="dragDrop">
                 <tr>
                     <td class="datatable-group" :colspan="columnSpan">
                         <datatable-collection 
@@ -32,30 +35,23 @@
                             :striped="striped"
                             :editable="editable"
                             :line-numbers="lineNumbers"
+                            :aggregated="aggregated"
                             :grouping-columns="groupingColumnIds"
                             :margin="lineColumnWidth">
                         </datatable-collection>
                     </td>
                 </tr>
             </tbody>
-            <tfoot v-for="aggregator in aggregators" :key="aggregator.label">
+            <tfoot class="datatable-aggregators" v-if="aggregated">
                 <tr>
-                    <td :colspan="columnSpan">{{ aggregator.label }}</td>
+                    <td class="datatable-info-cell" :colspan="columnSpan">&nbsp;</td>
                 </tr>
-                <tr>
-                    <td v-if="lineNumbers">&nbsp;</td>
+                <tr v-for="(aggregator, index) in aggregators" :key="aggregator.label">
+                    <td v-if="lineNumbers" class="datatable-linenumber-cell">{{ index + 1 }}</td>
+                    <td v-if="aggregated" class="datatable-aggregate-cell">{{ aggregator.label }}</td>
                     <td v-for="column in columns">{{ aggregate(column, aggregator) }}</td>
                 </tr>
             </tfoot>
-<!--            <tfoot v-if="showTotals">
-                <tr>
-                    <td :colspan="columnSpan">Total</td>
-                </tr>
-                <tr>
-                    <td v-if="lineNumbers">&nbsp;</td>
-                    <td v-for="column in columns">{{ calculateTotal(column) }}</td>
-                </tr>
-            </tfoot>-->
         </table>
         <div class="datatable-options" layout="row center-justify" v-if="filterable">
             <input type="text" placeholder="Filter this dataset" v-model="filter" self="size-x1">
@@ -156,7 +152,17 @@
             },
 
             columnSpan() {
-                return this.columns.length + (this.lineNumbers ? 1 : 0);
+                let columnSpan = this.columns.length;
+
+                if (this.lineNumbers) {
+                    columnSpan++
+                }
+
+                if (this.aggregated) {
+                    columnSpan ++
+                }
+
+                return columnSpan;
             },
 
             lineColumnWidth() {
@@ -178,6 +184,10 @@
                 return aggregators.filter((item, index, arr) => {
                     return index === arr.indexOf(item);
                 });
+            },
+
+            aggregated() {
+                return this.aggregators && this.aggregators.length > 0;
             }
 
         },
@@ -203,15 +213,16 @@
             },
 
             aggregate(column, aggregator) {
- 
+                const noResult = " ";
+
                 if (!column.aggregators || column.aggregators.indexOf(aggregator) === -1) {
-                    return "n/a";
+                    return noResult;
                 }
 
                 let result = aggregator.callback.call(column, this.rows, row => row[column.id]);
                 
                 if (!result) {
-                    return "n/a";
+                    return noResult;
                 }
 
                 return aggregator.format ? column.formatData(result) : result;
@@ -269,11 +280,8 @@
         text-align: center;
     }
 
-    .datatable-linenumber-column {
-        cursor: default !important;
-    }
-
-    .datatable-linenumber-cell {
+    .datatable-linenumber-cell,
+    .datatable-aggregate-cell {
         font-weight: 600; 
         background-color: $colour-background-medium !important;
         border-right-color: $colour-border;
@@ -283,14 +291,23 @@
         margin-right: 0.5rem;
     }
 
+    .datatable-collection {
+
+        & .datatable-collection {
+
+            & .datatable-resultset {
+                border-top: 1px solid $colour-border;
+            }
+        }
+    }
+
     .datatable-group {
         padding: 0;
         background-color: $colour-background;
         border-bottom: 1px solid $colour-border;
     }
 
-    .datatable-groups-header,
-    .datatable-group-header {
+    .datatable-groups-header {
         border-bottom: 1px solid $colour-border;
     }
 
@@ -316,6 +333,13 @@
     .datatable-info-cell {
         text-align: center;
         font-weight: 600;
+    }
+
+    .datatable-aggregators {
+
+        & .datatable-info-cell  {
+            border-bottom: 1px solid $colour-border;
+        }
     }
 
     .datatable-options {

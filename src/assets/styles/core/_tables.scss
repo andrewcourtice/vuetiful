@@ -76,15 +76,16 @@ tfoot {
 
 tfoot {
 
-    tr {
+    & td {
+        font-weight: 600;
+    }
+
+    & tr {
 
         &:first-of-type {
 
             & td {
-                font-weight: 600;
-                background-color: $colour-background-medium;
                 border-top: 1px solid $colour-border;
-                border-bottom: 1px solid $colour-border;
             }
         }
     }
