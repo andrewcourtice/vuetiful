@@ -267,11 +267,12 @@ If an aggregate function is applied to a column with an unsupported type in it, 
 
 To apply aggregation to a column(s) first you need to import the aggregate functions.
 
-![Aggregation](https://cloud.githubusercontent.com/assets/11718453/24491113/0b46ad26-1569-11e7-9eeb-706b3539f770.png)
-
 ```javascript
 import aggregators from "../../aggregators/aggregators.js";
 ```
+
+![Aggregation](https://cloud.githubusercontent.com/assets/11718453/24491113/0b46ad26-1569-11e7-9eeb-706b3539f770.png)
+
 
 ## Pagination
 
