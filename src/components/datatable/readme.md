@@ -21,6 +21,7 @@ To see a demo of this component in action check out this codepen example: [http:
 	- [Cell Templates](#cell-templates)
 		- [View Mode](#view-mode)
 		- [Edit Mode](#edit-mode)
+- [Aggregation](#aggregation)
 - [Pagination](#pagination)
 
 ## Getting Started
@@ -96,7 +97,7 @@ new Vue({
     :width="column.width"
     :sortable="column.sortable"
     :groupable="column.groupable"
-    :total="column.total"
+    :aggregators="column.aggregators"
     :formatter="column.formatter">
 </datatable-column>
 ```
@@ -108,7 +109,7 @@ new Vue({
 | width | string or number | no | | The width of the column. If a number is supplied the component will assume a percentage (eg. 25 = 25%). If a string is supplied the component will interpret it literally (eg. 3px, 3.5rem, 4em etc.) |
 | sortable | boolean | no | true | Whether this row can be used for sorting |
 | groupable | boolean | no | true | Whether this row can be used for grouping |
-| total | boolean | no | false | Whether data in this column should be totalled and displayed at the bottom of the table. **Note:** for obvious reasons this is only available if the column has numeric data |
+| aggregators | array | no | | A set of aggregate functions the column should use to process data in this column. See [Aggregators](#aggregators) for more information |
 | formatter | function | no | | A function used to format the data in this column before it is displayed. This is particularly useful for dates and numeric value. See [Formatting Data](#formatting-data) |
 
 
@@ -245,6 +246,27 @@ At this point you may be wondering how to define a different template for when t
 </template>
 ```
 
+## Aggregation
+The datatable component supports aggregate functions out-of-the-box. The aggregate functions included are listed below.
+
+| Function | Supported Types | Formatted Output |
+| -------- | --------------- | ----------- |
+| min | number, date | yes |
+| max | number, date | yes |
+| count | n/a | no |
+| average (mean) | number | yes |
+| median | number | yes |
+| total | number | yes |
+| variance | number | no |
+| standard deviation | number | no |
+
+If an aggregate function is applied to a column with an unsupported type in it, a null value will be displayed. 
+
+To apply aggregation to a column(s) first you need to import the aggregate functions.
+
+```javascript
+import aggregators from "../../aggregators/aggregators.js";
+```
 
 ## Pagination
 
