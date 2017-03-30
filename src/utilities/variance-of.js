@@ -11,5 +11,5 @@ export default function varianceOf(array, callback) {
         return accumulator + Math.pow(value - average, 2);
     });
     
-    return totalVariance / count;
+    return totalVariance ? totalVariance / count : false;
 }

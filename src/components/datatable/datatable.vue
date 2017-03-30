@@ -63,7 +63,7 @@
     import DatatableCollection from "./datatable-collection.vue"; 
     import filterBy from "../../utilities/filter-by.js";
     import sortBy from "../../utilities/sort-by.js";
-    import isArray from "../../utilities/is-array.js";
+    import { isCollection } from "../../utilities/validators.js";
 
     export default {
 
@@ -97,6 +97,11 @@
             lineNumbers: {
                 type: Boolean,
                 default: false
+            },
+
+            threshold: {
+                type: Number,
+                default: 50
             }
 
         },
@@ -188,6 +193,10 @@
 
             aggregated() {
                 return this.aggregators && this.aggregators.length > 0;
+            },
+
+            optimize() {
+                return this.source.length >= this.threshold;
             }
 
         },
@@ -221,7 +230,7 @@
 
                 let result = aggregator.callback.call(column, this.rows, row => row[column.id]);
                 
-                if (!result) {
+                if (!result || isCollection(result)) {
                     return noResult;
                 }
 
