@@ -143,7 +143,8 @@
                     aggregators.average,
                     aggregators.count,
                     aggregators.variance,
-                    aggregators.standardDeviation
+                    aggregators.standardDeviation,
+                    aggregators.median
                 ]
             }
         ],

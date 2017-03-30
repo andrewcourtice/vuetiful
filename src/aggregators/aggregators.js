@@ -5,6 +5,7 @@ import average from "./average";
 import total from "./total";
 import variance from "./variance";
 import standardDeviation from "./standard-deviation";
+import median from "./median";
 
 export default {
     min,
@@ -13,5 +14,6 @@ export default {
     average,
     total,
     variance,
-    standardDeviation
+    standardDeviation,
+    median
 }
