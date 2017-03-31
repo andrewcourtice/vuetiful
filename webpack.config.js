@@ -115,7 +115,10 @@ if (process.env.SCOPE === "components") {
         path: path.resolve(__dirname, "./dist/components"),
         filename: "components.bundle.js"
     };
-    config.externals = ["vue", "date-fns"];
+    config.externals = {
+        "Vue": "vue",
+        "date-fns": "dateFns"
+    };
 }
 
 module.exports = config;
