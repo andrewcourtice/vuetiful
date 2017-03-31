@@ -20,7 +20,6 @@ export default function getTypeConverter(value) {
         let result = evaluator.validator(parsed);
 
         if (result) {
-            console.log(evaluator);
             return evaluator.converter;
         }
     }

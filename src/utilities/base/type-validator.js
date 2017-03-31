@@ -35,7 +35,7 @@ export function isBoolean(value) {
 }
 
 export function isDate(value) {
-    return isType(value, types.date);
+    return isType(value, types.date) && !isNaN(value.getTime());
 }
 
 export function isNull(value) {
