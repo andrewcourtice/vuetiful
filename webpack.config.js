@@ -111,10 +111,8 @@ if (process.env.NODE_ENV === "production") {
 
 if (process.env.SCOPE === "components") {
     config.entry = "./build/components.js";
-    config.output = {
-        path: path.resolve(__dirname, "./dist/components"),
-        filename: "components.bundle.js"
-    };
+    config.output.path = path.resolve(__dirname, "./dist/components");
+    config.output.filename = "components.bundle.js";
     config.externals = {
         "Vue": "vue",
         "date-fns": "dateFns"
