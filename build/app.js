@@ -94,3 +94,5 @@ function bootstrap() {
 }
 
 bootstrap();
+
+module.exports = Vuetiful;

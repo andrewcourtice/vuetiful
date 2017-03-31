@@ -6,6 +6,9 @@ import "./assets/styles/site.scss";
 import components from "./components/components";
 import directives from "./directives/directives";
 
+// Exposed modules
+import aggregators from "../src/aggregators/aggregators";
+
 function registerComponents(Vue) {
     for (let component in components) {
         let definition = components[component];
@@ -27,6 +30,9 @@ export default {
     install(Vue) {
         registerComponents(Vue);
         registerDirectives(Vue);
-    }
+    },
+
+    // Expose aggregators to global scope
+    aggregators
 
 }
