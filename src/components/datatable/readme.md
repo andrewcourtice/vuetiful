@@ -263,13 +263,33 @@ The datatable component supports aggregate functions out-of-the-box. The aggrega
 | variance | number | no |
 | standard deviation | number | no |
 
+**Note:** *Formatted Output tells the aggregator to format the result for the current column before rendering it in the view.*
+
 If an aggregate function is applied to a column with an unsupported type in it, a null value will be displayed. 
 
-To apply aggregation to a column(s) first you need to import the aggregate functions.
+To apply aggregation to a column(s) you simply bind an array of aggregators to each column you want to aggregate. Here's how you would use some of the built-in aggregate functions to calculate the **min**, **max** and **total**. 
 
 ```javascript
-import aggregators from "../../aggregators/aggregators.js";
+var aggregators = vuetiful.aggregators;
+
+new Vue({
+
+    el: "#app",
+
+    data: function() {
+        return {
+            /* ... */
+            aggregators: [
+                aggregators.min,
+                aggregators.max,
+                aggregators.total
+            ]
+        };
+    }
+});
 ```
+
+Then in your view you would bind `:aggregators="aggregators"` like so on any column you would like to apply these aggregate functions to. Of course you can apply different combinations of aggregation to different columns.
 
 ![Aggregation](https://cloud.githubusercontent.com/assets/11718453/24491113/0b46ad26-1569-11e7-9eeb-706b3539f770.png)
 
