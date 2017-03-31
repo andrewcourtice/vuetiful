@@ -28,7 +28,6 @@ const eventHandlerMap = {
     },
     drop: { 
         eventName: "drop",
-        draggable: true,
         callback: genericHandler
     },
     end: { 
