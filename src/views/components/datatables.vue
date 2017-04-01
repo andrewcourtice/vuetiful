@@ -61,7 +61,111 @@
                 </div>
             </div>
         </div>
-
+        <div>
+            <h3>Formatting</h3>
+            <div class="grid-row" layout="row top-stretch">
+                <div class="grid-cell">
+                    <datatable id="data-table-options" :source="formatters" :filterable="false" editable>
+                        <datatable-column id="name" label="Name" width="33" :sortable="false" :groupable="false"></datatable-column>
+                        <datatable-column id="format" label="Format" :sortable="false" :groupable="false"></datatable-column>
+                        <template slot="format" scope="cell">
+                            <div v-if="cell.row.id === 'C'">
+                                <select v-model.lazy="customers.currency">
+                                    <option :value="code" v-for="(symbol, code) in currencies">{{ code }} ({{ symbol }})</option>
+                                </select>
+                            </div>
+                            <div v-else>
+                                <select v-model.lazy="customers.dateFormat">
+                                    <option :value="format" v-for="format in dateFormats">{{ format }}</option>
+                                </select>
+                            </div>
+                        </template>
+                    </datatable>
+                </div>
+            </div>
+            <div class="grid-row" layout="row top-stretch">
+                <div class="grid-cell">
+                    <datatable id="data-table-main" 
+                        :source="customers.rows" 
+                        :striped="customers.striped" 
+                        :editable="customers.editable" 
+                        :line-numbers="customers.lineNumbers">
+                        <datatable-column 
+                            v-for="column in customers.columns" 
+                            :id="column.id" 
+                            :label="column.label" 
+                            :width="column.width" 
+                            :sortable="column.sortable"
+                            :groupable="column.groupable"
+                            :formatter="column.formatter">
+                        </datatable-column>
+                    </datatable>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>Aggregation</h3>
+            <p>
+                This is a basic example of how to use aggregate functions with the datatable 
+            </p>
+            <div class="grid-row" layout="row top-stretch">
+                <div class="grid-cell">
+                    <datatable id="data-table-options" :source="customers.columns" :filterable="false" editable>
+                        <datatable-column id="label" label="Column Name" width="25" data-intro="Clicking a column will sort by that column" data-step="4"></datatable-column>
+                        <datatable-column id="min" label="Min"></datatable-column>
+                        <datatable-column id="max" label="Max"></datatable-column>
+                        <datatable-column id="average" label="Average (mean)"></datatable-column>
+                        <datatable-column id="median" label="Median"></datatable-column>
+                        <datatable-column id="total" label="Total"></datatable-column>
+                        <template slot="min" scope="cell">
+                            <div class="datatable-options-toggle">
+                                <toggle :id="cell.row.id + 'min'" :value="aggregators.min" v-model="cell.row.aggregators"></toggle>
+                            </div>
+                        </template>
+                        <template slot="max" scope="cell">
+                            <div class="datatable-options-toggle">
+                                <toggle :id="cell.row.id + 'max'" :value="aggregators.max" v-model="cell.row.aggregators"></toggle>
+                            </div>
+                        </template>
+                        <template slot="average" scope="cell">
+                            <div class="datatable-options-toggle">
+                                <toggle :id="cell.row.id + 'average'" :value="aggregators.average" v-model="cell.row.aggregators"></toggle>
+                            </div>
+                        </template>
+                        <template slot="median" scope="cell">
+                            <div class="datatable-options-toggle">
+                                <toggle :id="cell.row.id + 'median'" :value="aggregators.median" v-model="cell.row.aggregators"></toggle>
+                            </div>
+                        </template>
+                        <template slot="total" scope="cell">
+                            <div class="datatable-options-toggle">
+                                <toggle :id="cell.row.id + 'total'" :value="aggregators.total" v-model="cell.row.aggregators"></toggle>
+                            </div>
+                        </template>
+                    </datatable>
+                </div>
+            </div>
+            <div class="grid-row" layout="row top-stretch">
+                <div class="grid-cell">
+                    <datatable id="data-table-main" 
+                        :source="customers.rows" 
+                        :striped="customers.striped" 
+                        :editable="customers.editable" 
+                        :line-numbers="customers.lineNumbers">
+                        <datatable-column 
+                            v-for="column in customers.columns" 
+                            :id="column.id" 
+                            :label="column.label" 
+                            :width="column.width" 
+                            :sortable="column.sortable"
+                            :groupable="column.groupable"
+                            :aggregators="column.aggregators"
+                            :formatter="column.formatter">
+                        </datatable-column>
+                    </datatable>
+                </div>
+            </div>
+        </div>
         <div>
             <h3>Paginated</h3>
             <div class="grid-row" layout="row top-stretch">
@@ -92,11 +196,16 @@
 <script>
     import { format } from "date-fns";
     import aggregators from "../../aggregators/aggregators.js";
+    import formatters from "../../formatters/formatters.js";
+    import currencies from "../../maps/currencies.js";
 
     let customers = {
         striped: true,
         editable: false,
         lineNumbers: false,
+
+        currency: "USD",
+        dateFormat: "D MMMM YYYY",
 
         columns: [
             {
@@ -104,14 +213,16 @@
                 label: "Client Name",
                 width: null,
                 sortable: true,
-                groupable: true
+                groupable: true,
+                aggregators: []
             },
             {
                 id: "purchasor_email",
                 label: "Client Email",
                 width: 25,
                 sortable: true,
-                groupable: true
+                groupable: true,
+                aggregators: []
             },
             {
                 id: "purchase_date",
@@ -119,7 +230,9 @@
                 width: null,
                 sortable: true,
                 groupable: true,
-                formatter: value => format(value, "DD MMMM YYYY"),
+                formatter: value => {
+                    return formatters.datetime(value, customers.dateFormat);
+                },
                 aggregators: [
                     aggregators.min,
                     aggregators.max
@@ -132,23 +245,12 @@
                 sortable: true,
                 groupable: true,
                 formatter: value => {
-                    var currency = parseFloat(value);
-
-                    if (isNaN(currency)) {
-                        return value;
-                    }
-
-                    return "$" + currency.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+                    return formatters.currency(value, 2, customers.currency);
                 },
                 aggregators: [ 
                     aggregators.min, 
                     aggregators.max,
-                    aggregators.total,
-                    aggregators.average,
-                    aggregators.count,
-                    aggregators.variance,
-                    aggregators.standardDeviation,
-                    aggregators.median
+                    aggregators.total
                 ]
             }
         ],
@@ -235,7 +337,19 @@
 
         data() {
             return {
-                customers: customers
+                customers: customers,
+                currencies: currencies,
+                aggregators: aggregators,
+                dateFormats: [
+                    "DD/MM/YYYY",
+                    "DD MMM YYYY",
+                    "D MMMM YYYY",
+                    "D/MM/YYYY h:mm a"
+                ],
+                formatters: [
+                    { id: "C", name: "Currency" },
+                    { id: "DT", name: "Date and Time" }
+                ]
             };
         },
 

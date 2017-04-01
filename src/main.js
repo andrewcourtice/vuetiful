@@ -8,6 +8,8 @@ import directives from "./directives/directives";
 
 // Exposed modules
 import aggregators from "../src/aggregators/aggregators";
+import formatters from "../src/formatters/formatters";
+import maps from "../src/maps/maps";
 
 function registerComponents(Vue) {
     for (let component in components) {
@@ -32,7 +34,9 @@ export default {
         registerDirectives(Vue);
     },
 
-    // Expose aggregators to global scope
-    aggregators
+    // Expose to global scope
+    aggregators,
+    formatters,
+    maps
 
 }
