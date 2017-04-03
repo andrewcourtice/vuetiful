@@ -298,9 +298,9 @@ Then in your view you would bind `:aggregators="aggregators"` like so on any col
 
 Pagination is particularly useful for when you need to display a large set of data but don't want to take up large amounts of screen real-estate displaying it all. It also means our datatable has to do less work by rendering smaller chunks of data at a time. 
 
-You may have noticed that there is no option on the datatable for pagination. This is because pagination is not built into the datatable component. The `paginator` is actually a standalone component that allows you to paginate data and inject any child component into it's scope. Given that the `paginator` is a separate component I won't go into too much detail here on how to use it but I will show you a simple example of bundling it with the `datagrid`. To see how the `paginator` component works in detail, check out the **components/paginator** folder.
+You may have noticed that there is no option on the datatable for pagination. This is because pagination is not built into the datatable component. The `paginator` is actually a standalone component that allows you to paginate data and inject any child component into it's scope. Given that the `paginator` is a separate component I won't go into too much detail here on how to use it but I will show you a simple example of bundling it with the `datatable`. To see how the `paginator` component works in detail, check out the **components/paginator** folder.
 
-Here's a basic example of using the paginator with the `datagrid`:
+Here's a basic example of using the paginator with the `datatable`:
 
 ```html
 <paginator :source="customers.data" :page-size="5">
