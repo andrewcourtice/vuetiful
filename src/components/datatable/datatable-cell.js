@@ -18,7 +18,16 @@ export default {
 
         row: Object,
         column: Object,
-        editable: Boolean
+
+        editable: {
+            type: Boolean,
+            default: false
+        },
+
+        optimize: {
+            type: Boolean,
+            default: false
+        }
 
     },
 

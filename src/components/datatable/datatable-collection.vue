@@ -19,7 +19,8 @@
                         :margin="margin" 
                         :grouping-columns="groupingColumns"
                         :grouping-index="groupingIndex + 1"
-                        :collection-index="collectionIndex * index">
+                        :collection-index="collectionIndex * index"
+                        :optimize="optimize">
                     </datatable-collection>
                 </td>
             </tr>
@@ -93,6 +94,11 @@
             collectionIndex: {
                 type: Number,
                 default: 0
+            },
+
+            optimize: {
+                type: Boolean,
+                default: false
             }
 
         },

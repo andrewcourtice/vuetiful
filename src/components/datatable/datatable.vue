@@ -37,7 +37,8 @@
                             :line-numbers="lineNumbers"
                             :aggregated="aggregated"
                             :grouping-columns="groupingColumnIds"
-                            :margin="lineColumnWidth">
+                            :margin="lineColumnWidth"
+                            :optimize="optimize">
                         </datatable-collection>
                     </td>
                 </tr>
@@ -54,7 +55,8 @@
             </tfoot>
         </table>
         <div class="datatable-options" layout="row center-justify" v-if="filterable">
-            <input type="text" placeholder="Filter this dataset" v-model="filter" self="size-x1">
+            <input type="text" placeholder="Filter this dataset. Press enter to search..." v-model.lazy="filter" self="size-x1" v-if="optimize">
+            <input type="text" placeholder="Filter this dataset..." v-model="filter" self="size-x1" v-else>
         </div>
     </div>
 </template>
