@@ -31,9 +31,7 @@ export default {
             class: {
                 "datatable-cell": true
             },
-            style: {
-                width: column.columnWidth
-            }
+            style: column.columnStyles
         };
 
         if (column.template) {

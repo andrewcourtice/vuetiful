@@ -1,6 +1,6 @@
 <template>
     <th :style="columnStyles" title="Click to sort. Drag to center to group." @click="sort" v-drag:start="dragStart">
-        <div class="datatable-column" layout="row center-justify">
+        <div class="datatable-column" :layout="columnLayout">
             <div>
                 <slot>{{ label || id }}</slot>
             </div>
@@ -10,6 +10,13 @@
 </template>
 
 <script>
+
+    const alignments = [
+        "left",
+        "center",
+        "right",
+        "auto"
+    ];
 
     const sortClassMap = {
         "1": "asc",
@@ -31,6 +38,14 @@
 
             width: {
                 type: [ Number, String ]
+            },
+
+            alignment: {
+                type: String,
+                default: "left",
+                validator: value => {
+                    return alignments.indexOf(value) > -1;
+                }
             },
 
             formatter: {
@@ -88,9 +103,18 @@
                 return this.width + suffix;
             },
 
+            columnLayout() {
+                let direction = this.alignment !== "right" ? "row" : "row-reverse";
+
+                return direction + " center-justify";
+            },
+
             columnStyles() {
+                let alignment = this.alignment === "left" ? null : this.alignment;
+
                 return {
-                    width: this.columnWidth
+                    width: this.columnWidth,
+                    textAlign: alignment
                 };
             },
 

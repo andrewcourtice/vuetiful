@@ -49,7 +49,7 @@
                 <tr v-for="(aggregator, index) in aggregators" :key="aggregator.label">
                     <td v-if="lineNumbers" class="datatable-linenumber-cell">{{ index + 1 }}</td>
                     <td v-if="aggregated" class="datatable-aggregate-cell">{{ aggregator.label }}</td>
-                    <td v-for="column in columns">{{ aggregate(column, aggregator) }}</td>
+                    <td v-for="column in columns" :style="column.columnStyles">{{ aggregate(column, aggregator) }}</td>
                 </tr>
             </tfoot>
         </table>
