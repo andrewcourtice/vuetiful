@@ -56,7 +56,7 @@
             <div class="grid-row" layout="row top-stretch">
                 <div class="grid-cell">
                     <datatable id="data-table-selected" :source="customers.selected">
-                        <datatable-column v-for="column in customers.columns" :key="column.id" :id="column.id" :label="column.label" :width="column.width" :formatter="column.formatter"></datatable-column>
+                        <datatable-column v-for="column in customers.columns" :key="column.id" :id="column.id" :label="column.label" :width="column.width" :alignment="column.alignment" :formatter="column.formatter"></datatable-column>
                     </datatable>
                 </div>
             </div>
@@ -95,6 +95,7 @@
                             :id="column.id" 
                             :label="column.label" 
                             :width="column.width" 
+                            :alignment="column.alignment" 
                             :sortable="column.sortable"
                             :groupable="column.groupable"
                             :formatter="column.formatter">
@@ -156,7 +157,8 @@
                             v-for="column in customers.columns" 
                             :id="column.id" 
                             :label="column.label" 
-                            :width="column.width" 
+                            :width="column.width"
+                            :alignment="column.alignment" 
                             :sortable="column.sortable"
                             :groupable="column.groupable"
                             :aggregators="column.aggregators"
