@@ -1,26 +1,34 @@
 import * as typeValidator from "./type-validator";
 
+const floatTest = /^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/;
+
 const evaluators = [
     {
-        parser: value => new Date(value),
-        validator: typeValidator.isDate,
-        converter: value => (new Date(value)).getTime()
+        test: value => {
+            return typeValidator.isNumber(value) ? true : floatTest.test(value);
+        },
+        toNumber: parseFloat
     },
     {
-        parser: parseFloat,
-        validator: typeValidator.isNumber,
-        converter: parseFloat
+        test: value => { 
+            if (typeValidator.isDate(value)) {
+                return true;
+            } 
+
+            let date = new Date(value);
+            return typeValidator.isDate(date);
+        },
+        toNumber: value => (new Date(value)).getTime()
     }
 ]
 
-export default function getTypeConverter(value) {
+export default function toNumber(value) {
     
     for (let evaluator of evaluators) {
-        let parsed = evaluator.parser(value);
-        let result = evaluator.validator(parsed);
+        let result = evaluator.test(value);
 
         if (result) {
-            return evaluator.converter;
+            return evaluator.toNumber;
         }
     }
 
