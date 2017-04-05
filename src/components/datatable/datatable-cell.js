@@ -1,13 +1,20 @@
+const defaultTemplate = "<span>{{ column.formatData(row[column.id]) }}</span>";
+const editableTemplate = '<input type="text" v-model="row[column.id]"/>';
+const optimizedEditableTemplate = '<input type="text" v-model.lazy="row[column.id]"/>';
 
-const defaultCell = {
-    template: "<span>{{ column.formatData(row[column.id]) }}</span>",
-    props: [ "row", "column" ]
-};
+function getChildComponent(editable, optimize) {
 
-const editableCell = {
-    template: '<input type="text" v-model="row[column.id]"/>',
-    props: [ "row", "column" ]
-};
+    let component = {
+        template: defaultTemplate,
+        props: ["row", "column"]
+    };
+
+    if (editable) {
+        component.template = optimize ? optimizedEditableTemplate : editableTemplate;
+    }
+
+    return component;
+}
 
 export default {
     functional: true,
@@ -35,7 +42,7 @@ export default {
         let row = context.props.row;
         let column = context.props.column;
 
-        let cell = "td";        
+        let cell = "td";
         let cellProps = {
             class: {
                 "datatable-cell": true
@@ -44,17 +51,17 @@ export default {
         };
 
         if (column.template) {
-            
+
             let vNode = column.template({
                 row,
                 column,
                 value: row[column.id]
             });
 
-            return createElement(cell, cellProps, [ vNode ]);
+            return createElement(cell, cellProps, [vNode]);
         }
 
-        let child = context.props.editable ? editableCell : defaultCell;
+        let child = getChildComponent(context.props.editable, context.props.optimize);
 
         let childProps = {
             props: {

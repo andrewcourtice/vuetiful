@@ -32,7 +32,7 @@
             <tr v-for="(row, index) in rows">
                 <td v-if="lineNumbers" class="datatable-cell datatable-linenumber-cell" :style="{ width: margin }">{{ collectionIndex + index + 1 }}</td>
                 <td v-if="aggregated" class="datatable-cell datatable-aggregate-cell">&nbsp;</td>
-                <datatable-cell v-for="column in columns" :key="column.id" :column="column" :row="row" :editable="editable"></datatable-cell>
+                <datatable-cell v-for="column in columns" :key="column.id" :column="column" :row="row" :editable="editable" :optimize="optimize"></datatable-cell>
             </tr>
         </table>
     </div>
