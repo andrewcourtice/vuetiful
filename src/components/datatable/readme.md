@@ -25,6 +25,7 @@ To see a demo of this component in action check out this codepen example: [http:
 		- [Edit Mode](#edit-mode)
 - [Aggregation](#aggregation)
 - [Pagination](#pagination)
+- [Optimization](#optimization)
 
 ## Getting Started
 
@@ -87,6 +88,7 @@ new Vue({
 | filterable | boolean | no | true | Whether the table should display a textbox in the footer for filtering the current dataset |
 | editable | boolean | no | false | Whether the table should be displayed in edit mode. See [Editing Data](#editing-data) |
 | line-numbers | boolean | no | true | Whether the table should display line numbers on the left of each row |
+| threshold | number | no | 50 | The maximum number of rows before the datatable enables performance optimizations. See [Optimization](#optimization). |
 
 **Note:** For specifying literal true values on props you can use a shorthand version. eg. instead of writing `editable="true"` you can just use the existence of the prop to define it's value eg. `editable`.
 
@@ -315,3 +317,12 @@ Here's a basic example of using the paginator with the `datatable`:
 ```
 
 All we've done here is bound the `paginator` to the root data source instead of the `datatable`. The `datatable` source is then bound to the data exposed by the current page.
+
+
+## Optimization
+
+Because the datatable component is designed to display large amounts of complex data it wouldn't make sense to have everything running in real-time on large sets of data. Doing so would result in a noticable impact on performance. For this reason you can provide a `threshold` value on the datatable. The threshold tells the datatable to enable performace optimizations as soon as the number of rows in the dataset exceeds the threshold value. Once the threshold is exceeded a few things will happen:
+
+1. Typing in the filter box at the bottom of the table will no longer filter the data in real-time. The filter won't be applied until the enter key is pressed or the textbox loses focus.
+2. Typing in an editable cell will no longer edit data in real-time. Changes won;t be applied to the data until the enter key is pressed or the cell loses focus.
+
