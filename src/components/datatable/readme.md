@@ -119,7 +119,7 @@ new Vue({
 
 ## Formatting Data
 
-More often than not you will likely run into a situation where you need to display data in a different format than it's raw form. This is common for dates and numbers. As seen above, each column has a `formatter` prop which allows you to specify a function that formats the data for that cell. There are several ways you could do this but using our basic example above, let's take a look at one way how you would implement a formatter:
+More often than not you will likely run into a situation where you need to display data in a different format than it's raw form. This is common for dates and numbers. As seen above, each column has a `formatter` prop which allows you to specify a function that formats the data for that cell. There are several ways you could do this but using our basic example above, let's take a look at one way how you would implement a custom formatter:
 
 ```javascript
 new Vue({
@@ -149,14 +149,45 @@ new Vue({
 });
 ```
 
-The format function signature expects one parameter which will be the value of the cell. 
-
 ```html
 <datatable>
     <datatable-column id="datatable-column-1" label="Column 1"></datatable-column>
     <datatable-column id="datatable-column-2" label="Column 2"></datatable-column>
     <datatable-column id="datatable-column-3" label="Column 3" :formatter="formatCurrency"></datatable-column>
 </datatable>
+```
+
+The format function signature expects one parameter which will be the value of the cell. Vuetiful comes with a few formatters already built in such as **currency**, **datetime**, **dateShort**, **dateLong**, **datetimeShort**, **datetimeLong**.
+
+**Note:** The **datetime** formatter requires a format string parameter (eg. "DD MMM YYYY hh:mm"). Because the datatable only sends one parameter through to the formatter function you would have to wrap the formatter in a function before being bound to a column. eg:
+
+```javascript
+var formatters = vuteiful.formatters;
+
+new Vue({
+
+    el: "#app",
+
+    data: function() {
+        return {
+            /* replace with real data */
+            data: []
+        };
+    },
+
+    methods: {
+
+        /* 
+        We need to wrap the datetime formatter in a function that just expects 
+        the value parameter. This way we can tell the datetime formatter which format 
+        we'd like the data displayed in.
+        */
+        customDatetimeFormatter: function(value) {
+            return formatters.datetime(value, "DD MMMM YYYY h:mm a");
+        }
+
+    }
+});
 ```
 
 
