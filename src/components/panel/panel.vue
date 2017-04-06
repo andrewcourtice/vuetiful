@@ -46,7 +46,7 @@
     .panel-header,
     .panel-body,
     .panel-footer {
-        padding: 1rem;
+        padding: 0.75rem 1rem;
     }
 
     .panel-header,
