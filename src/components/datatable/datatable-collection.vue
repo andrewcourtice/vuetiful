@@ -20,14 +20,15 @@
                         :grouping-columns="groupingColumns"
                         :grouping-index="groupingIndex + 1"
                         :collection-index="collectionIndex * index"
-                        :optimize="optimize">
+                        :optimize="optimize"
+                        :message="message">
                     </datatable-collection>
                 </td>
             </tr>
         </table>
         <table v-else class="datatable-resultset" :class="{ 'table-striped': striped }">
             <tr v-if="rows.length < 1">
-                <td class="datatable-info-cell" :colspan="columnSpan">No Results</td>
+                <td class="datatable-info-cell" :colspan="columnSpan">{{ message }}</td>
             </tr>
             <tr v-for="(row, index) in rows">
                 <td v-if="lineNumbers" class="datatable-cell datatable-linenumber-cell" :style="{ width: margin }">{{ collectionIndex + index + 1 }}</td>
@@ -99,6 +100,12 @@
             optimize: {
                 type: Boolean,
                 default: false
+            },
+
+            message: {
+                type: String,
+                default: "No results",
+                required: false
             }
 
         },

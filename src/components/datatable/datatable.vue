@@ -38,7 +38,7 @@
                             :aggregated="aggregated"
                             :grouping-columns="groupingColumnIds"
                             :margin="lineColumnWidth"
-                            :optimize="optimize">
+                            :message="message">
                         </datatable-collection>
                     </td>
                 </tr>
@@ -104,6 +104,11 @@
             threshold: {
                 type: Number,
                 default: 50
+            },
+
+            message: {
+                type: String,
+                default: "No results"
             }
 
         },
