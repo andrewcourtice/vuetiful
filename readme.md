@@ -2,6 +2,8 @@
 
 Vuetiful is a component framework written on top of the Vue reactive library. It is primarily designed for creating business/administration applications where the displaying of data is paramount. Although targeted primarily at business applications, Vuetiful is extremely flexible and easily themed making it trivial to integrate into any website.
 
+[Veutiful demo on Codepen](https://codepen.io/andrewcourtice/full/woQzpa)
+
 ## Getting started
 This project is still very much in the early days of development so it is not currently available on npm (but will be soon). 
 
