@@ -23,16 +23,16 @@ var config = {
                     // the "scss" and "sass" values for the lang attribute to the right configs here.
                     // other preprocessors should work out of the box, no loader config like this nessessary.
                     "css": ExtractTextPlugin.extract({
-                        loader: "css-loader!postcss-loader",
-                        fallbackLoader: "vue-style-loader"
+                        use: "css-loader!postcss-loader",
+                        fallback: "vue-style-loader"
                     }),
                     "scss": ExtractTextPlugin.extract({
-                        loader: "css-loader!postcss-loader!sass-loader",
-                        fallbackLoader: "vue-style-loader"
+						use: "css-loader!postcss-loader!sass-loader",
+                        fallback: "vue-style-loader"
                     }),
                     "sass": ExtractTextPlugin.extract({
-                        loader: "css-loader!postcss-loader!sass-loader?indentedSyntax",
-                        fallbackLoader: "vue-style-loader"
+						use: "css-loader!postcss-loader!sass-loader?indentedSyntax",
+                        fallback: "vue-style-loader"
                     })
                 }
                 // other vue-loader options go here
@@ -40,14 +40,14 @@ var config = {
         }, {
             test: /\.css$/,
             loaders: ExtractTextPlugin.extract({
-                loader: "css-loader!postcss-loader",
-                fallbackLoader: "style-loader"
+				use: "css-loader!postcss-loader",
+                fallback: "style-loader"
             })
         }, {
             test: /\.scss$/,
             loaders: ExtractTextPlugin.extract({
-                loader: "css-loader!sass-loader",
-                fallbackLoader: "style-loader"
+				use: "css-loader!sass-loader",
+                fallback: "style-loader"
             }),
             exclude: /node_modules/
         }, {
@@ -115,7 +115,8 @@ if (process.env.SCOPE === "components") {
     config.output.filename = "components.bundle.js";
     config.externals = {
         "Vue": "vue",
-        "date-fns": "dateFns"
+        //use "commonjs date-fns" instead of dateFns to fix https://github.com/andrewcourtice/vuetiful/issues/30, see https://github.com/webpack/webpack/issues/4238
+        "date-fns": "commonjs date-fns"
     };
 }
 
