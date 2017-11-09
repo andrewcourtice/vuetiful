@@ -253,7 +253,7 @@ To override this all we have to do is define a template in our datatable and tel
 
     <!-- Define the rest of our columns here -->
 
-    <template slot="sel" scope="cell">
+    <template slot="select-all" scope="cell">
         <div class="checkable-column">
             <checkbox :id="cell.row.id" :val="cell.row" v-model="customers.selected"></checkbox>
         </div>
