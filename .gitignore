@@ -4,3 +4,4 @@ dist/app/
 dist/*/report.html
 npm-debug.log.*
 *.log
+.idea/
