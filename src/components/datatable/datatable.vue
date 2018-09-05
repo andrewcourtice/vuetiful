@@ -1,5 +1,9 @@
 <template>
     <div class="datatable table-wrapper" :class="tableClasses">
+        <div class="datatable-options" layout="row center-justify" v-if="filterable && filterPosition !== 'bottom'">
+            <input type="text" placeholder="Filter this dataset. Press enter to search..." v-model.lazy="filter" self="size-x1" v-if="optimize">
+            <input type="text" placeholder="Filter this dataset..." v-model="filter" self="size-x1" v-else>
+        </div>
         <table>
             <thead class="datatable-columns">
                 <tr>
@@ -50,11 +54,11 @@
                 <tr v-for="(aggregator, index) in aggregators" :key="aggregator.label">
                     <td v-if="lineNumbers" class="datatable-linenumber-cell">{{ index + 1 }}</td>
                     <td v-if="aggregated" class="datatable-aggregate-cell">{{ aggregator.label }}</td>
-                    <td v-for="column in columns" :style="column.columnStyles">{{ aggregate(column, aggregator) }}</td>
+                    <td v-for="column in columns" :style="column.columnStyles" :key="column.id">{{ aggregate(column, aggregator) }}</td>
                 </tr>
             </tfoot>
         </table>
-        <div class="datatable-options" layout="row center-justify" v-if="filterable">
+        <div class="datatable-options" layout="row center-justify" v-if="filterable && filterPosition === 'bottom'">
             <input type="text" placeholder="Filter this dataset. Press enter to search..." v-model.lazy="filter" self="size-x1" v-if="optimize">
             <input type="text" placeholder="Filter this dataset..." v-model="filter" self="size-x1" v-else>
         </div>
@@ -94,6 +98,11 @@
             filterable: {
                 type: Boolean,
                 default: true
+            },
+
+            filterPosition: {
+                type: String,
+                default: 'bottom'
             },
 
             lineNumbers: {

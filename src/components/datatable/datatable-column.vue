@@ -1,5 +1,5 @@
 <template>
-    <th :style="columnStyles" title="Click to sort. Drag to center to group." @click="sort" v-drag:start="dragStart">
+    <th :style="columnStyles" :title="toolTip" @click="sort" v-drag:start="dragStart">
         <div class="datatable-column" :layout="columnLayout">
             <div>
                 <slot>{{ label || id }}</slot>
@@ -34,6 +34,12 @@
 
             label: {
                 type: String
+            },
+
+            toolTip: {
+                type: String,
+                required: false,
+                default: 'Click to sort. Drag to center to group.'
             },
 
             width: {
